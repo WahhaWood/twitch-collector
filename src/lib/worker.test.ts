@@ -61,7 +61,7 @@ describe("dropCandidates", () => {
       new Set(["a1"]),
     );
     expect(out.map((c) => c.login)).toEqual(["a2", "b1"]);
-    expect(out[0]).toEqual({ kind: "drop", login: "a2", displayName: "A2", campaignName: "A", campaignKey: "camp-a", reward: undefined, etaMin: null });
+    expect(out[0]).toEqual({ kind: "drop", login: "a2", displayName: "A2", avatarUrl: null, campaignName: "A", campaignKey: "camp-a", reward: undefined, etaMin: null });
   });
 
   it("skips channels where watching this campaign did not count, but only for that campaign", () => {

@@ -73,7 +73,7 @@ export function streakCandidates(streaks: Streak[]): Candidate[] {
   return streaks
     .filter((s) => s.live && s.broadcastId && s.watchedSeconds < STREAK_GOAL_SECONDS)
     .sort((a, b) => (a.liveSince?.getTime() ?? 0) - (b.liveSince?.getTime() ?? 0))
-    .map((s) => ({ kind: "streak", login: s.login, displayName: s.displayName, streakId: s.id }));
+    .map((s) => ({ kind: "streak", login: s.login, displayName: s.displayName, avatarUrl: s.avatarUrl, streakId: s.id }));
 }
 
 // Channels of the most urgent watchable campaigns, in plan order; `offline` holds logins that failed recently,
@@ -90,6 +90,7 @@ export function dropCandidates(
         kind: "drop" as const,
         login: c.login,
         displayName: c.displayName,
+        avatarUrl: c.avatarUrl,
         campaignName: i.campaignName,
         campaignKey: i.key,
         reward: i.next?.name,
@@ -246,7 +247,7 @@ async function runAccount(a: Account, streaks: Streak[], state: State, now: numb
     }
   }
   await checkProgress(a, state, now);
-  const targets = state.watches.map(({ kind, login, displayName, campaignName, reward }) => ({ kind, login, displayName, campaignName, reward }));
+  const targets = state.watches.map(({ kind, login, displayName, campaignName, reward, avatarUrl }) => ({ kind, login, displayName, campaignName, reward, avatarUrl }));
   await setWatching(a.id, targets, {
     state: targets.length ? "watching" : "idle",
     reason: targets.length ? "ok" : state.idle.reason,

@@ -321,22 +321,28 @@ function Row({ title, sub, thumb, icon, children }: { title: string; sub: string
   );
 }
 
-function Avatar({ login, size }: { login: string; size: string }) {
+function Avatar({ login, avatarUrl, size }: { login: string; avatarUrl?: string | null; size: string }) {
   return (
     <div
-      className={`grid shrink-0 place-items-center rounded-full font-semibold text-avatar ${size}`}
+      className={`grid shrink-0 place-items-center overflow-hidden rounded-full font-semibold text-avatar ${size}`}
       style={{ background: `oklch(0.52 0.11 ${channelHue(login)})`, boxShadow: "0 0 0 2px var(--bg), 0 0 0 3.5px var(--ok)" }}
       aria-hidden
     >
-      {login[0]?.toUpperCase()}
+      {avatarUrl ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={avatarUrl} alt="" className="size-full object-cover" />
+      ) : (
+        login[0]?.toUpperCase()
+      )}
     </div>
   );
 }
 
-function NowWatching({ kind, login, displayName, campaignName, account, progress, streaks }: {
+function NowWatching({ kind, login, displayName, avatarUrl, campaignName, account, progress, streaks }: {
   kind: "drop" | "streak";
   login: string;
   displayName: string;
+  avatarUrl?: string | null;
   campaignName?: string | null;
   account: Account;
   progress?: Progress;
@@ -361,7 +367,7 @@ function NowWatching({ kind, login, displayName, campaignName, account, progress
   return (
     <div className="flex min-w-0 flex-col gap-2 md:gap-2.5">
       <div className="flex items-center gap-2.5 md:gap-3">
-        <Avatar login={login} size="size-[30px] text-xs md:size-9 md:text-sm" />
+        <Avatar login={login} avatarUrl={avatarUrl} size="size-[30px] text-xs md:size-9 md:text-sm" />
         <div className="min-w-0 flex-1">
           <div className="truncate text-[15px]">
             <a href={`https://www.twitch.tv/${encodeURIComponent(login)}`} target="_blank" rel="noreferrer" className="font-medium hover:text-acc-t">
