@@ -26,7 +26,7 @@ describe("workerLine", () => {
     const idle = (reason: "no_campaigns" | "no_live" | "waiting_streamers", detail: string | null = null) =>
       workerLine({ ...base, workerStatus: { state: "idle", reason, detail } }, now);
     expect(idle("no_campaigns").title).toContain("смотреть пока нечего");
-    expect(idle("no_live", "Roier").detail).toContain("Ждём эфир: Roier");
+    expect(idle("no_live", "Roier").detail).toContain("Ждут канал: Roier");
     expect(idle("waiting_streamers", "Roier").detail).toBe("Не в эфире: Roier.");
   });
 

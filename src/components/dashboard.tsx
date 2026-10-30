@@ -69,7 +69,7 @@ export function Dashboard({ name }: { name: string }) {
   const t = stats.data?.totals;
   const totals = t && [
     { v: String(t.ready), label: "готово к получению", fg: t.ready ? "text-acc-t" : "" },
-    { v: String(t.inProgress), label: "набирается сейчас" },
+    { v: String(t.inProgress), label: "начато" },
     { v: String(t.claimed), label: "уже получено" },
     { v: hoursText(t.remainingMinutes), label: "смотреть до конца всех кампаний" },
   ];

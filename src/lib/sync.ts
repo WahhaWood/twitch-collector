@@ -3,6 +3,7 @@ import { db } from "@/db";
 import { campaigns, liveChannels, loginAttempts, progress, progressHistory, rewards, syncRuns, twitchAccounts } from "@/db/schema";
 import { decrypt, encrypt } from "./crypto";
 import {
+  allowedLive,
   channelCampaigns,
   claimId,
   type ChannelsData,
@@ -25,8 +26,9 @@ import { claimDrop } from "./watch";
 
 const LOCK_MS = 60_000;
 const REFRESH_MARGIN_MS = 5 * 60_000;
-const STREAM_PAGES = 6; // ~180 live drops-enabled streams, enough to cover every game with drops
-const MAX_CHANNELS = 75;
+const STREAM_PAGES = 45; // ~1300 live drops-enabled streams (~12 s): reaches every game that has drops, not just the biggest
+const MAX_CHANNELS = 250;
+const STREAMS_TTL_MS = 5 * 60_000; // the stream list is the same for everyone; the worker syncs far more often than it changes
 
 export type SyncResult = { status: "ok" | "failed" | "skipped"; code?: string; claimed?: number };
 
@@ -40,15 +42,7 @@ export async function fetchDrops(accessToken: string, now = new Date()) {
 export async function fetchDropSources(accessToken: string) {
   const inventory = await gql<InventoryData>(accessToken, INVENTORY_QUERY);
 
-  const edges: StreamEdge[] = [];
-  let after: string | undefined;
-  for (let page = 0; page < STREAM_PAGES; page++) {
-    const { streams } = await gql<StreamsData>(accessToken, streamsQuery(after));
-    edges.push(...(streams?.edges ?? []));
-    after = edges.at(-1)?.cursor ?? undefined;
-    if (!streams?.pageInfo?.hasNextPage || !after) break;
-  }
-
+  const edges = await fetchStreams(accessToken);
   const channels = pickChannels(edges).slice(0, MAX_CHANNELS);
   const campaigns = [];
   const live: LiveChannelRow[] = [];
@@ -58,7 +52,25 @@ export async function fetchDropSources(accessToken: string) {
     campaigns.push(...channelCampaigns(data));
     live.push(...toLiveChannels(edges, ids, data));
   }
+  const known = [...(inventory.currentUser?.inventory?.dropCampaignsInProgress ?? []), ...campaigns];
+  live.push(...allowedLive(known, edges));
   return { inventory, campaigns, live };
+}
+
+let streamsCache: { at: number; edges: StreamEdge[] } | null = null;
+
+async function fetchStreams(accessToken: string): Promise<StreamEdge[]> {
+  if (streamsCache && Date.now() - streamsCache.at < STREAMS_TTL_MS) return streamsCache.edges;
+  const edges: StreamEdge[] = [];
+  let after: string | undefined;
+  for (let page = 0; page < STREAM_PAGES; page++) {
+    const { streams } = await gql<StreamsData>(accessToken, streamsQuery(after));
+    edges.push(...(streams?.edges ?? []));
+    after = edges.at(-1)?.cursor ?? undefined;
+    if (!streams?.pageInfo?.hasNextPage || !after) break;
+  }
+  streamsCache = { at: Date.now(), edges };
+  return edges;
 }
 
 export async function syncAccount(accountId: number): Promise<SyncResult> {

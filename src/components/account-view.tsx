@@ -28,7 +28,7 @@ export function bucketOf(i: ProgressItem): Bucket {
 
 const SECTIONS: { bucket: Bucket; title: string; hint: string; open: boolean; filters: Filter[] }[] = [
   { bucket: "ready", title: "Можно забрать", hint: "Время набрано. Нажмите «Обновить сейчас» — сервис заберёт награды сам. Если у награды предупреждение о привязке, сначала привяжите аккаунт игры.", open: true, filters: ["active", "all"] },
-  { bucket: "progress", title: "Набираются сейчас", hint: "Минуты уже идут.", open: true, filters: ["active", "all"] },
+  { bucket: "progress", title: "Начаты", hint: "Часть минут уже набрана. Прирост идёт, только пока вы или воркер смотрите стрим этой игры (см. статус воркера выше).", open: true, filters: ["active", "all"] },
   { bucket: "waiting", title: "Ещё не начаты", hint: "Начнут набираться, когда вы или воркер посмотрите стрим этой игры.", open: false, filters: ["active", "all"] },
   { bucket: "link", title: "Не начаты, нужна привязка аккаунта игры", hint: "Пока аккаунт игры не привязан к Twitch, награды не выдаются, а воркер эти кампании пропускает.", open: false, filters: ["active", "all"] },
   { bucket: "claimed", title: "Получено", hint: "", open: true, filters: ["claimed", "all"] },
@@ -84,7 +84,7 @@ export function AccountView({ id }: { id: string }) {
       )}
 
       <p className="text-sm text-mut">
-        {count("ready")} можно забрать · {count("progress")} набирается · {count("waiting")} не начато · {count("link")} ждут привязки · {count("claimed")} получено
+        {count("ready")} можно забрать · {count("progress")} начато · {count("waiting")} не начато · {count("link")} ждут привязки · {count("claimed")} получено
       </p>
 
       <Segmented options={FILTERS} value={filter} onChange={setFilter} label="Что показать" />

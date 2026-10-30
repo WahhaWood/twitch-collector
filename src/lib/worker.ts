@@ -275,6 +275,7 @@ async function replan(a: Account, streaks: Streak[], state: State, now: number) 
     let drops: Candidate[] = [];
     let items: StatItem[] = [];
     let watchable = 0;
+    let starving: string[] = []; // watchable campaigns that have no usable live channel right now
     if (a.autoWatch) {
       items = await loadItems([a.id], new Date(now));
       const ids = [...new Set(items.map((i) => i.campaignExternalId).filter((v): v is string => !!v))];
@@ -282,6 +283,8 @@ async function replan(a: Account, streaks: Streak[], state: State, now: number) 
       const p = plan(items, await loadLive(ids, new Date(now)), new Date(now), new Set(skipped.map((s) => s.campaignKey)));
       watchable = p.filter((i) => i.action === "watch" && i.risk !== "impossible").length;
       drops = dropCandidates(p, activeOffline(state.offline, now), state.tried);
+      const served = new Set(drops.map((d) => d.campaignKey));
+      starving = p.filter((i) => i.action === "watch" && i.risk !== "impossible" && !served.has(i.key)).map((i) => i.campaignName ?? i.key);
     }
     state.lastDrops = drops;
 
@@ -321,7 +324,7 @@ async function replan(a: Account, streaks: Streak[], state: State, now: number) 
     state.watches = next;
     state.idle = {
       reason: !a.autoWatch ? "waiting_streamers" : watchable === 0 ? "no_campaigns" : "no_live",
-      detail: streaks.filter((s) => !s.live).map((s) => s.displayName).join(", ") || null,
+      detail: (watchable > 0 ? [...new Set(starving)].slice(0, 4).join(", ") : streaks.filter((s) => !s.live).map((s) => s.displayName).join(", ")) || null,
     };
   });
 }

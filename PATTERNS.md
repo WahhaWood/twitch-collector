@@ -15,3 +15,4 @@
 - Текст состояния воркера для UI — чистая `workerLine()` в `src/lib/worker-text.ts` (тесты); не собирать формулировки в компонентах.
 - Адаптивные решения воркера — маленькие чистые функции в `src/lib/worker.ts` (`backoffMs`, `syncDueAt`, `stallAction`, `planInterval`) с тестами; `runAccount` только вызывает их.
 - Скриншоты в Playwright: куку `session` подписать `SESSION_SECRET` (формат `userId.expMs.hmac`, `src/lib/session.ts`) — без входа по токену. Chromium скачивать вручную в scratchpad (автораспаковка Playwright на этой машине пустая).
+- Кампания без своих каналов в `viewerDropCampaigns`: живые каналы берём из `allow` (isEnabled=false → стримы игры) — `allowedLive` в src/lib/drops.ts.

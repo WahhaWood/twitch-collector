@@ -61,7 +61,9 @@ export type GqlCampaign = {
   imageURL?: string | null;
   accountLinkURL?: string | null;
   self?: { isAccountConnected?: boolean | null } | null;
-  game?: { displayName?: string | null } | null;
+  game?: { id?: string | null; displayName?: string | null } | null;
+  // `isEnabled`: only the listed channels count; otherwise any drops-enabled stream of the game does.
+  allow?: { isEnabled?: boolean | null; channels?: { id?: string | null }[] | null } | null;
   timeBasedDrops?: GqlDrop[] | null;
 };
 type GqlEventDrop = { id?: string; name?: string | null; imageURL?: string | null; lastAwardedAt?: string | null };
@@ -86,7 +88,7 @@ export type ChannelsData = Record<string, { viewerDropCampaigns?: GqlCampaign[] 
 const DROP_FIELDS = `id name requiredMinutesWatched requiredSubs startAt endAt
   self { currentMinutesWatched currentSubs isClaimed dropInstanceID }
   benefitEdges { benefit { id name imageAssetURL distributionType } }`;
-const CAMPAIGN_FIELDS = `id name status startAt endAt imageURL accountLinkURL self { isAccountConnected } game { displayName }`;
+const CAMPAIGN_FIELDS = `id name status startAt endAt imageURL accountLinkURL self { isAccountConnected } game { id displayName } allow { isEnabled channels { id } }`;
 
 // Since 2026-09 Twitch gates currentUser.dropCampaigns (dashboard) and dropCampaign(id) behind client
 // integrity: they come back null. Campaigns are discovered through live drops-enabled streams instead,
@@ -128,6 +130,44 @@ export function pickChannels(edges: StreamEdge[], perGame = 2): string[] {
     picked.push(channel);
   }
   return picked;
+}
+
+// Live channels per campaign taken from its own channel rules: Twitch does not always list an open campaign
+// (e.g. one already in the inventory) in a channel's viewerDropCampaigns, so its game's streams are used instead.
+// Campaigns with an allow-list get the listed channels that are live; campaigns without a game get nothing.
+export function allowedLive(campaigns: GqlCampaign[], edges: StreamEdge[], perCampaign = 5): LiveChannelRow[] {
+  const byGame = new Map<string, StreamEdge[]>();
+  const byChannel = new Map<string, StreamEdge>();
+  for (const e of edges) {
+    const id = e.node?.broadcaster?.id;
+    if (!id || !e.node?.broadcaster?.login) continue;
+    byChannel.set(id, e);
+    const game = e.node.game?.id;
+    if (game) byGame.set(game, [...(byGame.get(game) ?? []), e]);
+  }
+  const rows: LiveChannelRow[] = [];
+  for (const c of campaigns) {
+    if (!c.allow) continue;
+    const pool = c.allow.isEnabled
+      ? (c.allow.channels ?? []).flatMap((ch) => (ch?.id && byChannel.has(ch.id) ? [byChannel.get(ch.id)!] : []))
+      : c.game?.id
+        ? (byGame.get(c.game.id) ?? [])
+        : [];
+    const top = [...pool].sort((a, b) => (b.node?.viewersCount ?? 0) - (a.node?.viewersCount ?? 0)).slice(0, perCampaign);
+    for (const e of top) {
+      const b = e.node!.broadcaster!;
+      rows.push({
+        campaignExternalId: c.id,
+        channelId: b.id!,
+        login: b.login!,
+        displayName: b.displayName || b.login!,
+        title: e.node!.title?.slice(0, 200) ?? null,
+        viewers: typeof e.node!.viewersCount === "number" ? e.node!.viewersCount : null,
+        avatarUrl: b.profileImageURL ?? null,
+      });
+    }
+  }
+  return rows;
 }
 
 export function channelCampaigns(data: ChannelsData): GqlCampaign[] {

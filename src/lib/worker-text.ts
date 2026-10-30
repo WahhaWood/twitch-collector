@@ -31,12 +31,11 @@ export function workerLine(a: Pick<Account, "autoWatch" | "watching" | "watching
     const parts = a.watching.map((w) => `${w.displayName} (${w.kind === "drop" ? "дропсы" : "серия просмотра"})`);
     return { tone: "ok", title: `Смотрит: ${parts.join(", ")}`, detail: null };
   }
-  const waiting = s?.detail ? ` Ждём эфир: ${s.detail}.` : "";
   switch (s?.reason) {
     case "no_campaigns":
-      return { tone: "idle", title: "Воркер работает, смотреть пока нечего", detail: `Нет кампаний, которые имеет смысл смотреть (всё получено, пропущено или не успеть).${waiting}` };
+      return { tone: "idle", title: "Воркер работает, смотреть пока нечего", detail: `Нет кампаний, которые имеет смысл смотреть (всё получено, пропущено или не успеть).` };
     case "no_live":
-      return { tone: "idle", title: "Ждём живые стримы", detail: `Подходящие кампании есть, но у них сейчас нет каналов в эфире. Воркер проверяет каждые несколько минут.${waiting}` };
+      return { tone: "idle", title: "Ждём живые стримы", detail: `Подходящие кампании есть, но канал для них не нашёлся или стример не в эфире. Воркер проверяет каждые несколько минут.${s.detail ? ` Ждут канал: ${s.detail}.` : ""}` };
     case "waiting_streamers":
       return { tone: "idle", title: "Ждём эфир стримеров из серий", detail: s.detail ? `Не в эфире: ${s.detail}.` : null };
     default:

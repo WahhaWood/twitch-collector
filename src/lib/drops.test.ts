@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import real from "./__fixtures__/drops-sources.real.json";
 import synthetic from "./__fixtures__/drops-sources.synthetic.json";
 import {
+  allowedLive,
   channelCampaigns,
   channelsQuery,
   claimId,
@@ -123,6 +124,28 @@ describe("discovery queries", () => {
 
   it("flattens channel campaigns, skipping offline channels", () => {
     expect(channelCampaigns({ c0: { viewerDropCampaigns: [{ id: "x" }] }, c1: null, c2: { viewerDropCampaigns: null } })).toEqual([{ id: "x" }]);
+  });
+});
+
+describe("allowedLive", () => {
+  const stream = (id: string, game: string, viewers: number) => ({
+    node: { title: "t", viewersCount: viewers, broadcaster: { id, login: `l${id}`, displayName: `L${id}`, profileImageURL: null }, game: { id: game } },
+  });
+  const edges = [stream("1", "g1", 10), stream("2", "g1", 300), stream("3", "g2", 5), stream("4", "g1", 50)];
+
+  it("gives an open campaign the top streams of its game", () => {
+    const rows = allowedLive([{ id: "open", game: { id: "g1" }, allow: { isEnabled: false, channels: null } }], edges, 2);
+    expect(rows.map((r) => r.login)).toEqual(["l2", "l4"]);
+    expect(rows.every((r) => r.campaignExternalId === "open")).toBe(true);
+  });
+
+  it("gives an allow-listed campaign only its live listed channels", () => {
+    const rows = allowedLive([{ id: "r", game: { id: "g1" }, allow: { isEnabled: true, channels: [{ id: "3" }, { id: "99" }, { id: "1" }] } }], edges);
+    expect(rows.map((r) => r.login)).toEqual(["l1", "l3"]);
+  });
+
+  it("skips campaigns without game or allow info", () => {
+    expect(allowedLive([{ id: "a", allow: { isEnabled: false } }, { id: "b", game: { id: "g1" } }], edges)).toEqual([]);
   });
 });
 
