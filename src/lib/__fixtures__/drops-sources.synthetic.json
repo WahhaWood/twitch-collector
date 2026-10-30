@@ -1,0 +1,147 @@
+{
+  "inventory": {
+    "currentUser": {
+      "inventory": {
+        "dropCampaignsInProgress": [
+          {
+            "id": "camp-active",
+            "name": "Season Drops",
+            "status": "ACTIVE",
+            "startAt": "2026-10-20T00:00:00Z",
+            "endAt": "2026-11-10T00:00:00Z",
+            "imageURL": "https://example.test/camp.png",
+            "game": {
+              "displayName": "Game A"
+            },
+            "timeBasedDrops": [
+              {
+                "id": "drop-1",
+                "name": "Part 1",
+                "requiredMinutesWatched": 60,
+                "startAt": "2026-10-20T00:00:00Z",
+                "endAt": "2026-11-10T00:00:00Z",
+                "self": {
+                  "currentMinutesWatched": 60,
+                  "isClaimed": true
+                },
+                "benefitEdges": [
+                  {
+                    "benefit": {
+                      "id": "ben-1",
+                      "name": "Helmet",
+                      "imageAssetURL": "https://example.test/helmet.png",
+                      "distributionType": "DIRECT_ENTITLEMENT"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "drop-2",
+                "name": "Part 2",
+                "requiredMinutesWatched": 120,
+                "startAt": "2026-10-20T00:00:00Z",
+                "endAt": "2026-11-10T00:00:00Z",
+                "self": {
+                  "currentMinutesWatched": 43,
+                  "isClaimed": false
+                },
+                "benefitEdges": [
+                  {
+                    "benefit": {
+                      "id": "ben-2",
+                      "name": "Armor",
+                      "imageAssetURL": null,
+                      "distributionType": "DIRECT_ENTITLEMENT"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "gameEventDrops": [
+          {
+            "id": "ben-badge",
+            "lastAwardedAt": "2026-10-15T12:00:00Z"
+          }
+        ]
+      }
+    }
+  },
+  "campaigns": [
+    {
+      "id": "camp-active",
+      "name": "Season Drops",
+      "status": "ACTIVE",
+      "startAt": "2026-10-20T00:00:00Z",
+      "endAt": "2026-11-10T00:00:00Z",
+      "imageURL": "https://example.test/camp.png",
+      "game": {
+        "displayName": "Game A"
+      },
+      "timeBasedDrops": null
+    },
+    {
+      "id": "camp-badge",
+      "name": "Badge Event",
+      "status": "ACTIVE",
+      "startAt": "2026-10-01T00:00:00Z",
+      "endAt": "2026-11-05T00:00:00Z",
+      "imageURL": null,
+      "game": {
+        "displayName": "Game B"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "drop-badge",
+          "name": "Watch 30",
+          "requiredMinutesWatched": 30,
+          "startAt": null,
+          "endAt": null,
+          "self": null,
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "ben-badge",
+                "name": "Cool Badge",
+                "imageAssetURL": "https://example.test/badge.png",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "camp-untouched",
+      "name": "Untouched",
+      "status": "ACTIVE",
+      "startAt": "2026-10-25T00:00:00Z",
+      "endAt": "2026-11-20T00:00:00Z",
+      "imageURL": null,
+      "game": {
+        "displayName": "Game C"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "drop-untouched",
+          "name": "Watch 60",
+          "requiredMinutesWatched": 60,
+          "startAt": null,
+          "endAt": null,
+          "self": null,
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "ben-u",
+                "name": "Skin",
+                "imageAssetURL": null,
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

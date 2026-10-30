@@ -1,0 +1,69 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1793311251474,
+      "tag": "0000_smiling_robbie_robertson",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793311691258,
+      "tag": "0001_needy_stranger",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793312668913,
+      "tag": "0002_goofy_chimera",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1793314941542,
+      "tag": "0003_mysterious_rafael_vega",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793317223757,
+      "tag": "0004_curious_thunderbird",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1793317889692,
+      "tag": "0005_lyrical_salo",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793321834502,
+      "tag": "0006_brown_galactus",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1793323548732,
+      "tag": "0007_nosy_madame_hydra",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1793324398673,
+      "tag": "0008_clammy_blonde_phantom",
+      "breakpoints": true
+    }
+  ]
+}

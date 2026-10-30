@@ -1,0 +1,1 @@
+ALTER TABLE "skipped_campaigns" ADD COLUMN "reason" text DEFAULT 'user' NOT NULL;

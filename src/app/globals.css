@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+/* Nocturne palette (Claude Design handoff): dark by default, light ramp under prefers-color-scheme: light.
+   Status pairs (fg on bg) are tuned to WCAG AA >= 4.5 in both themes. */
+:root {
+  --bg: #161826;
+  --sf: #1e2030;
+  --sf2: #262836;
+  --fg: #e9e9ed;
+  --mut: #9397ab;
+  --line: rgba(233, 233, 237, 0.1);
+  --track: #2e3040;
+  --acc: #9184d9;
+  --acc-t: #b5abfc;
+  --acc-bg: #2b2741;
+  --ok: #7ad59c;
+  --ok-bg: #173523;
+  --run: #78c6ff;
+  --run-bg: #163045;
+  --warn: #efb062;
+  --warn-bg: #3e290f;
+  --bad: #ff9e96;
+  --bad-bg: #442321;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #eef0f8;
+    --sf: #f9fafe;
+    --sf2: #e4e7f5;
+    --fg: #161826;
+    --mut: #595d6c;
+    --line: rgba(22, 24, 38, 0.1);
+    --track: #dde0ee;
+    --acc: #796cbf;
+    --acc-t: #5d5294;
+    --acc-bg: #e7e5fe;
+    --ok: #0b7643;
+    --ok-bg: #d4f0dc;
+    --run: #0f68a2;
+    --run-bg: #d3ebff;
+    --warn: #8e5400;
+    --warn-bg: #fae4cc;
+    --bad: #9c433f;
+    --bad-bg: #ffdedb;
+    color-scheme: light;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-sf: var(--sf);
+  --color-sf2: var(--sf2);
+  --color-fg: var(--fg);
+  --color-mut: var(--mut);
+  --color-line: var(--line);
+  --color-track: var(--track);
+  --color-acc: var(--acc);
+  --color-acc-t: var(--acc-t);
+  --color-acc-bg: var(--acc-bg);
+  --color-ok: var(--ok);
+  --color-ok-bg: var(--ok-bg);
+  --color-run: var(--run);
+  --color-run-bg: var(--run-bg);
+  --color-warn: var(--warn);
+  --color-warn-bg: var(--warn-bg);
+  --color-bad: var(--bad);
+  --color-bad-bg: var(--bad-bg);
+  --color-avatar: #f3f5fe;
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+a {
+  text-underline-offset: 3px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--acc);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--acc) 30%, transparent);
+}
+
+/* Rules fade out over 48px at both ends instead of stopping cleanly. */
+.rule {
+  background: linear-gradient(to right, transparent, var(--line) 48px, var(--line) calc(100% - 48px), transparent) no-repeat bottom / 100% 1px;
+}
+@media (max-width: 639px) {
+  .rule {
+    background-image: linear-gradient(to right, transparent, var(--line) 32px, var(--line) calc(100% - 32px), transparent);
+  }
+}
+
+.hatch {
+  background: repeating-linear-gradient(135deg, var(--bad) 0 3px, transparent 3px 6px);
+}

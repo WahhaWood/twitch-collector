@@ -1,0 +1,2893 @@
+{
+  "inventory": {
+    "currentUser": {
+      "inventory": {
+        "dropCampaignsInProgress": null,
+        "gameEventDrops": [
+          {
+            "id": "43065265-32ee-11f1-872c-0a58a9feac02",
+            "lastAwardedAt": "2026-05-12T13:15:42Z"
+          },
+          {
+            "id": "36446bda-32ee-11f1-b483-0a58a9feac02",
+            "lastAwardedAt": "2026-05-12T12:45:44Z"
+          },
+          {
+            "id": "1678f40b-32ee-11f1-9ff3-0a58a9feac02",
+            "lastAwardedAt": "2026-05-12T11:58:07Z"
+          },
+          {
+            "id": "08d2c5d5-32ee-11f1-8a1c-0a58a9feac02",
+            "lastAwardedAt": "2026-05-12T12:13:08Z"
+          },
+          {
+            "id": "fe5f2622-36ce-11f1-a181-0a58a9feac02",
+            "lastAwardedAt": "2026-05-16T00:55:45Z"
+          },
+          {
+            "id": "f751ba67-7c8b-4c41-b6df-bcea0914f3ad_CUSTOM_ID_ArbiterofAshWaypoint",
+            "lastAwardedAt": "2026-06-04T17:17:29Z"
+          },
+          {
+            "id": "4c838f42-b5c6-11f1-9813-0a58a9feac02",
+            "lastAwardedAt": "2026-09-24T17:34:11.73Z"
+          }
+        ]
+      }
+    }
+  },
+  "campaigns": [
+    {
+      "id": "b66c6ae7-42bc-4e67-b0ad-8ab0d9897d26",
+      "name": "Worlds 2026 Chat Badge",
+      "status": "ACTIVE",
+      "startAt": "2026-10-14T19:00:00Z",
+      "endAt": "2026-11-15T18:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/4efb87e1-50f3-4192-9f4e-24f485d64f44.png",
+      "game": {
+        "displayName": "League of Legends"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "26fee398-c759-11f1-a917-0a58a9feac02",
+          "name": "Worlds 2026 Supporter",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-14T19:00:00Z",
+          "endAt": "2026-11-15T18:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "37ea3450-c759-11f1-9665-0a58a9feac02",
+                "name": "Worlds 2026 Supporter",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/63c01e1e-ba77-446a-9c3b-821c019cacad.png",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b66c6ae7-42bc-4e67-b0ad-8ab0d9897d26",
+      "name": "Worlds 2026 Chat Badge",
+      "status": "ACTIVE",
+      "startAt": "2026-10-14T19:00:00Z",
+      "endAt": "2026-11-15T18:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/4efb87e1-50f3-4192-9f4e-24f485d64f44.png",
+      "game": {
+        "displayName": "League of Legends"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "26fee398-c759-11f1-a917-0a58a9feac02",
+          "name": "Worlds 2026 Supporter",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-14T19:00:00Z",
+          "endAt": "2026-11-15T18:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "37ea3450-c759-11f1-9665-0a58a9feac02",
+                "name": "Worlds 2026 Supporter",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/63c01e1e-ba77-446a-9c3b-821c019cacad.png",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "15b9fa77-2959-47c9-acc0-2d33bc1ad62e",
+      "name": "ALGS S2 PO D1",
+      "status": "ACTIVE",
+      "startAt": "2026-10-29T16:45:00Z",
+      "endAt": "2026-10-30T05:29:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/6d7d59f9-e4dc-4b68-a6b9-e28bb0db6c11.png",
+      "game": {
+        "displayName": "Apex Legends"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "05550f10-c939-11f1-8596-0a58a9feac02",
+          "name": "APEX Pack",
+          "requiredMinutesWatched": 15,
+          "startAt": "2026-10-29T16:45:00Z",
+          "endAt": "2026-10-30T05:29:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "fa395b5e-cadd-47d9-989d-fe511aa3dbb1_CUSTOM_ID_algs_s30_rare_pack_12",
+                "name": "APEX Pack",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/a2563348-e48f-4b1c-82a2-5ead96e54122.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "25f57849-c939-11f1-8fc8-0a58a9feac02",
+          "name": "Charge Rifle Skin",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-29T16:45:00Z",
+          "endAt": "2026-10-30T05:29:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "fa395b5e-cadd-47d9-989d-fe511aa3dbb1_CUSTOM_ID_algs_s28_weapon_skin",
+                "name": "Charge Rifle Skin",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/360649ef-0495-4515-b822-7302b0f230d5.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "15b9fa77-2959-47c9-acc0-2d33bc1ad62e",
+      "name": "ALGS S2 PO D1",
+      "status": "ACTIVE",
+      "startAt": "2026-10-29T16:45:00Z",
+      "endAt": "2026-10-30T05:29:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/6d7d59f9-e4dc-4b68-a6b9-e28bb0db6c11.png",
+      "game": {
+        "displayName": "Apex Legends"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "05550f10-c939-11f1-8596-0a58a9feac02",
+          "name": "APEX Pack",
+          "requiredMinutesWatched": 15,
+          "startAt": "2026-10-29T16:45:00Z",
+          "endAt": "2026-10-30T05:29:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "fa395b5e-cadd-47d9-989d-fe511aa3dbb1_CUSTOM_ID_algs_s30_rare_pack_12",
+                "name": "APEX Pack",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/a2563348-e48f-4b1c-82a2-5ead96e54122.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "25f57849-c939-11f1-8fc8-0a58a9feac02",
+          "name": "Charge Rifle Skin",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-29T16:45:00Z",
+          "endAt": "2026-10-30T05:29:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "fa395b5e-cadd-47d9-989d-fe511aa3dbb1_CUSTOM_ID_algs_s28_weapon_skin",
+                "name": "Charge Rifle Skin",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/360649ef-0495-4515-b822-7302b0f230d5.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9c45c558-e191-4980-96af-83a4c811c25a",
+      "name": "Halloween Celebration",
+      "status": "ACTIVE",
+      "startAt": "2026-10-28T17:00:00Z",
+      "endAt": "2026-11-04T07:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/f8898c63-adff-41e9-af13-4503384fffe1.png",
+      "game": {
+        "displayName": "AION 2"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "d283c4b6-ced0-11f1-9c50-0a58a9feac02",
+          "name": "Resurrection Stone x15",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-28T17:00:00Z",
+          "endAt": "2026-11-04T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "ec6bc01f-af8b-4751-aefe-f53814228bb4_CUSTOM_ID_HalloweenDrops1hr",
+                "name": "Resurrection Stone x15",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/e85eb2a9-7a92-403a-89b4-b67d1eabe2d3.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "d8568709-ced0-11f1-a79f-0a58a9feac02",
+          "name": "Appearance Change x1",
+          "requiredMinutesWatched": 120,
+          "startAt": "2026-10-28T17:00:00Z",
+          "endAt": "2026-11-04T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "ec6bc01f-af8b-4751-aefe-f53814228bb4_CUSTOM_ID_HalloweenDrops2hr",
+                "name": "Appearance Change x1",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/ae09fb24-7590-4dc9-ad22-31c188ae43e9.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "dced0693-ced0-11f1-ac78-0a58a9feac02",
+          "name": "Customization Voucher x3",
+          "requiredMinutesWatched": 240,
+          "startAt": "2026-10-28T17:00:00Z",
+          "endAt": "2026-11-04T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "ec6bc01f-af8b-4751-aefe-f53814228bb4_CUSTOM_ID_HalloweenDrops4hr",
+                "name": "Customization Voucher x3",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/12c07433-6105-4d57-9145-4d642c0f3333.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e0ee7449-ced0-11f1-9207-0a58a9feac02",
+          "name": "Odyle Energy x4",
+          "requiredMinutesWatched": 360,
+          "startAt": "2026-10-28T17:00:00Z",
+          "endAt": "2026-11-04T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "ec6bc01f-af8b-4751-aefe-f53814228bb4_CUSTOM_ID_HalloweenDrops6hr",
+                "name": "Odyle Energy x4",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/150cb0ba-5dfe-4ede-864e-c46a4a922891.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e4cd8989-ced0-11f1-bbec-0a58a9feac02",
+          "name": "Chubby Panda(Helm) x1",
+          "requiredMinutesWatched": 480,
+          "startAt": "2026-10-28T17:00:00Z",
+          "endAt": "2026-11-04T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "ec6bc01f-af8b-4751-aefe-f53814228bb4_CUSTOM_ID_HalloweenDrops8hr",
+                "name": "Chubby Panda (Helm) x1",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/403eac43-e794-4469-ae0a-bddb5e502aaa.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a40fa4aa-bdca-4b6f-8858-6a3f5aaf3484",
+      "name": "Crimson Desert DLC Week 1",
+      "status": "ACTIVE",
+      "startAt": "2026-10-29T22:00:00Z",
+      "endAt": "2026-11-04T23:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/c30c938a-e0b7-42d0-ae27-0ba759f980c0.jpeg",
+      "game": {
+        "displayName": "Crimson Desert"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "9b0407f9-b275-11f1-a20c-0a58a9feac02",
+          "name": "60 min.",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-29T22:00:00Z",
+          "endAt": "2026-11-04T23:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "3346bf0d-5179-4a89-b760-13e1581dfd12_CUSTOM_ID_DLC60MINWEEK1",
+                "name": "Lantern & Meat Dish",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/6fb510c8-189a-4232-8552-0f662f1b2ad2.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "a044b8df-b275-11f1-a3ec-0a58a9feac02",
+          "name": "120 min.",
+          "requiredMinutesWatched": 120,
+          "startAt": "2026-10-29T22:00:00Z",
+          "endAt": "2026-11-04T23:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "3346bf0d-5179-4a89-b760-13e1581dfd12_CUSTOM_ID_DLC120MINWEEK1",
+                "name": "Pirate Eyepatch & Sword",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/a018ac8f-47c3-45d3-b4e7-d5442f9742a1.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "a622abb2-b275-11f1-bf97-0a58a9feac02",
+          "name": "180 min.",
+          "requiredMinutesWatched": 180,
+          "startAt": "2026-10-29T22:00:00Z",
+          "endAt": "2026-11-04T23:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "3346bf0d-5179-4a89-b760-13e1581dfd12_CUSTOM_ID_DLC180MINWEEK1",
+                "name": "Pet Parrot in Pirate Hat",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/8923aee2-68a7-489e-aee0-e153381878af.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1a262fb8-ab5d-4dbe-9284-bdc17aabe5c9",
+      "name": "Cuddly Gold Grrgle",
+      "status": "ACTIVE",
+      "startAt": "2026-10-13T17:00:00Z",
+      "endAt": "2026-11-03T17:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/54c7f158-497b-408a-8d03-3e69e96c2248.png",
+      "game": {
+        "displayName": "World of Warcraft"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "188909b5-c7ef-11f1-9ac8-0a58a9feac02",
+          "name": "Cuddly Gold Grrgle",
+          "requiredMinutesWatched": 240,
+          "startAt": "2026-10-13T17:00:00Z",
+          "endAt": "2026-11-03T17:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "9620a89d-b07c-4160-a851-ae832fa6985e_CUSTOM_ID_2073886",
+                "name": "Cuddly Gold Grrgle Update",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/18298974-784c-49d4-adf4-7997523b74cc.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8fbafdec-31ee-4878-a9ca-9ebbe07ca74d",
+      "name": "Modern Warfare 4 Badge",
+      "status": "ACTIVE",
+      "startAt": "2026-10-23T17:00:00Z",
+      "endAt": "2026-11-13T17:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/e580e2b4-96e7-40a5-908d-d16fdc871f75.png",
+      "game": {
+        "displayName": "Call of Duty: Modern Warfare 4"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "f4ea4a2b-c4e0-11f1-9641-0a58a9feac02",
+          "name": "Modern Warfare 4 Badge",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-23T17:00:00Z",
+          "endAt": "2026-11-13T17:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "20e82c33-c4e1-11f1-9c0f-0a58a9feac02",
+                "name": "Modern Warfare 4 Badge",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/d927f823-a469-4881-a67f-ba5d93a85fe5.png",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8fbafdec-31ee-4878-a9ca-9ebbe07ca74d",
+      "name": "Modern Warfare 4 Badge",
+      "status": "ACTIVE",
+      "startAt": "2026-10-23T17:00:00Z",
+      "endAt": "2026-11-13T17:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/e580e2b4-96e7-40a5-908d-d16fdc871f75.png",
+      "game": {
+        "displayName": "Call of Duty: Modern Warfare 4"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "f4ea4a2b-c4e0-11f1-9641-0a58a9feac02",
+          "name": "Modern Warfare 4 Badge",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-23T17:00:00Z",
+          "endAt": "2026-11-13T17:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "20e82c33-c4e1-11f1-9c0f-0a58a9feac02",
+                "name": "Modern Warfare 4 Badge",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/d927f823-a469-4881-a67f-ba5d93a85fe5.png",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9c45c558-e191-4980-96af-83a4c811c25a",
+      "name": "Halloween Celebration",
+      "status": "ACTIVE",
+      "startAt": "2026-10-28T17:00:00Z",
+      "endAt": "2026-11-04T07:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/f8898c63-adff-41e9-af13-4503384fffe1.png",
+      "game": {
+        "displayName": "AION 2"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "d283c4b6-ced0-11f1-9c50-0a58a9feac02",
+          "name": "Resurrection Stone x15",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-28T17:00:00Z",
+          "endAt": "2026-11-04T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "ec6bc01f-af8b-4751-aefe-f53814228bb4_CUSTOM_ID_HalloweenDrops1hr",
+                "name": "Resurrection Stone x15",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/e85eb2a9-7a92-403a-89b4-b67d1eabe2d3.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "d8568709-ced0-11f1-a79f-0a58a9feac02",
+          "name": "Appearance Change x1",
+          "requiredMinutesWatched": 120,
+          "startAt": "2026-10-28T17:00:00Z",
+          "endAt": "2026-11-04T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "ec6bc01f-af8b-4751-aefe-f53814228bb4_CUSTOM_ID_HalloweenDrops2hr",
+                "name": "Appearance Change x1",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/ae09fb24-7590-4dc9-ad22-31c188ae43e9.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "dced0693-ced0-11f1-ac78-0a58a9feac02",
+          "name": "Customization Voucher x3",
+          "requiredMinutesWatched": 240,
+          "startAt": "2026-10-28T17:00:00Z",
+          "endAt": "2026-11-04T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "ec6bc01f-af8b-4751-aefe-f53814228bb4_CUSTOM_ID_HalloweenDrops4hr",
+                "name": "Customization Voucher x3",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/12c07433-6105-4d57-9145-4d642c0f3333.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e0ee7449-ced0-11f1-9207-0a58a9feac02",
+          "name": "Odyle Energy x4",
+          "requiredMinutesWatched": 360,
+          "startAt": "2026-10-28T17:00:00Z",
+          "endAt": "2026-11-04T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "ec6bc01f-af8b-4751-aefe-f53814228bb4_CUSTOM_ID_HalloweenDrops6hr",
+                "name": "Odyle Energy x4",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/150cb0ba-5dfe-4ede-864e-c46a4a922891.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e4cd8989-ced0-11f1-bbec-0a58a9feac02",
+          "name": "Chubby Panda(Helm) x1",
+          "requiredMinutesWatched": 480,
+          "startAt": "2026-10-28T17:00:00Z",
+          "endAt": "2026-11-04T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "ec6bc01f-af8b-4751-aefe-f53814228bb4_CUSTOM_ID_HalloweenDrops8hr",
+                "name": "Chubby Panda (Helm) x1",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/403eac43-e794-4469-ae0a-bddb5e502aaa.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "233a7dcd-1c1f-4876-9529-2071a7f0d30d",
+      "name": "Twitch Rivals BI Generals",
+      "status": "ACTIVE",
+      "startAt": "2026-10-23T17:45:00Z",
+      "endAt": "2026-11-01T23:58:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/eb9cc8ab-0583-4b86-b902-bdd5771aae0f.png",
+      "game": {
+        "displayName": "Rust"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "0b26fa32-cc9a-11f1-83bb-0a58a9feac02",
+          "name": "Twitch Rivals Spooky Bed",
+          "requiredMinutesWatched": 120,
+          "startAt": "2026-10-23T17:45:00Z",
+          "endAt": "2026-11-01T23:58:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "0c95681b-95ad-4be7-a2ba-07dcace74891_CUSTOM_ID_11599",
+                "name": "Twitch Rivals Spooky Bed",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/a41d865c-ca0f-4426-82ca-e688d702ecf0.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "1766518f-cc9a-11f1-8068-0a58a9feac02",
+          "name": "Twitch Rivals Spooky Door",
+          "requiredMinutesWatched": 180,
+          "startAt": "2026-10-23T17:45:00Z",
+          "endAt": "2026-11-01T23:58:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "0c95681b-95ad-4be7-a2ba-07dcace74891_CUSTOM_ID_11600",
+                "name": "Twitch Rivals Spooky Door",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/087e5932-dc2d-4953-8ea5-db8854035dfd.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "251235f6-cc9a-11f1-b114-0a58a9feac02",
+          "name": "Twitch Rivals Spooky Thompson",
+          "requiredMinutesWatched": 240,
+          "startAt": "2026-10-23T17:45:00Z",
+          "endAt": "2026-11-01T23:58:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "0c95681b-95ad-4be7-a2ba-07dcace74891_CUSTOM_ID_11601",
+                "name": "Twitch Rivals Spooky Thom",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/7dc66b51-0a04-49e0-a5d7-2939d9e9b9b7.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "34d81340-cc9a-11f1-9731-0a58a9feac02",
+          "name": "Rustoria Clones Box",
+          "requiredMinutesWatched": 300,
+          "startAt": "2026-10-23T17:45:00Z",
+          "endAt": "2026-11-01T23:58:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "0c95681b-95ad-4be7-a2ba-07dcace74891_CUSTOM_ID_11602",
+                "name": "Rustoria Clones Box",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/9ff50c85-35aa-4fc6-8092-4fba3491f676.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "f89d3b5e-cc99-11f1-bb38-0a58a9feac02",
+          "name": "Twitch Rivals Spooky Rug",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-23T17:45:00Z",
+          "endAt": "2026-11-01T23:58:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "0c95681b-95ad-4be7-a2ba-07dcace74891_CUSTOM_ID_11598",
+                "name": "Twitch Rivals Spooky Rug",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/9d9db1dc-a2ac-4f3c-aae8-057dbc7d57d3.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1a262fb8-ab5d-4dbe-9284-bdc17aabe5c9",
+      "name": "Cuddly Gold Grrgle",
+      "status": "ACTIVE",
+      "startAt": "2026-10-13T17:00:00Z",
+      "endAt": "2026-11-03T17:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/54c7f158-497b-408a-8d03-3e69e96c2248.png",
+      "game": {
+        "displayName": "World of Warcraft"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "188909b5-c7ef-11f1-9ac8-0a58a9feac02",
+          "name": "Cuddly Gold Grrgle",
+          "requiredMinutesWatched": 240,
+          "startAt": "2026-10-13T17:00:00Z",
+          "endAt": "2026-11-03T17:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "9620a89d-b07c-4160-a851-ae832fa6985e_CUSTOM_ID_2073886",
+                "name": "Cuddly Gold Grrgle Update",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/18298974-784c-49d4-adf4-7997523b74cc.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dfa9c27f-877b-417a-8a49-279ecf0fbb15",
+      "name": "Reign of Talon S5 Launch",
+      "status": "ACTIVE",
+      "startAt": "2026-10-06T18:00:00Z",
+      "endAt": "2026-11-03T07:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/8e50d69d-98e3-4258-8b6b-9dee335663f5.jpeg",
+      "game": {
+        "displayName": "Overwatch"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "355a3d94-c151-11f1-a470-0a58a9feac02",
+          "name": "Heroes of Heart Spray",
+          "requiredMinutesWatched": 600,
+          "startAt": "2026-10-06T18:00:00Z",
+          "endAt": "2026-11-03T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "9620a89d-b07c-4160-a851-ae832fa6985e_CUSTOM_ID_2139963",
+                "name": "Heroes of Heart Spray",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/65f1c300-ad4d-48c5-9199-35c1ce7626bd.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "6822bdef-c151-11f1-be8d-0a58a9feac02",
+          "name": "Epic Lootbox",
+          "requiredMinutesWatched": 900,
+          "startAt": "2026-10-06T18:00:00Z",
+          "endAt": "2026-11-03T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "9620a89d-b07c-4160-a851-ae832fa6985e_CUSTOM_ID_2110810",
+                "name": "RoT Epic Lootbox",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/15b7dce8-26a2-4b27-91a2-892551834013.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "9462de07-c150-11f1-a204-0a58a9feac02",
+          "name": "Hollow Hearts Avatar",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-06T18:00:00Z",
+          "endAt": "2026-11-03T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "9620a89d-b07c-4160-a851-ae832fa6985e_CUSTOM_ID_2139935",
+                "name": "Hollow Hearts Avatar",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/8c68f55c-8c65-471b-8d96-9538ebf58a8c.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "a712c340-c150-11f1-80b1-0a58a9feac02",
+          "name": "Hollow Hearts Spray",
+          "requiredMinutesWatched": 180,
+          "startAt": "2026-10-06T18:00:00Z",
+          "endAt": "2026-11-03T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "9620a89d-b07c-4160-a851-ae832fa6985e_CUSTOM_ID_2139976",
+                "name": "Hollow Hearts Spray",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/9313d1e7-7ab6-40cf-95eb-97cb650f3cb9.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fb53a96d-c150-11f1-bdab-0a58a9feac02",
+          "name": "Lootbox",
+          "requiredMinutesWatched": 360,
+          "startAt": "2026-10-06T18:00:00Z",
+          "endAt": "2026-11-03T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "9620a89d-b07c-4160-a851-ae832fa6985e_CUSTOM_ID_2110811",
+                "name": "RoT Lootbox",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/ee0d34d7-fab4-4d5b-b751-b98b3bbc4ea4.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fd0c6ca1-c13a-11f1-aeb8-0a58a9feac02",
+          "name": "Heroes of Heart Avatar",
+          "requiredMinutesWatched": 30,
+          "startAt": "2026-10-06T18:00:00Z",
+          "endAt": "2026-11-03T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "9620a89d-b07c-4160-a851-ae832fa6985e_CUSTOM_ID_2139964",
+                "name": "Heroes of Heart Avatar",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/12483657-a951-4d19-aac0-eb3f62119e36.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "90273492-0fd5-46d0-b1cf-60084d901adf",
+      "name": " Ignite Stage2 W5",
+      "status": "ACTIVE",
+      "startAt": "2026-10-18T15:00:00Z",
+      "endAt": "2026-11-15T08:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/a3aac96e-0cb1-48b1-8301-87754d6eaaaf.png",
+      "game": {
+        "displayName": "Marvel Rivals"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "22d4192b-c479-11f1-a353-0a58a9feac02",
+          "name": "Chrono Tokens *100",
+          "requiredMinutesWatched": 30,
+          "startAt": "2026-10-18T15:00:00Z",
+          "endAt": "2026-11-15T08:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "cf2d901d-c477-11f1-901a-0a58a9feac02",
+                "name": "Stage2 Chrono Token 7",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/d2bb308b-c9b6-41cf-9143-33c282509228.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "2deb3cbd-c479-11f1-9cbf-0a58a9feac02",
+          "name": "「GIANT KILLERS」Spray",
+          "requiredMinutesWatched": 90,
+          "startAt": "2026-10-18T15:00:00Z",
+          "endAt": "2026-11-15T08:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "524264ab-c478-11f1-87ca-0a58a9feac02",
+                "name": "「GIANT KILLERS」Spray",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/8c8eb1eb-1b7e-4ba9-abdc-f538a3ffda0a.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "35c7a759-c479-11f1-889d-0a58a9feac02",
+          "name": "Chrono Tokens *100",
+          "requiredMinutesWatched": 120,
+          "startAt": "2026-10-18T15:00:00Z",
+          "endAt": "2026-11-15T08:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "d7db8c5f-c477-11f1-9e2e-0a58a9feac02",
+                "name": "Stage2 Chrono Token 8",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/833d0492-f94c-4af0-8fb1-4aabf4cec93b.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "3ec54a86-c479-11f1-8302-0a58a9feac02",
+          "name": "Cyclops「X-BEAM」Emotes",
+          "requiredMinutesWatched": 240,
+          "startAt": "2026-10-18T15:00:00Z",
+          "endAt": "2026-11-15T08:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "5f1a700a-c478-11f1-bbb1-0a58a9feac02",
+                "name": "Cyclops「X-BEAM」Emotes",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/f0f54345-3456-43b0-a75d-0eb2b97122a4.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "44ea8e35-c479-11f1-8c5f-0a58a9feac02",
+          "name": "Cyclops「Will of Galacta」Costume",
+          "requiredMinutesWatched": 360,
+          "startAt": "2026-10-18T15:00:00Z",
+          "endAt": "2026-11-15T08:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "6d92fa5f-c478-11f1-8b15-0a58a9feac02",
+                "name": "Cyclops Costume",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/16ada3c8-0b38-4981-b196-ed416063992a.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9a9ca7e6-0f58-4949-954c-fb6370c76c70",
+      "name": "WoT A Thrill Store #8",
+      "status": "ACTIVE",
+      "startAt": "2026-10-28T16:00:00Z",
+      "endAt": "2026-10-30T15:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/73c6cfa0-c861-4b26-ab7b-b6107b56a121.jpeg",
+      "game": {
+        "displayName": "World of Tanks"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "e1839770-bbe1-11f1-9638-0a58a9feac02",
+          "name": "Drop 1",
+          "requiredMinutesWatched": 180,
+          "startAt": "2026-10-28T16:00:00Z",
+          "endAt": "2026-10-30T15:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "6948a129-2c6d-4d88-9444-6b96918a19f8_CUSTOM_ID_WoT_WAT_1026_08_1",
+                "name": "5x Pumpkin Tokens",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/d282e248-eb1f-4c5f-9036-1490b6181823.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e49fdb58-bbe1-11f1-9a80-0a58a9feac02",
+          "name": "Drop 2",
+          "requiredMinutesWatched": 240,
+          "startAt": "2026-10-28T16:00:00Z",
+          "endAt": "2026-10-30T15:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "6948a129-2c6d-4d88-9444-6b96918a19f8_CUSTOM_ID_WoT_WAT_1026_08_2",
+                "name": "5x combat abilities",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/692d3e2f-c9b7-4df1-a661-c1751bc84a7a.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "75064d8e-726d-45e6-9caa-26d66d49b993",
+      "name": "DbD: October of Horror IV",
+      "status": "ACTIVE",
+      "startAt": "2026-10-26T04:00:00Z",
+      "endAt": "2026-11-02T03:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/750ee889-f19c-4dbe-99f0-a63f41fed797.png",
+      "game": {
+        "displayName": "Dead by Daylight"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "746cbff3-cf5d-11f1-815c-0a58a9feac02",
+          "name": "Smile, Pumpkin Banner",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-26T04:00:00Z",
+          "endAt": "2026-11-02T03:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "6da09649-1fda-4446-a061-cacd8e21b886_CUSTOM_ID_UDO_BNR_07",
+                "name": "Smile, Pumpkin Banner",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/07e08a14-945c-4936-96a7-fedf1d46181c.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e4f226c6-c9c3-4d99-9c13-e0050e004f9a",
+      "name": "Frozen Trail",
+      "status": "ACTIVE",
+      "startAt": "2026-10-08T11:00:00Z",
+      "endAt": "2026-11-04T12:44:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/b8e5d867-5604-4578-b6bc-2894189fe6d8.jpeg",
+      "game": {
+        "displayName": "ARC Raiders"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "e477336b-c0bb-11f1-b5a4-0a58a9feac02",
+          "name": "Mailbox",
+          "requiredMinutesWatched": 120,
+          "startAt": "2026-10-08T11:00:00Z",
+          "endAt": "2026-11-04T12:44:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "e2a2aacb-acce-4761-8960-3c7f814a3f55_CUSTOM_ID_BackpackAttachment_Mailbox",
+                "name": "Mailbox",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/2c02928f-e298-45de-8381-4c4a51b641b6.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "eb56fc5f-c0bb-11f1-93f2-0a58a9feac02",
+          "name": "Oxygen Respirator",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-08T11:00:00Z",
+          "endAt": "2026-11-04T12:44:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "e2a2aacb-acce-4761-8960-3c7f814a3f55_CUSTOM_ID_BackpackAttachment_OxygenRespirator",
+                "name": "Oxygen Respirator",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/8af9ed2c-cbe9-4450-b70f-b30340b2f570.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "5e4f501a-0e62-4a2c-b3ef-567b60c6f4cf",
+      "name": "Horror Month Sub '26",
+      "status": "ACTIVE",
+      "startAt": "2026-10-04T04:00:00Z",
+      "endAt": "2026-11-01T04:00:00Z",
+      "imageURL": "https://static-cdn.jtvnw.net/badges/v1/3fe70888-ddc5-4e5a-9030-0f4f4d5af8bb/3",
+      "game": null,
+      "timeBasedDrops": [
+        {
+          "id": "b3bbed06-bcc1-11f1-a0f0-0a58a9feac02",
+          "name": "",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-04T04:00:00Z",
+          "endAt": "2026-11-01T04:00:00Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "b3bbf11d-bcc1-11f1-a0f0-0a58a9feac02",
+                "name": "Horror Month Sub '26",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/badges/v1/3fe70888-ddc5-4e5a-9030-0f4f4d5af8bb/3",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        },
+        {
+          "id": "b3bbf296-bcc1-11f1-a0f0-0a58a9feac02",
+          "name": "",
+          "requiredMinutesWatched": 1440,
+          "startAt": "2026-10-04T04:00:00Z",
+          "endAt": "2026-11-01T04:00:00Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "b3bbf2a4-bcc1-11f1-a0f0-0a58a9feac02",
+                "name": "Horror Month '26",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/badges/v1/54c9c4c3-72db-4a01-b5c9-ed7e04e0a003/3",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "64982eb9-9f8b-4151-afb8-8f53552b257b",
+      "name": "Conebear",
+      "status": "ACTIVE",
+      "startAt": "2026-10-28T19:00:00Z",
+      "endAt": "2026-10-30T16:00:00Z",
+      "imageURL": "https://static-cdn.jtvnw.net/badges/v1/80088fe5-a438-40e5-aa3b-c50ed98cd721/3",
+      "game": null,
+      "timeBasedDrops": [
+        {
+          "id": "e3e7cdc3-d2dc-11f1-a300-0a58a9feac02",
+          "name": "",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-28T19:00:00Z",
+          "endAt": "2026-10-30T16:00:00Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "e3e7cde9-d2dc-11f1-a300-0a58a9feac02",
+                "name": "Conebear",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/badges/v1/80088fe5-a438-40e5-aa3b-c50ed98cd721/3",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a40fa4aa-bdca-4b6f-8858-6a3f5aaf3484",
+      "name": "Crimson Desert DLC Week 1",
+      "status": "ACTIVE",
+      "startAt": "2026-10-29T22:00:00Z",
+      "endAt": "2026-11-04T23:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/c30c938a-e0b7-42d0-ae27-0ba759f980c0.jpeg",
+      "game": {
+        "displayName": "Crimson Desert"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "9b0407f9-b275-11f1-a20c-0a58a9feac02",
+          "name": "60 min.",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-29T22:00:00Z",
+          "endAt": "2026-11-04T23:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "3346bf0d-5179-4a89-b760-13e1581dfd12_CUSTOM_ID_DLC60MINWEEK1",
+                "name": "Lantern & Meat Dish",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/6fb510c8-189a-4232-8552-0f662f1b2ad2.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "a044b8df-b275-11f1-a3ec-0a58a9feac02",
+          "name": "120 min.",
+          "requiredMinutesWatched": 120,
+          "startAt": "2026-10-29T22:00:00Z",
+          "endAt": "2026-11-04T23:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "3346bf0d-5179-4a89-b760-13e1581dfd12_CUSTOM_ID_DLC120MINWEEK1",
+                "name": "Pirate Eyepatch & Sword",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/a018ac8f-47c3-45d3-b4e7-d5442f9742a1.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "a622abb2-b275-11f1-bf97-0a58a9feac02",
+          "name": "180 min.",
+          "requiredMinutesWatched": 180,
+          "startAt": "2026-10-29T22:00:00Z",
+          "endAt": "2026-11-04T23:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "3346bf0d-5179-4a89-b760-13e1581dfd12_CUSTOM_ID_DLC180MINWEEK1",
+                "name": "Pet Parrot in Pirate Hat",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/8923aee2-68a7-489e-aee0-e153381878af.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e7187868-3a18-4343-b31b-94a28cf732a8",
+      "name": "doctordoctor",
+      "status": "ACTIVE",
+      "startAt": "2026-10-26T16:12:50.294Z",
+      "endAt": "2026-11-02T17:12:00Z",
+      "imageURL": "https://static-cdn.jtvnw.net/badges/v1/fe1cb139-1718-4918-9eae-3ecdae8862e8/3",
+      "game": null,
+      "timeBasedDrops": [
+        {
+          "id": "176c49fb-d158-11f1-8b4a-0a58a9feac02",
+          "name": "",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-26T16:12:50.294Z",
+          "endAt": "2026-11-02T17:12:00Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "176c4a20-d158-11f1-8b4a-0a58a9feac02",
+                "name": "doctordoctor",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/badges/v1/fe1cb139-1718-4918-9eae-3ecdae8862e8/3",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8c373f6f-862e-4737-81fe-452dc0252977",
+      "name": "R6S Doktor's Curse 26",
+      "status": "ACTIVE",
+      "startAt": "2026-10-15T14:00:00Z",
+      "endAt": "2026-11-02T13:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/563a7901-a0e3-4b56-8bad-f2d3986b64ab.png",
+      "game": {
+        "displayName": "Rainbow Six Siege"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "869eae2a-c418-11f1-b6cf-0a58a9feac02",
+          "name": "Ominous Downfall",
+          "requiredMinutesWatched": 180,
+          "startAt": "2026-10-15T14:00:00Z",
+          "endAt": "2026-11-02T13:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "59d4f6c2-36bc-4c3f-83c8-f8d9936dc75b_CUSTOM_ID_Ominous_Downfall_Oct2026",
+                "name": "Ominous Downfall",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/f4603e90-555e-4f8b-8f7f-eeca95ed29c8.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e4f226c6-c9c3-4d99-9c13-e0050e004f9a",
+      "name": "Frozen Trail",
+      "status": "ACTIVE",
+      "startAt": "2026-10-08T11:00:00Z",
+      "endAt": "2026-11-04T12:44:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/b8e5d867-5604-4578-b6bc-2894189fe6d8.jpeg",
+      "game": {
+        "displayName": "ARC Raiders"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "e477336b-c0bb-11f1-b5a4-0a58a9feac02",
+          "name": "Mailbox",
+          "requiredMinutesWatched": 120,
+          "startAt": "2026-10-08T11:00:00Z",
+          "endAt": "2026-11-04T12:44:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "e2a2aacb-acce-4761-8960-3c7f814a3f55_CUSTOM_ID_BackpackAttachment_Mailbox",
+                "name": "Mailbox",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/2c02928f-e298-45de-8381-4c4a51b641b6.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "eb56fc5f-c0bb-11f1-93f2-0a58a9feac02",
+          "name": "Oxygen Respirator",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-08T11:00:00Z",
+          "endAt": "2026-11-04T12:44:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "e2a2aacb-acce-4761-8960-3c7f814a3f55_CUSTOM_ID_BackpackAttachment_OxygenRespirator",
+                "name": "Oxygen Respirator",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/8af9ed2c-cbe9-4450-b70f-b30340b2f570.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "75064d8e-726d-45e6-9caa-26d66d49b993",
+      "name": "DbD: October of Horror IV",
+      "status": "ACTIVE",
+      "startAt": "2026-10-26T04:00:00Z",
+      "endAt": "2026-11-02T03:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/750ee889-f19c-4dbe-99f0-a63f41fed797.png",
+      "game": {
+        "displayName": "Dead by Daylight"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "746cbff3-cf5d-11f1-815c-0a58a9feac02",
+          "name": "Smile, Pumpkin Banner",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-26T04:00:00Z",
+          "endAt": "2026-11-02T03:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "6da09649-1fda-4446-a061-cacd8e21b886_CUSTOM_ID_UDO_BNR_07",
+                "name": "Smile, Pumpkin Banner",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/07e08a14-945c-4936-96a7-fedf1d46181c.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "11d793a3-077a-4b88-bff4-9659605c655d",
+      "name": "Pixelbit",
+      "status": "ACTIVE",
+      "startAt": "2026-10-11T12:00:00.286Z",
+      "endAt": "2026-10-31T22:00:00Z",
+      "imageURL": "https://static-cdn.jtvnw.net/badges/v1/de588750-82d8-44e7-aa5b-09a83e4e749a/3",
+      "game": null,
+      "timeBasedDrops": [
+        {
+          "id": "f807f389-c567-11f1-b802-0a58a9feac02",
+          "name": "",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-11T12:00:00.286Z",
+          "endAt": "2026-10-31T22:00:00Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "f807f3b1-c567-11f1-b802-0a58a9feac02",
+                "name": "Pixelbit",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/badges/v1/de588750-82d8-44e7-aa5b-09a83e4e749a/3",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4ea03d3d-327b-4414-9282-74f54000e585",
+      "name": "glipper",
+      "status": "ACTIVE",
+      "startAt": "2026-10-17T06:34:55.709Z",
+      "endAt": "2026-11-01T06:29:00Z",
+      "imageURL": "https://static-cdn.jtvnw.net/badges/v1/5dafb398-a205-42ad-af72-00948ddc3cfb/3",
+      "game": null,
+      "timeBasedDrops": [
+        {
+          "id": "de2ff88e-c9f4-11f1-b492-0a58a9feac02",
+          "name": "",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-17T06:34:55.709Z",
+          "endAt": "2026-11-01T06:29:00Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "de2ff8ad-c9f4-11f1-b492-0a58a9feac02",
+                "name": "glipper",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/badges/v1/5dafb398-a205-42ad-af72-00948ddc3cfb/3",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        },
+        {
+          "id": "de2ff9a3-c9f4-11f1-b492-0a58a9feac02",
+          "name": "",
+          "requiredMinutesWatched": 480,
+          "startAt": "2026-10-17T06:34:55.709Z",
+          "endAt": "2026-11-01T06:29:00Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "de2ff9ab-c9f4-11f1-b492-0a58a9feac02",
+                "name": "other glipper",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/badges/v1/f052592b-4c0a-460c-80ea-1d11f25967b8/3",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feb9c9a0-6144-4c4e-be6e-9eebc064f5ba",
+      "name": "imviolet Halloween 2k26",
+      "status": "ACTIVE",
+      "startAt": "2026-10-18T21:15:00Z",
+      "endAt": "2026-11-03T01:30:00Z",
+      "imageURL": "https://static-cdn.jtvnw.net/badges/v1/c440aeaa-0a71-434a-9f7b-e68301634dd8/3",
+      "game": null,
+      "timeBasedDrops": [
+        {
+          "id": "d4b8d7e3-cb37-11f1-98fa-0a58a9feac02",
+          "name": "",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-18T21:15:00Z",
+          "endAt": "2026-11-03T01:30:00Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "d4b8d802-cb37-11f1-98fa-0a58a9feac02",
+                "name": "imviolet Halloween 2k26",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/badges/v1/c440aeaa-0a71-434a-9f7b-e68301634dd8/3",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "907b637a-7ac0-49d2-b563-5b3dd79c29d4",
+      "name": "October Week 4 - CCP",
+      "status": "ACTIVE",
+      "startAt": "2026-10-23T17:00:00Z",
+      "endAt": "2026-10-30T16:44:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/default.png",
+      "game": {
+        "displayName": "MARVEL Contest of Champions"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "df887865-ce3b-11f1-a481-0a58a9feac02",
+          "name": "CCP Drop 1 - PRG Gated Rank-Up Gem",
+          "requiredMinutesWatched": 120,
+          "startAt": "2026-10-23T17:00:00Z",
+          "endAt": "2026-10-30T16:44:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "787ffa29-14d6-4990-bd94-14f46c513068_CUSTOM_ID_com.kabam.marvel.twitch.standard.drop22",
+                "name": "Creator Drop 1 - NW4",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/53570235-a034-4b43-8ef7-e293fdec0e62.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e7572ac4-ce3b-11f1-9a09-0a58a9feac02",
+          "name": "CCP Drop 2 - 1x Observance",
+          "requiredMinutesWatched": 180,
+          "startAt": "2026-10-23T17:00:00Z",
+          "endAt": "2026-10-30T16:44:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "787ffa29-14d6-4990-bd94-14f46c513068_CUSTOM_ID_com.kabam.marvel.twitch.standard.drop23",
+                "name": "Creator Drop 2 - NW4",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/b9afde57-bf23-410c-89f6-2c4d04864430.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "f30698e1-ce3b-11f1-9699-0a58a9feac02",
+          "name": "CCP Drop 3 - PRG Gated Ascension Materials",
+          "requiredMinutesWatched": 240,
+          "startAt": "2026-10-23T17:00:00Z",
+          "endAt": "2026-10-30T16:44:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "787ffa29-14d6-4990-bd94-14f46c513068_CUSTOM_ID_com.kabam.marvel.twitch.standard.drop24",
+                "name": "Creator Drop 3 - NW4",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/418262a8-8ffa-4eb8-a4c9-47fe53a344ce.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "5618dff1-898b-4139-b763-d1693b82e8f1",
+      "name": "Oct 26 Subathon",
+      "status": "ACTIVE",
+      "startAt": "2026-10-09T02:30:14.881Z",
+      "endAt": "2026-10-31T06:00:00Z",
+      "imageURL": "https://static-cdn.jtvnw.net/badges/v1/782b3c81-bd13-4fb9-8aa9-c8bbd63b2737/3",
+      "game": null,
+      "timeBasedDrops": [
+        {
+          "id": "5c73f836-c389-11f1-823a-0a58a9feac02",
+          "name": "",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-09T02:30:14.881Z",
+          "endAt": "2026-10-31T06:00:00Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "5c73f85c-c389-11f1-823a-0a58a9feac02",
+                "name": "Oct 26 Subathon",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/badges/v1/782b3c81-bd13-4fb9-8aa9-c8bbd63b2737/3",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dfa9c27f-877b-417a-8a49-279ecf0fbb15",
+      "name": "Reign of Talon S5 Launch",
+      "status": "ACTIVE",
+      "startAt": "2026-10-06T18:00:00Z",
+      "endAt": "2026-11-03T07:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/8e50d69d-98e3-4258-8b6b-9dee335663f5.jpeg",
+      "game": {
+        "displayName": "Overwatch"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "355a3d94-c151-11f1-a470-0a58a9feac02",
+          "name": "Heroes of Heart Spray",
+          "requiredMinutesWatched": 600,
+          "startAt": "2026-10-06T18:00:00Z",
+          "endAt": "2026-11-03T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "9620a89d-b07c-4160-a851-ae832fa6985e_CUSTOM_ID_2139963",
+                "name": "Heroes of Heart Spray",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/65f1c300-ad4d-48c5-9199-35c1ce7626bd.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "6822bdef-c151-11f1-be8d-0a58a9feac02",
+          "name": "Epic Lootbox",
+          "requiredMinutesWatched": 900,
+          "startAt": "2026-10-06T18:00:00Z",
+          "endAt": "2026-11-03T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "9620a89d-b07c-4160-a851-ae832fa6985e_CUSTOM_ID_2110810",
+                "name": "RoT Epic Lootbox",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/15b7dce8-26a2-4b27-91a2-892551834013.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "9462de07-c150-11f1-a204-0a58a9feac02",
+          "name": "Hollow Hearts Avatar",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-06T18:00:00Z",
+          "endAt": "2026-11-03T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "9620a89d-b07c-4160-a851-ae832fa6985e_CUSTOM_ID_2139935",
+                "name": "Hollow Hearts Avatar",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/8c68f55c-8c65-471b-8d96-9538ebf58a8c.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "a712c340-c150-11f1-80b1-0a58a9feac02",
+          "name": "Hollow Hearts Spray",
+          "requiredMinutesWatched": 180,
+          "startAt": "2026-10-06T18:00:00Z",
+          "endAt": "2026-11-03T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "9620a89d-b07c-4160-a851-ae832fa6985e_CUSTOM_ID_2139976",
+                "name": "Hollow Hearts Spray",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/9313d1e7-7ab6-40cf-95eb-97cb650f3cb9.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fb53a96d-c150-11f1-bdab-0a58a9feac02",
+          "name": "Lootbox",
+          "requiredMinutesWatched": 360,
+          "startAt": "2026-10-06T18:00:00Z",
+          "endAt": "2026-11-03T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "9620a89d-b07c-4160-a851-ae832fa6985e_CUSTOM_ID_2110811",
+                "name": "RoT Lootbox",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/ee0d34d7-fab4-4d5b-b751-b98b3bbc4ea4.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "fd0c6ca1-c13a-11f1-aeb8-0a58a9feac02",
+          "name": "Heroes of Heart Avatar",
+          "requiredMinutesWatched": 30,
+          "startAt": "2026-10-06T18:00:00Z",
+          "endAt": "2026-11-03T07:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "9620a89d-b07c-4160-a851-ae832fa6985e_CUSTOM_ID_2139964",
+                "name": "Heroes of Heart Avatar",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/12483657-a951-4d19-aac0-eb3f62119e36.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e8b7af11-0544-4a76-99e7-4807e4f3f35f",
+      "name": "HS 1896 Halloween 2026",
+      "status": "ACTIVE",
+      "startAt": "2026-10-26T14:54:34Z",
+      "endAt": "2026-11-09T13:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/0f7bd88c-44a8-4e21-845f-dc891359406d.png",
+      "game": {
+        "displayName": "Hunt: Showdown 1896"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "12bc36e9-d14e-11f1-be13-0a58a9feac02",
+          "name": "Hunt Red",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-26T14:54:34Z",
+          "endAt": "2026-11-09T13:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "4cdbd5a2-d14e-11f1-8a48-0a58a9feac02",
+                "name": "Hunt Red",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/e52b190f-d224-4837-8681-12738c0810bb.png",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        },
+        {
+          "id": "0d0c7712-d14e-11f1-8959-0a58a9feac02",
+          "name": "Hunt White",
+          "requiredMinutesWatched": 15,
+          "startAt": "2026-10-26T14:54:34Z",
+          "endAt": "2026-11-09T13:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "32db5a6c-d14e-11f1-a73b-0a58a9feac02",
+                "name": "Hunt White",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/e3a45dbe-6055-4209-899d-a196ad93d10f.png",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "233a7dcd-1c1f-4876-9529-2071a7f0d30d",
+      "name": "Twitch Rivals BI Generals",
+      "status": "ACTIVE",
+      "startAt": "2026-10-23T17:45:00Z",
+      "endAt": "2026-11-01T23:58:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/eb9cc8ab-0583-4b86-b902-bdd5771aae0f.png",
+      "game": {
+        "displayName": "Rust"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "0b26fa32-cc9a-11f1-83bb-0a58a9feac02",
+          "name": "Twitch Rivals Spooky Bed",
+          "requiredMinutesWatched": 120,
+          "startAt": "2026-10-23T17:45:00Z",
+          "endAt": "2026-11-01T23:58:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "0c95681b-95ad-4be7-a2ba-07dcace74891_CUSTOM_ID_11599",
+                "name": "Twitch Rivals Spooky Bed",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/a41d865c-ca0f-4426-82ca-e688d702ecf0.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "1766518f-cc9a-11f1-8068-0a58a9feac02",
+          "name": "Twitch Rivals Spooky Door",
+          "requiredMinutesWatched": 180,
+          "startAt": "2026-10-23T17:45:00Z",
+          "endAt": "2026-11-01T23:58:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "0c95681b-95ad-4be7-a2ba-07dcace74891_CUSTOM_ID_11600",
+                "name": "Twitch Rivals Spooky Door",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/087e5932-dc2d-4953-8ea5-db8854035dfd.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "251235f6-cc9a-11f1-b114-0a58a9feac02",
+          "name": "Twitch Rivals Spooky Thompson",
+          "requiredMinutesWatched": 240,
+          "startAt": "2026-10-23T17:45:00Z",
+          "endAt": "2026-11-01T23:58:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "0c95681b-95ad-4be7-a2ba-07dcace74891_CUSTOM_ID_11601",
+                "name": "Twitch Rivals Spooky Thom",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/7dc66b51-0a04-49e0-a5d7-2939d9e9b9b7.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "34d81340-cc9a-11f1-9731-0a58a9feac02",
+          "name": "Rustoria Clones Box",
+          "requiredMinutesWatched": 300,
+          "startAt": "2026-10-23T17:45:00Z",
+          "endAt": "2026-11-01T23:58:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "0c95681b-95ad-4be7-a2ba-07dcace74891_CUSTOM_ID_11602",
+                "name": "Rustoria Clones Box",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/9ff50c85-35aa-4fc6-8092-4fba3491f676.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "f89d3b5e-cc99-11f1-bb38-0a58a9feac02",
+          "name": "Twitch Rivals Spooky Rug",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-23T17:45:00Z",
+          "endAt": "2026-11-01T23:58:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "0c95681b-95ad-4be7-a2ba-07dcace74891_CUSTOM_ID_11598",
+                "name": "Twitch Rivals Spooky Rug",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/9d9db1dc-a2ac-4f3c-aae8-057dbc7d57d3.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "119b5c68-114e-4085-bb93-db563cba5f4c",
+      "name": "A Haddonfield Halloween",
+      "status": "ACTIVE",
+      "startAt": "2026-10-26T17:00:00Z",
+      "endAt": "2026-11-03T17:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/54b1164c-60f6-464f-a1f2-8c54cde9922c.jpeg",
+      "game": {
+        "displayName": "Halloween: The Game"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "4be75f37-cf12-11f1-b21e-0a58a9feac02",
+          "name": "Moon Smile Profile Icon & BG",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-26T17:00:00Z",
+          "endAt": "2026-11-03T17:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "2c77f8e3-086d-4b2f-83f5-284f2241769e_CUSTOM_ID_134",
+                "name": "Profile Icon & BG",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/d073a9a7-96cc-4b1d-a857-b38f190bf461.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "69f0b888-cf12-11f1-83e0-0a58a9feac02",
+          "name": "Kitchen Knife Tint",
+          "requiredMinutesWatched": 120,
+          "startAt": "2026-10-26T17:00:00Z",
+          "endAt": "2026-11-03T17:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "2c77f8e3-086d-4b2f-83f5-284f2241769e_CUSTOM_ID_135",
+                "name": "Kitchen Knife Tint",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/bee69b15-3436-4678-8c38-90fcc3b6a31e.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "78df2884-cf12-11f1-9acd-0a58a9feac02",
+          "name": "Tanya & Marcus Outfit Tints",
+          "requiredMinutesWatched": 240,
+          "startAt": "2026-10-26T17:00:00Z",
+          "endAt": "2026-11-03T17:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "2c77f8e3-086d-4b2f-83f5-284f2241769e_CUSTOM_ID_133",
+                "name": "Tanya & Marcus Tints",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/cf2c7c29-9a67-4368-8a0d-36e4e2ff4192.jpeg",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7c516b8a-f614-4052-b7da-af5e326333e6",
+      "name": "2100-Krone",
+      "status": "ACTIVE",
+      "startAt": "2026-10-28T19:00:00Z",
+      "endAt": "2026-11-24T22:30:00Z",
+      "imageURL": "https://static-cdn.jtvnw.net/badges/v1/cb043f0b-471a-4496-88fb-0465afe08a06/3",
+      "game": null,
+      "timeBasedDrops": [
+        {
+          "id": "23800518-d2e7-11f1-991e-0a58a9feac02",
+          "name": "",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-28T19:00:00Z",
+          "endAt": "2026-11-24T22:30:00Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "238009ff-d2e7-11f1-991e-0a58a9feac02",
+                "name": "2100-Krone",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/badges/v1/cb043f0b-471a-4496-88fb-0465afe08a06/3",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f8b02ff6-77cc-4afb-aecb-3e0ebe72ce88",
+      "name": "AOCP Flamescale 6 - #4/7",
+      "status": "ACTIVE",
+      "startAt": "2026-10-29T10:00:00Z",
+      "endAt": "2026-10-30T09:29:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/596b297b-0073-4b66-bb97-132a75e362d7.png",
+      "game": {
+        "displayName": "Albion Online"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "9dd6ce38-cec8-11f1-b961-0a58a9feac02",
+          "name": "Noble Community Chest",
+          "requiredMinutesWatched": 240,
+          "startAt": "2026-10-29T10:00:00Z",
+          "endAt": "2026-10-30T09:29:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "39dcfadd-48e4-4362-8c22-974319aff88e_CUSTOM_ID_noble_community_chest-3e009a14-dbd6-4731-bdf6-ca66e2d3e6a9",
+                "name": "Noble Community Chest",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/563de50c-4ad2-466d-9972-cac854ee1937.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e4f567f2-4eab-4dae-9995-c46e769b0c7a",
+      "name": "V3.3 Zenless Zone Zero",
+      "status": "ACTIVE",
+      "startAt": "2026-10-21T02:00:00Z",
+      "endAt": "2026-11-11T15:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/default.png",
+      "game": {
+        "displayName": "Zenless Zone Zero"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "c54e9e92-c94b-11f1-a6c6-0a58a9feac02",
+          "name": "丁尼*12000",
+          "requiredMinutesWatched": 15,
+          "startAt": "2026-10-21T02:00:00Z",
+          "endAt": "2026-11-11T15:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "c093d8df-0f77-11ef-b313-0a58a9feac02",
+                "name": "Denny*12000",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/da8e3c07-4c4f-4a84-b167-1afa8cfd9b85.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "cffa44c8-c94b-11f1-9cc1-0a58a9feac02",
+          "name": "资深调查员记录*2",
+          "requiredMinutesWatched": 30,
+          "startAt": "2026-10-21T02:00:00Z",
+          "endAt": "2026-11-11T15:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "048fce55-1102-11ef-8219-0a58a9feac02",
+                "name": "Senior Investigator Log*2",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/78515db3-cbff-436b-a774-d17f4f7144a8.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "d69e694e-c94b-11f1-962d-0a58a9feac02",
+          "name": "音擎能源模块*3",
+          "requiredMinutesWatched": 45,
+          "startAt": "2026-10-21T02:00:00Z",
+          "endAt": "2026-11-11T15:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "0ba6473d-1102-11ef-b0cd-0a58a9feac02",
+                "name": "W-Engine Energy Module*3",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/d4819064-7c86-46ba-9541-4ff5e4d40b7d.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "da70afe7-c94b-11f1-b701-0a58a9feac02",
+          "name": "邦布系统控件*2",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-21T02:00:00Z",
+          "endAt": "2026-11-11T15:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "1330799d-1102-11ef-8219-0a58a9feac02",
+                "name": "Bangboo System Widget*2",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/be50fb2c-5d21-4c02-85ac-900687d0d19f.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "dea59110-c94b-11f1-8aa1-0a58a9feac02",
+          "name": "菲林*50",
+          "requiredMinutesWatched": 120,
+          "startAt": "2026-10-21T02:00:00Z",
+          "endAt": "2026-11-11T15:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "1922df3a-1102-11ef-bbe0-0a58a9feac02",
+                "name": "Polychrom*50",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/926d9728-1e17-4afb-8903-12e5d2b95760.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3fbad26b-3224-4246-ad9d-0a2c56e39d2b",
+      "name": "NIKKE 4th Anniv. Drops",
+      "status": "ACTIVE",
+      "startAt": "2026-10-28T15:00:00Z",
+      "endAt": "2026-11-18T14:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/36b3dbf6-2986-4680-b4cb-251478fa5b74.png",
+      "game": {
+        "displayName": "GODDESS OF VICTORY: NIKKE"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "01acb15b-cc6b-11f1-83e7-0a58a9feac02",
+          "name": "Gem300&2H Core Dust Case",
+          "requiredMinutesWatched": 120,
+          "startAt": "2026-10-28T15:00:00Z",
+          "endAt": "2026-11-18T14:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "82488dda-cc69-11f1-b2e6-0a58a9feac02",
+                "name": "Gem300&2H Core Dust Case",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/97dc62cb-2864-4cee-bc22-e4c396d3204b.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "ac537d89-cc6a-11f1-928d-0a58a9feac02",
+          "name": "Ultra Boost Module ×20",
+          "requiredMinutesWatched": 30,
+          "startAt": "2026-10-28T15:00:00Z",
+          "endAt": "2026-11-18T14:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "6e6a4860-cc69-11f1-9af6-0a58a9feac02",
+                "name": "Ultra Boost Module ×20",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/17ef9917-0cab-4f85-bc6b-b0023a5d5b4e.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "b986db3a-cc6a-11f1-9312-0a58a9feac02",
+          "name": "Gems ×150",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-28T15:00:00Z",
+          "endAt": "2026-11-18T14:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "75df5d2b-cc69-11f1-8dad-0a58a9feac02",
+                "name": "Gems ×150",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/b82a1150-18ac-4ac9-ba42-52879541a125.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e3211841-cc6a-11f1-b832-0a58a9feac02",
+          "name": "Gem150&2HBattle Data Case",
+          "requiredMinutesWatched": 90,
+          "startAt": "2026-10-28T15:00:00Z",
+          "endAt": "2026-11-18T14:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "7b033a12-cc69-11f1-8ee3-0a58a9feac02",
+                "name": "Gem150&2HBattle Data Case",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/202669ec-1d6f-475b-b084-d795fb391c12.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "08f3cebb-e87d-4558-96c5-43fd6d06d9bd",
+      "name": "Basoweeni 2026",
+      "status": "ACTIVE",
+      "startAt": "2026-10-27T17:00:00Z",
+      "endAt": "2026-11-01T00:00:00Z",
+      "imageURL": "https://static-cdn.jtvnw.net/badges/v1/b265dded-fdde-4d20-b82d-15a24004d750/3",
+      "game": null,
+      "timeBasedDrops": [
+        {
+          "id": "4f240c3c-d189-11f1-a298-0a58a9feac02",
+          "name": "",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-27T17:00:00Z",
+          "endAt": "2026-11-01T00:00:00Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "4f240c68-d189-11f1-a298-0a58a9feac02",
+                "name": "Basoweeni 2026",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/badges/v1/b265dded-fdde-4d20-b82d-15a24004d750/3",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        },
+        {
+          "id": "4f240e06-d189-11f1-a298-0a58a9feac02",
+          "name": "",
+          "requiredMinutesWatched": 360,
+          "startAt": "2026-10-27T17:00:00Z",
+          "endAt": "2026-11-01T00:00:00Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "4f240e15-d189-11f1-a298-0a58a9feac02",
+                "name": "Basoween 2026",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/badges/v1/74bd7b59-97d2-4f58-93c4-88fe37ab3420/3",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "90273492-0fd5-46d0-b1cf-60084d901adf",
+      "name": " Ignite Stage2 W5",
+      "status": "ACTIVE",
+      "startAt": "2026-10-18T15:00:00Z",
+      "endAt": "2026-11-15T08:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/a3aac96e-0cb1-48b1-8301-87754d6eaaaf.png",
+      "game": {
+        "displayName": "Marvel Rivals"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "22d4192b-c479-11f1-a353-0a58a9feac02",
+          "name": "Chrono Tokens *100",
+          "requiredMinutesWatched": 30,
+          "startAt": "2026-10-18T15:00:00Z",
+          "endAt": "2026-11-15T08:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "cf2d901d-c477-11f1-901a-0a58a9feac02",
+                "name": "Stage2 Chrono Token 7",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/d2bb308b-c9b6-41cf-9143-33c282509228.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "2deb3cbd-c479-11f1-9cbf-0a58a9feac02",
+          "name": "「GIANT KILLERS」Spray",
+          "requiredMinutesWatched": 90,
+          "startAt": "2026-10-18T15:00:00Z",
+          "endAt": "2026-11-15T08:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "524264ab-c478-11f1-87ca-0a58a9feac02",
+                "name": "「GIANT KILLERS」Spray",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/8c8eb1eb-1b7e-4ba9-abdc-f538a3ffda0a.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "35c7a759-c479-11f1-889d-0a58a9feac02",
+          "name": "Chrono Tokens *100",
+          "requiredMinutesWatched": 120,
+          "startAt": "2026-10-18T15:00:00Z",
+          "endAt": "2026-11-15T08:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "d7db8c5f-c477-11f1-9e2e-0a58a9feac02",
+                "name": "Stage2 Chrono Token 8",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/833d0492-f94c-4af0-8fb1-4aabf4cec93b.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "3ec54a86-c479-11f1-8302-0a58a9feac02",
+          "name": "Cyclops「X-BEAM」Emotes",
+          "requiredMinutesWatched": 240,
+          "startAt": "2026-10-18T15:00:00Z",
+          "endAt": "2026-11-15T08:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "5f1a700a-c478-11f1-bbb1-0a58a9feac02",
+                "name": "Cyclops「X-BEAM」Emotes",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/f0f54345-3456-43b0-a75d-0eb2b97122a4.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "44ea8e35-c479-11f1-8c5f-0a58a9feac02",
+          "name": "Cyclops「Will of Galacta」Costume",
+          "requiredMinutesWatched": 360,
+          "startAt": "2026-10-18T15:00:00Z",
+          "endAt": "2026-11-15T08:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "6d92fa5f-c478-11f1-8b15-0a58a9feac02",
+                "name": "Cyclops Costume",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/16ada3c8-0b38-4981-b196-ed416063992a.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "26a6f84b-e8f3-4ed0-ae51-4a1622125533",
+      "name": "PZ Rivals Gold Trophy",
+      "status": "ACTIVE",
+      "startAt": "2026-10-29T17:00:00Z",
+      "endAt": "2026-10-30T17:00:00Z",
+      "imageURL": "https://static-cdn.jtvnw.net/badges/v1/3807b22e-9fe2-4d10-894b-54ffdaec8ccf/3",
+      "game": null,
+      "timeBasedDrops": [
+        {
+          "id": "832276f6-d34b-11f1-bbf0-0a58a9feac02",
+          "name": "",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-29T17:00:00Z",
+          "endAt": "2026-10-30T17:00:00Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "8322770e-d34b-11f1-bbf0-0a58a9feac02",
+                "name": "PZ Rivals Gold Trophy",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/badges/v1/3807b22e-9fe2-4d10-894b-54ffdaec8ccf/3",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        },
+        {
+          "id": "832278b1-d34b-11f1-bbf0-0a58a9feac02",
+          "name": "",
+          "requiredMinutesWatched": 120,
+          "startAt": "2026-10-29T17:00:00Z",
+          "endAt": "2026-10-30T17:00:00Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "832278be-d34b-11f1-bbf0-0a58a9feac02",
+                "name": "PZ Rivals Trophy",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/badges/v1/5c99473c-9e57-4507-a71c-c2755287e92c/3",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fee4fc73-a4d2-48be-8b6d-b7a7c3da9277",
+      "name": "Koga Uchiha",
+      "status": "ACTIVE",
+      "startAt": "2026-10-12T02:37:52.387Z",
+      "endAt": "2026-11-07T23:00:00Z",
+      "imageURL": "https://static-cdn.jtvnw.net/badges/v1/f3da0fb6-e3b5-41e6-8d8f-f0240ea4764b/3",
+      "game": null,
+      "timeBasedDrops": [
+        {
+          "id": "ec3c323f-c5e5-11f1-9992-0a58a9feac02",
+          "name": "",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-12T02:37:52.387Z",
+          "endAt": "2026-11-07T23:00:00Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "ec3c3264-c5e5-11f1-9992-0a58a9feac02",
+                "name": "Koga Uchiha",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/badges/v1/f3da0fb6-e3b5-41e6-8d8f-f0240ea4764b/3",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9a9ca7e6-0f58-4949-954c-fb6370c76c70",
+      "name": "WoT A Thrill Store #8",
+      "status": "ACTIVE",
+      "startAt": "2026-10-28T16:00:00Z",
+      "endAt": "2026-10-30T15:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/73c6cfa0-c861-4b26-ab7b-b6107b56a121.jpeg",
+      "game": {
+        "displayName": "World of Tanks"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "e1839770-bbe1-11f1-9638-0a58a9feac02",
+          "name": "Drop 1",
+          "requiredMinutesWatched": 180,
+          "startAt": "2026-10-28T16:00:00Z",
+          "endAt": "2026-10-30T15:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "6948a129-2c6d-4d88-9444-6b96918a19f8_CUSTOM_ID_WoT_WAT_1026_08_1",
+                "name": "5x Pumpkin Tokens",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/d282e248-eb1f-4c5f-9036-1490b6181823.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "e49fdb58-bbe1-11f1-9a80-0a58a9feac02",
+          "name": "Drop 2",
+          "requiredMinutesWatched": 240,
+          "startAt": "2026-10-28T16:00:00Z",
+          "endAt": "2026-10-30T15:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "6948a129-2c6d-4d88-9444-6b96918a19f8_CUSTOM_ID_WoT_WAT_1026_08_2",
+                "name": "5x combat abilities",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/692d3e2f-c9b7-4df1-a661-c1751bc84a7a.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d631fdcf-ac14-4697-92b6-2d4e9ba77854",
+      "name": "Update 15.9 Drop: Week 4",
+      "status": "ACTIVE",
+      "startAt": "2026-10-29T17:00:00Z",
+      "endAt": "2026-11-05T02:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/d82d1254-9948-423a-8cc6-886496384430.png",
+      "game": {
+        "displayName": "World of Warships"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "90198a4a-bd8f-11f1-b229-0a58a9feac02",
+          "name": "Update 15.9 Mission #4",
+          "requiredMinutesWatched": 90,
+          "startAt": "2026-10-29T17:00:00Z",
+          "endAt": "2026-11-05T02:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "6948a129-2c6d-4d88-9444-6b96918a19f8_CUSTOM_ID_WOWS_TwitchDrops_1509_mission4",
+                "name": "Update 15.9 Mission #4",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/7d5afb80-06b2-41ce-bd26-72a91c2c7dad.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "9498b3f4-bd8f-11f1-abb8-0a58a9feac02",
+          "name": "Twitch Container 15.9 week #4",
+          "requiredMinutesWatched": 180,
+          "startAt": "2026-10-29T17:00:00Z",
+          "endAt": "2026-11-05T02:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "6948a129-2c6d-4d88-9444-6b96918a19f8_CUSTOM_ID_WOWS_TwitchDrops_1509_twitchbox",
+                "name": "Twitch Container 15.9",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/15394297-7aae-47fb-be3a-1ef0793706ce.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a9c2f298-5a53-439a-9a8c-41b4d88937e1",
+      "name": "Cyberpunk 2077 Chat Badge",
+      "status": "ACTIVE",
+      "startAt": "2026-10-22T10:00:00Z",
+      "endAt": "2026-11-19T09:59:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/126c8977-533e-4ead-be1c-24e2bfa0161e.png",
+      "game": {
+        "displayName": "Cyberpunk 2077"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "f82c27d9-ccce-11f1-841a-0a58a9feac02",
+          "name": "The Mox",
+          "requiredMinutesWatched": 0,
+          "startAt": "2026-10-22T10:00:00Z",
+          "endAt": "2026-11-19T09:59:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "96c68fe2-cccf-11f1-8e25-0a58a9feac02",
+                "name": "The Mox",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/6654b908-590d-47bc-a27f-804a0b1329df.png",
+                "distributionType": "BADGE"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eab9a8d6-ddc1-4c83-b146-367de8696696",
+      "name": "Halloween 26 - Day 1",
+      "status": "ACTIVE",
+      "startAt": "2026-10-29T16:00:00Z",
+      "endAt": "2026-10-30T15:57:59.999Z",
+      "imageURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/CAMPAIGN/91523c35-f925-4a74-b622-d1f9e720e2bc.png",
+      "game": {
+        "displayName": "Ghosts of Tabor"
+      },
+      "timeBasedDrops": [
+        {
+          "id": "08f6e0e5-d2d6-11f1-816b-0a58a9feac02",
+          "name": "GPU",
+          "requiredMinutesWatched": 120,
+          "startAt": "2026-10-29T16:00:00Z",
+          "endAt": "2026-10-30T15:57:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "60d0d638-ee2a-4ed2-9181-7b127dc186dc_CUSTOM_ID_GPU",
+                "name": "GPU",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/adfab12c-222f-424e-93b0-ef8d79806cc8.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "1269d020-d2d6-11f1-a56c-0a58a9feac02",
+          "name": "Gloves Bundle 1",
+          "requiredMinutesWatched": 180,
+          "startAt": "2026-10-29T16:00:00Z",
+          "endAt": "2026-10-30T15:57:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "60d0d638-ee2a-4ed2-9181-7b127dc186dc_CUSTOM_ID_HGlovesBundle1",
+                "name": "Halloween gloves 1",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/1977b336-d54c-4a37-b90d-4c83ba0e1976.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "f47ab2e9-d2d5-11f1-b1df-0a58a9feac02",
+          "name": "50K Koruna",
+          "requiredMinutesWatched": 30,
+          "startAt": "2026-10-29T16:00:00Z",
+          "endAt": "2026-10-30T15:57:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "60d0d638-ee2a-4ed2-9181-7b127dc186dc_CUSTOM_ID_50kKoruna",
+                "name": "50k Koruna",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/d95fda87-7fb6-41b0-867c-ba8bff7b6f47.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "ff097810-d2d5-11f1-8e28-0a58a9feac02",
+          "name": "Purple Keycard",
+          "requiredMinutesWatched": 60,
+          "startAt": "2026-10-29T16:00:00Z",
+          "endAt": "2026-10-30T15:57:59.999Z",
+          "self": {
+            "currentMinutesWatched": 0,
+            "isClaimed": false
+          },
+          "benefitEdges": [
+            {
+              "benefit": {
+                "id": "60d0d638-ee2a-4ed2-9181-7b127dc186dc_CUSTOM_ID_PURPLEKEYCARD",
+                "name": "Purple Keycard",
+                "imageAssetURL": "https://static-cdn.jtvnw.net/twitch-quests-assets/REWARD/8505ac0a-c737-4308-9fbb-e4df596fed05.png",
+                "distributionType": "DIRECT_ENTITLEMENT"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

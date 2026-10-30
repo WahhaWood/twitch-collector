@@ -1,0 +1,25 @@
+name: sync
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Trigger sync
+        env:
+          APP_URL: ${{ secrets.APP_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        # Only the HTTP status is printed: the response lists account ids.
+        run: |
+          code=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 90 -X POST \
+            -H "Authorization: Bearer $CRON_SECRET" "$APP_URL/api/internal/sync")
+          echo "sync responded $code"
+          test "$code" = 200
