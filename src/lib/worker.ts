@@ -15,7 +15,7 @@ import { loadItems, loadLive, loadSkipped } from "./stats-data";
 import { campaignKey, plan, type StatItem } from "./stats";
 import { syncAccount, withFreshToken } from "./sync";
 import { TwitchError } from "./twitch";
-import { type Channel, fetchChannel, fetchPlaylistUrl, headLatestChunk, sendMinuteWatched } from "./watch";
+import { type Channel, fetchChannel, fetchPlaylistUrl, headNewSegments, sendMinuteWatched } from "./watch";
 
 export const TICK_MS = 20_000;
 export const MAX_WATCH = 2; // Twitch counts watch time on at most two channels at once
@@ -54,6 +54,7 @@ type Watch = Candidate & {
   etaAt: number | null;
   misses: number;
   minuteAt: number; // when minute-watched was last sent for this channel
+  seen: Set<string>; // segments of the playlist already requested
 };
 type State = {
   watches: Watch[];
@@ -335,6 +336,7 @@ async function replan(a: Account, streaks: Streak[], state: State, now: number) 
         etaAt: c.etaMin != null ? now + c.etaMin * 60_000 : null,
         misses: 0,
         minuteAt: 0,
+        seen: new Set(),
       });
       log(a, `watching ${c.login} (${c.kind === "drop" ? `drops: ${c.reward ?? "?"}, campaign ${c.campaignName ?? "?"}` : "streak"})`);
     }
@@ -384,14 +386,14 @@ async function checkProgress(a: Account, state: State, now: number) {
   }
 }
 
-// HLS chunk keeps drops going; minute-watched counts the view for channel points and the streak.
+// HEAD of every new HLS segment is what keeps drops going; minute-watched counts the view for channel points and the streak.
 export function minuteDue(lastAt: number, now: number): boolean {
   return now - lastAt >= MINUTE_MS;
 }
 
 async function beat(a: Account, w: Watch, now: number): Promise<boolean> {
   try {
-    if (!(await headLatestChunk(w.playlistUrl))) return false;
+    if (!(await headNewSegments(w.playlistUrl, w.seen))) return false;
     if (!minuteDue(w.minuteAt, now)) return true;
     w.minuteAt = now;
     await sendMinuteWatched({ userId: a.twitchUserId, channelId: w.channelId, login: w.login, broadcastId: w.broadcastId, game: w.game }).catch(() => false);

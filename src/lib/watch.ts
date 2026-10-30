@@ -69,13 +69,32 @@ export function lastUrl(m3u8: string): string | null {
   return m3u8.split("\n").map((l) => l.trim()).filter((l) => l.startsWith("https://")).at(-1) ?? null;
 }
 
-// One watch beat: fetch the media playlist and HEAD its newest chunk. False when the stream is gone or the URL expired.
-export async function headLatestChunk(playlistUrl: string): Promise<boolean> {
-  const res = await fetchWithRetry(playlistUrl, {});
+export const SEEN_SEGMENTS_MAX = 256;
+
+// Every https line of a media playlist: its segments, oldest first.
+export function segmentUrls(m3u8: string): string[] {
+  return m3u8.split("\n").map((l) => l.trim()).filter((l) => l.startsWith("https://"));
+}
+
+// One watch beat: fetch the media playlist and HEAD every segment not requested yet (what TwitchDropsMiner does).
+// Twitch counts the watched minute from the segments requested, so asking for the newest one only credits a fraction of it.
+// False when the stream is gone, the URL expired or a segment failed.
+export async function headNewSegments(playlistUrl: string, seen: Set<string>): Promise<boolean> {
+  const res = await fetchWithRetry(playlistUrl, { headers: { Connection: "close" } });
   if (!res.ok) return false;
-  const chunk = lastUrl(await res.text());
-  if (!chunk) return false;
-  return (await fetchWithRetry(chunk, { method: "HEAD" })).ok;
+  const segments = segmentUrls(await res.text());
+  if (!segments.length) return false;
+  let ok = true;
+  for (const url of segments) {
+    if (seen.has(url)) continue;
+    if ((await fetchWithRetry(url, { method: "HEAD" })).ok) seen.add(url);
+    else ok = false;
+  }
+  for (const url of seen) {
+    if (seen.size <= SEEN_SEGMENTS_MAX) break;
+    seen.delete(url);
+  }
+  return ok;
 }
 
 let spade: { url: string; at: number } | null = null;

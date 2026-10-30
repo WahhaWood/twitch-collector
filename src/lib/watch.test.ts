@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { lastUrl, LOGIN_RE, minuteWatchedBody } from "./watch";
+import { lastUrl, LOGIN_RE, minuteWatchedBody, segmentUrls } from "./watch";
 
 describe("lastUrl", () => {
   it("takes the lowest quality from a master playlist", () => {
@@ -45,5 +45,13 @@ describe("LOGIN_RE", () => {
     expect(LOGIN_RE.test("a")).toBe(false);
     expect(LOGIN_RE.test("bad name")).toBe(false);
     expect(LOGIN_RE.test('x") { id }')).toBe(false);
+  });
+});
+
+describe("segmentUrls", () => {
+  it("lists every segment of a media playlist in order", () => {
+    const m3u8 = "#EXTM3U\n#EXTINF:2.000,live\nhttps://c.example/1.ts\n#EXTINF:2.000,live\nhttps://c.example/2.ts\n";
+    expect(segmentUrls(m3u8)).toEqual(["https://c.example/1.ts", "https://c.example/2.ts"]);
+    expect(segmentUrls("#EXTM3U\n")).toEqual([]);
   });
 });
