@@ -1,4 +1,4 @@
-import { asc, eq, sql } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 import { db } from "@/db";
 import { twitchAccounts } from "@/db/schema";
 import { apiError, getCurrentUser } from "@/lib/auth";
@@ -17,7 +17,6 @@ export async function GET() {
       watching: twitchAccounts.watching,
       watchingAt: twitchAccounts.watchingAt,
       workerStatus: twitchAccounts.workerStatus,
-      watchLinked: sql<boolean>`${twitchAccounts.watchTokenEnc} is not null`,
     })
     .from(twitchAccounts)
     .where(eq(twitchAccounts.userId, user.id))

@@ -10,7 +10,6 @@ import { ConnectTwitch } from "./connect-twitch";
 import { useNow } from "./progress-row";
 import { AccountBadge, Button, Card, Empty, ErrorBox, Notice, Skeleton, Switch } from "./ui";
 import { useSync } from "./use-sync";
-import { WatchLogin } from "./watch-login";
 
 const MAX_ACCOUNTS = 5;
 const TONE_FG = { ok: "text-ok", idle: "text-mut", warn: "text-warn", bad: "text-bad", off: "text-mut" } as const;
@@ -139,12 +138,12 @@ function AccountCard({ account, now, counts, hasStreaks, onChange }: {
             <div className="min-w-0 flex-1">
               <div className="text-sm font-medium">Автопросмотр дропсов</div>
               <p className="text-xs text-mut">
-                Воркер сам открывает стримы самых срочных кампаний, набирает минуты и забирает готовые награды. Это неофициальный способ — Twitch может
-                ограничить аккаунт.
+                Воркер открывает стримы самых срочных кампаний и забирает готовые награды. Серии просмотра он набирает надёжно, а вот минуты дропсов
+                Twitch за просмотр воркера пока не засчитывает (проверено 2026-10-30): смотрите стримы из подсказок на главной сами. Это неофициальный
+                способ — Twitch может ограничить аккаунт.
               </p>
             </div>
           </div>
-          <WatchLogin account={account} onChange={onChange} />
           <div className="flex items-start gap-2 border-t border-line pt-3 text-sm">
             <span className={`mt-1.5 size-2 shrink-0 rounded-full ${TONE_DOT[line.tone]}`} aria-hidden />
             <div className="min-w-0">

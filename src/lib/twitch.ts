@@ -119,10 +119,10 @@ export async function refreshTokens(refreshToken: string, now = Date.now()): Pro
   return toTokens(await res.json(), now);
 }
 
-export async function gql<T>(accessToken: string, query: string, client = clientId()): Promise<T> {
+export async function gql<T>(accessToken: string, query: string): Promise<T> {
   const res = await fetchWithRetry(GQL_URL, {
     method: "POST",
-    headers: { Authorization: `OAuth ${accessToken}`, "Client-Id": client, "content-type": "application/json" },
+    headers: { Authorization: `OAuth ${accessToken}`, "Client-Id": clientId(), "content-type": "application/json" },
     body: JSON.stringify({ query }),
   });
   if (res.status === 401) throw new TwitchError("unauthorized", "Twitch rejected the token");
@@ -135,8 +135,8 @@ export async function gql<T>(accessToken: string, query: string, client = client
   return body.data;
 }
 
-export async function fetchIdentity(accessToken: string, client?: string): Promise<TwitchIdentity> {
-  const data = await gql<{ currentUser: TwitchIdentity | null }>(accessToken, "query { currentUser { id login displayName } }", client);
+export async function fetchIdentity(accessToken: string): Promise<TwitchIdentity> {
+  const data = await gql<{ currentUser: TwitchIdentity | null }>(accessToken, "query { currentUser { id login displayName } }");
   if (!data.currentUser) throw new TwitchError("unauthorized", "Twitch returned no current user");
   return data.currentUser;
 }

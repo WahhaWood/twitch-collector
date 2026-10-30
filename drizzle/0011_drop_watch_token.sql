@@ -1,0 +1,1 @@
+ALTER TABLE "twitch_accounts" DROP COLUMN "watch_token_enc";
