@@ -31,7 +31,9 @@ export const STALL_FIRST_MS = 10 * 60_000; // first check of a fresh channel; la
 export const STALL_MS = 20 * 60_000;
 export const MAX_CHANNEL_TRIES = 2;
 export const MAX_MISSES = 3;
+export const MINUTE_MS = 60_000; // Twitch counts one minute-watched per channel per minute; the tick is faster
 const OFFLINE_TTL_MS = 10 * 60_000;
+const MAX_OFFLINE_TTL_MS = 2 * 60 * 60_000;
 
 type Account = typeof twitchAccounts.$inferSelect;
 type Streak = typeof streakChannels.$inferSelect;
@@ -51,6 +53,7 @@ type Watch = Candidate & {
   baseline: number | null;
   etaAt: number | null;
   misses: number;
+  minuteAt: number; // when minute-watched was last sent for this channel
 };
 type State = {
   watches: Watch[];
@@ -58,6 +61,8 @@ type State = {
   syncedAt: number;
   // login -> until when it is considered offline
   offline: Map<string, number>;
+  // login -> how many times in a row it failed (reset when watching it moves a campaign)
+  strikes: Map<string, number>;
   // campaign key -> channels where watching did not move the campaign
   tried: Map<string, Set<string>>;
   lastDrops: Candidate[];
@@ -142,6 +147,11 @@ export function planInterval(waitingForStreamer: boolean): number {
   return waitingForStreamer ? PLAN_WAITING_MS : PLAN_MS;
 }
 
+// A channel that keeps failing rests longer each time, so a broken top-priority channel cannot keep stealing the slot.
+export function offlineTtl(strikes: number): number {
+  return Math.min(OFFLINE_TTL_MS * 2 ** Math.max(0, strikes), MAX_OFFLINE_TTL_MS);
+}
+
 export function activeOffline(offline: Map<string, number>, now: number): Set<string> {
   for (const [login, until] of offline) if (until <= now) offline.delete(login);
   return new Set(offline.keys());
@@ -153,6 +163,7 @@ const newState = (): State => ({
   plannedAt: 0,
   syncedAt: 0,
   offline: new Map(),
+  strikes: new Map(),
   tried: new Map(),
   lastDrops: [],
   config: "",
@@ -160,6 +171,11 @@ const newState = (): State => ({
   retryAt: 0,
   idle: { reason: "ok", detail: null },
 });
+function rest(state: State, login: string, now: number) {
+  const strikes = state.strikes.get(login) ?? 0;
+  state.offline.set(login, now + offlineTtl(strikes));
+  state.strikes.set(login, strikes + 1);
+}
 const log = (a: Account, msg: string) => console.log(`${new Date().toISOString()} [${a.login}] ${msg}`);
 
 export async function tick(now = Date.now()) {
@@ -222,13 +238,13 @@ async function runAccount(a: Account, streaks: Streak[], state: State, now: numb
   }
 
   for (const w of [...state.watches]) {
-    const ok = await beat(a, w);
+    const ok = await beat(a, w, now);
     const elapsed = Math.min(now - w.beatAt, 2 * TICK_MS) / 1000;
     w.beatAt = now;
     if (!ok) {
       if (++w.misses < MAX_MISSES) continue; // a hiccup, not a lost stream
       log(a, `lost ${w.login}`);
-      state.offline.set(w.login, now + OFFLINE_TTL_MS);
+      rest(state, w.login, now);
       state.watches = state.watches.filter((x) => x !== w);
       state.plannedAt = 0;
       continue;
@@ -302,7 +318,7 @@ async function replan(a: Account, streaks: Streak[], state: State, now: number) 
       const ch = await fetchChannel(token, c.login);
       const url = ch?.broadcastId ? await fetchPlaylistUrl(token, c.login) : null;
       if (!ch?.broadcastId || !url) {
-        if (c.kind === "drop") state.offline.set(c.login, now + OFFLINE_TTL_MS);
+        if (c.kind === "drop") rest(state, c.login, now);
         continue;
       }
       const baseline = c.campaignKey ? campaignMinutes(items, c.campaignKey) : null;
@@ -318,6 +334,7 @@ async function replan(a: Account, streaks: Streak[], state: State, now: number) 
         baseline,
         etaAt: c.etaMin != null ? now + c.etaMin * 60_000 : null,
         misses: 0,
+        minuteAt: 0,
       });
       log(a, `watching ${c.login} (${c.kind === "drop" ? `drops: ${c.reward ?? "?"}, campaign ${c.campaignName ?? "?"}` : "streak"})`);
     }
@@ -344,6 +361,7 @@ async function checkProgress(a: Account, state: State, now: number) {
       w.checkFrom = now;
       w.checkAfter = STALL_MS;
       state.tried.delete(key);
+      state.strikes.delete(w.login);
       state.plannedAt = 0; // progress moved: the plan may have changed (reward earned, campaign done)
       continue;
     }
@@ -367,9 +385,15 @@ async function checkProgress(a: Account, state: State, now: number) {
 }
 
 // HLS chunk keeps drops going; minute-watched counts the view for channel points and the streak.
-async function beat(a: Account, w: Watch): Promise<boolean> {
+export function minuteDue(lastAt: number, now: number): boolean {
+  return now - lastAt >= MINUTE_MS;
+}
+
+async function beat(a: Account, w: Watch, now: number): Promise<boolean> {
   try {
     if (!(await headLatestChunk(w.playlistUrl))) return false;
+    if (!minuteDue(w.minuteAt, now)) return true;
+    w.minuteAt = now;
     await sendMinuteWatched({ userId: a.twitchUserId, channelId: w.channelId, login: w.login, broadcastId: w.broadcastId, game: w.game }).catch(() => false);
     return true;
   } catch {

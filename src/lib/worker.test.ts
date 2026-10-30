@@ -8,6 +8,8 @@ import {
   chooseTargets,
   dropCandidates,
   MAX_CHANNEL_TRIES,
+  minuteDue,
+  offlineTtl,
   planInterval,
   STREAK_GOAL_SECONDS,
   stalled,
@@ -135,5 +137,22 @@ describe("adaptive timing", () => {
     const offline = new Map([["a", 100], ["b", 500]]);
     expect([...activeOffline(offline, 200)]).toEqual(["b"]);
     expect(offline.has("a")).toBe(false);
+  });
+});
+
+describe("minuteDue", () => {
+  it("sends the first minute at once, then at most one per minute", () => {
+    expect(minuteDue(0, 1_000_000)).toBe(true);
+    expect(minuteDue(1_000_000, 1_020_000)).toBe(false);
+    expect(minuteDue(1_000_000, 1_060_000)).toBe(true);
+  });
+});
+
+describe("offlineTtl", () => {
+  it("doubles with every strike up to two hours", () => {
+    expect(offlineTtl(0)).toBe(10 * 60_000);
+    expect(offlineTtl(1)).toBe(20 * 60_000);
+    expect(offlineTtl(2)).toBe(40 * 60_000);
+    expect(offlineTtl(9)).toBe(2 * 60 * 60_000);
   });
 });
