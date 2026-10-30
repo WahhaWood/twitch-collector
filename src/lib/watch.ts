@@ -30,11 +30,12 @@ export async function claimDrop(accessToken: string, instanceId: string): Promis
 }
 
 // null when there is no such user.
-export async function fetchChannel(accessToken: string, login: string): Promise<Channel | null> {
+export async function fetchChannel(accessToken: string, login: string, client?: string): Promise<Channel | null> {
   type User = { id: string; login: string; displayName?: string | null; profileImageURL?: string | null; stream?: { id?: string; createdAt?: string; game?: { id?: string; name?: string } | null } | null };
   const data = await gql<{ user: User | null }>(
     accessToken,
     `query { user(login: ${JSON.stringify(login)}) { id login displayName profileImageURL(width: 70) stream { id createdAt game { id name } } } }`,
+    client,
   );
   const u = data.user;
   if (!u?.id) return null;
@@ -51,10 +52,11 @@ export async function fetchChannel(accessToken: string, login: string): Promise<
 }
 
 // Lowest-quality variant playlist of a live channel; null when it is offline.
-export async function fetchPlaylistUrl(accessToken: string, login: string): Promise<string | null> {
+export async function fetchPlaylistUrl(accessToken: string, login: string, client?: string): Promise<string | null> {
   const data = await gql<{ streamPlaybackAccessToken: { value: string; signature: string } | null }>(
     accessToken,
     `query { streamPlaybackAccessToken(channelName: ${JSON.stringify(login)}, params: { platform: "web", playerBackend: "mediaplayer", playerType: "site" }) { value signature } }`,
+    client,
   );
   const pat = data.streamPlaybackAccessToken;
   if (!pat) return null;

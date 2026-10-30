@@ -10,6 +10,8 @@ export type Account = {
   watching: WatchTarget[] | null;
   watchingAt: string | null;
   workerStatus: WorkerStatus | null;
+  // Twitch login for drops (Android client) is done; without it the worker's watching earns no drops minutes.
+  watchLinked: boolean;
 };
 
 export type WatchTarget = { kind: "drop" | "streak"; login: string; displayName: string; campaignName?: string | null; reward?: string | null };

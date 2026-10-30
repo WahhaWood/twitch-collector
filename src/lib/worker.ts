@@ -11,6 +11,8 @@
 import { and, eq, inArray, isNotNull } from "drizzle-orm";
 import { db } from "@/db";
 import { skippedCampaigns, streakChannels, twitchAccounts, type WatchTarget, type WorkerStatus } from "@/db/schema";
+import { decrypt } from "./crypto";
+import { env } from "./env";
 import { loadItems, loadLive, loadSkipped } from "./stats-data";
 import { campaignKey, plan, type StatItem } from "./stats";
 import { syncAccount, withFreshToken } from "./sync";
@@ -272,11 +274,26 @@ async function runAccount(a: Account, streaks: Streak[], state: State, now: numb
 }
 
 // Refreshes live state of streak channels, picks targets and opens playlists for the new ones.
+// Runs a watching call with the Android-client token when the account has one (it is the one that earns drops minutes).
+// If Twitch rejects it, it is dropped and the call falls back to the TV token; an account must never turn "expired" over it.
+async function viaWatchToken<T>(a: Account, tvToken: string, fn: (token: string, client?: string) => Promise<T>): Promise<T> {
+  if (!a.watchTokenEnc) return fn(tvToken);
+  try {
+    return await fn(decrypt(a.watchTokenEnc, env().TOKEN_ENC_KEY), env().TWITCH_WATCH_CLIENT_ID);
+  } catch (e) {
+    if (!(e instanceof TwitchError && e.code === "unauthorized")) throw e;
+    a.watchTokenEnc = null;
+    await db().update(twitchAccounts).set({ watchTokenEnc: null }).where(eq(twitchAccounts.id, a.id));
+    log(a, "watch token rejected by Twitch, falling back to the TV token");
+    return fn(tvToken);
+  }
+}
+
 async function replan(a: Account, streaks: Streak[], state: State, now: number) {
   state.plannedAt = now;
   await withFreshToken(a, async (token) => {
     for (const s of streaks) {
-      const ch = await fetchChannel(token, s.login);
+      const ch = await viaWatchToken(a, token, (t, client) => fetchChannel(t, s.login, client));
       const changed = (ch?.broadcastId ?? s.broadcastId) !== s.broadcastId;
       const update = {
         live: !!ch?.broadcastId,
@@ -315,8 +332,8 @@ async function replan(a: Account, streaks: Streak[], state: State, now: number) 
     for (const c of wanted) {
       if (next.length >= MAX_WATCH) break;
       if (next.some((w) => w.login === c.login)) continue;
-      const ch = await fetchChannel(token, c.login);
-      const url = ch?.broadcastId ? await fetchPlaylistUrl(token, c.login) : null;
+      const ch = await viaWatchToken(a, token, (t, client) => fetchChannel(t, c.login, client));
+      const url = ch?.broadcastId ? await viaWatchToken(a, token, (t, client) => fetchPlaylistUrl(t, c.login, client)) : null;
       if (!ch?.broadcastId || !url) {
         if (c.kind === "drop") rest(state, c.login, now);
         continue;

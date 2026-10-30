@@ -71,6 +71,13 @@
       "when": 1793330284201,
       "tag": "0009_common_magus",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1793380200796,
+      "tag": "0010_watch_token",
+      "breakpoints": true
     }
   ]
 }

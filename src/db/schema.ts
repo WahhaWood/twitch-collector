@@ -28,6 +28,8 @@ export const twitchAccounts = pgTable("twitch_accounts", {
   accessTokenEnc: text("access_token_enc"),
   refreshTokenEnc: text("refresh_token_enc"),
   tokenExpiresAt: timestamp("token_expires_at", { withTimezone: true }),
+  // Token of the Android client (twitch.tv login): unlike the TV token it earns drops minutes while watching.
+  watchTokenEnc: text("watch_token_enc"),
   status: text("status", { enum: ["pending", "active", "expired", "revoked", "error"] }).notNull().default("pending"),
   lastSyncedAt: timestamp("last_synced_at", { withTimezone: true }),
   lockedUntil: timestamp("locked_until", { withTimezone: true }),
