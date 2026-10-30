@@ -1,7 +1,15 @@
 import { boolean, index, integer, jsonb, pgTable, primaryKey, serial, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core";
 
 // What the watch worker is on right now, for the UI.
-export type WatchTarget = { kind: "drop" | "streak"; login: string; displayName: string; campaignName?: string | null };
+export type WatchTarget = { kind: "drop" | "streak"; login: string; displayName: string; campaignName?: string | null; reward?: string | null };
+
+// Why the worker is (not) watching, in words for the UI. `retryAt` is set while an account backs off after errors.
+export type WorkerStatus = {
+  state: "watching" | "idle" | "error";
+  reason: "no_campaigns" | "no_live" | "waiting_streamers" | "error" | "ok";
+  retryAt?: string | null;
+  detail?: string | null;
+};
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -27,6 +35,7 @@ export const twitchAccounts = pgTable("twitch_accounts", {
   autoWatch: boolean("auto_watch").notNull().default(false),
   watching: jsonb("watching").$type<WatchTarget[]>(),
   watchingAt: timestamp("watching_at", { withTimezone: true }),
+  workerStatus: jsonb("worker_status").$type<WorkerStatus>(),
 });
 
 export const campaigns = pgTable("campaigns", {

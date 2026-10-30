@@ -12,3 +12,6 @@
 - Twitch watch-протокол (сверено с TwitchDropsMiner / Channel-Points-Miner-v2, живьём 2026-10-30): raw `streamPlaybackAccessToken` → usher m3u8 → HEAD чанка, spade `minute-watched` (base64 в поле `data`, ответ 204), `claimDropRewards` — всё работает с TV-токеном (`src/lib/watch.ts`). Засчитываются ли дропсы — не подтверждено (Plan.md, этап 6).
 - `pkill -f <шаблон>` в той же Bash-команде убивает саму команду (шаблон есть в её строке). Останавливать по PID из `pgrep -af`.
 - Twitch дропы за подписку: `requiredSubs > 0`, `requiredMinutesWatched = 0`, прогресс в `self.currentSubs`. Одна кампания может мешать sub- и watch-дропы; имя кампании = имя первой награды (`src/lib/drops.ts` earned, `stats.ts` subDrops).
+- Текст состояния воркера для UI — чистая `workerLine()` в `src/lib/worker-text.ts` (тесты); не собирать формулировки в компонентах.
+- Адаптивные решения воркера — маленькие чистые функции в `src/lib/worker.ts` (`backoffMs`, `syncDueAt`, `stallAction`, `planInterval`) с тестами; `runAccount` только вызывает их.
+- Скриншоты в Playwright: куку `session` подписать `SESSION_SECRET` (формат `userId.expMs.hmac`, `src/lib/session.ts`) — без входа по токену. Chromium скачивать вручную в scratchpad (автораспаковка Playwright на этой машине пустая).

@@ -9,12 +9,24 @@ export type Account = {
   autoWatch: boolean;
   watching: WatchTarget[] | null;
   watchingAt: string | null;
+  workerStatus: WorkerStatus | null;
 };
 
-export type WatchTarget = { kind: "drop" | "streak"; login: string; displayName: string; campaignName?: string | null };
+export type WatchTarget = { kind: "drop" | "streak"; login: string; displayName: string; campaignName?: string | null; reward?: string | null };
+export type WorkerStatus = {
+  state: "watching" | "idle" | "error";
+  reason: "no_campaigns" | "no_live" | "waiting_streamers" | "error" | "ok";
+  retryAt?: string | null;
+  detail?: string | null;
+};
 
 // The worker writes `watchingAt` every tick; older than this means it is not running.
 export const WORKER_STALE_MS = 2 * 60_000;
+
+// Worker is up when it touched the account recently; an account backing off after an error is still "up".
+export function workerUp(a: Pick<Account, "watchingAt">, now: number): boolean {
+  return !!a.watchingAt && now - new Date(a.watchingAt).getTime() < WORKER_STALE_MS;
+}
 
 export type StreakChannel = {
   id: number;
@@ -85,7 +97,7 @@ export type CampaignSummary = {
   risk: Risk | null;
 };
 export type PlanItem = CampaignSummary & { action: "claim" | "link" | "watch"; channels: LiveChannel[] };
-export type PlanResponse = { accounts: { id: number; displayName: string; items: PlanItem[]; skipped: { key: string; campaignName: string; reason: "user" | "no_progress" }[] }[] };
+export type PlanResponse = { accounts: { id: number; displayName: string; items: PlanItem[]; skipped: { key: string; campaignName: string; reason: "user" | "no_progress"; retryAt: string | null }[] }[] };
 
 export type StatsResponse = {
   days: number;

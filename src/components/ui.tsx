@@ -139,3 +139,58 @@ export function Skeleton({ rows = 3 }: { rows?: number }) {
 export function Empty({ children }: { children: ReactNode }) {
   return <p className="rounded-xl border border-dashed border-line p-6 text-center text-sm text-mut">{children}</p>;
 }
+
+// Page title with one plain sentence under it saying what the page is for.
+export function PageHead({ title, children }: { title: string; children?: ReactNode }) {
+  return (
+    <div className="flex flex-col gap-1">
+      <h1 className="text-2xl font-semibold">{title}</h1>
+      {children && <p className="max-w-2xl text-sm text-mut">{children}</p>}
+    </div>
+  );
+}
+
+const NOTICE: Record<"ok" | "info" | "warn" | "bad", string> = {
+  ok: "bg-ok-bg text-ok",
+  info: "bg-sf2 text-fg",
+  warn: "bg-warn-bg text-warn",
+  bad: "bg-bad-bg text-bad",
+};
+
+// Coloured message box: a bold headline and an optional explanation, with an optional action on the right.
+export function Notice({ tone, title, children, action }: { tone: keyof typeof NOTICE; title: string; children?: ReactNode; action?: ReactNode }) {
+  return (
+    <div className={`flex flex-col gap-2 rounded-lg px-4 py-3 text-sm sm:flex-row sm:items-center sm:gap-4 ${NOTICE[tone]}`}>
+      <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+        <b className="font-medium">{title}</b>
+        {children && <div className={tone === "info" ? "text-mut" : "opacity-90"}>{children}</div>}
+      </div>
+      {action}
+    </div>
+  );
+}
+
+// On/off switch with a visible label; `busy` freezes it while the request is in flight.
+export function Switch({ checked, onChange, busy, label }: { checked: boolean; onChange: (v: boolean) => void; busy?: boolean; label: string }) {
+  return (
+    <button
+      role="switch"
+      aria-checked={checked}
+      aria-label={label}
+      disabled={busy}
+      onClick={() => onChange(!checked)}
+      className={`relative h-6 w-11 shrink-0 rounded-full border transition-colors disabled:opacity-50 ${checked ? "border-acc bg-acc/30" : "border-line bg-track"}`}
+    >
+      <span className={`absolute top-0.5 size-4.5 rounded-full transition-all ${checked ? "left-[22px] bg-acc-t" : "left-0.5 bg-mut"}`} />
+    </button>
+  );
+}
+
+// Tiny inline explanation for jargon: the dotted word shows the meaning on hover / long press.
+export function Term({ children, hint }: { children: ReactNode; hint: string }) {
+  return (
+    <abbr title={hint} className="cursor-help underline decoration-dotted underline-offset-4">
+      {children}
+    </abbr>
+  );
+}

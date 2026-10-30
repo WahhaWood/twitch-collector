@@ -1,7 +1,20 @@
 import { describe, expect, it } from "vitest";
 import type { PlanItem } from "./client";
 import type { StatItem } from "./stats";
-import { campaignMinutes, chooseTargets, dropCandidates, STREAK_GOAL_SECONDS, stalled, streakCandidates } from "./worker";
+import {
+  activeOffline,
+  backoffMs,
+  campaignMinutes,
+  chooseTargets,
+  dropCandidates,
+  MAX_CHANNEL_TRIES,
+  planInterval,
+  STREAK_GOAL_SECONDS,
+  stalled,
+  stallAction,
+  streakCandidates,
+  syncDueAt,
+} from "./worker";
 
 const streak = (id: number, login: string, over: Partial<Parameters<typeof streakCandidates>[0][number]> = {}) => ({
   id,
@@ -48,7 +61,13 @@ describe("dropCandidates", () => {
       new Set(["a1"]),
     );
     expect(out.map((c) => c.login)).toEqual(["a2", "b1"]);
-    expect(out[0]).toEqual({ kind: "drop", login: "a2", displayName: "A2", campaignName: "A", campaignKey: "camp-a", reward: undefined });
+    expect(out[0]).toEqual({ kind: "drop", login: "a2", displayName: "A2", campaignName: "A", campaignKey: "camp-a", reward: undefined, etaMin: null });
+  });
+
+  it("skips channels where watching this campaign did not count, but only for that campaign", () => {
+    const items = [item({ key: "a", channels: [ch("x"), ch("y")] }), item({ key: "b", channels: [ch("x")] })];
+    const out = dropCandidates(items, new Set(), new Map([["a", new Set(["x"])]]));
+    expect(out.map((c) => `${c.campaignKey}:${c.login}`)).toEqual(["a:y", "b:x"]);
   });
 });
 
@@ -83,5 +102,38 @@ describe("chooseTargets", () => {
 
   it("never opens one channel twice", () => {
     expect(chooseTargets([s("x")], [d("x"), d("y")]).map((c) => `${c.kind}:${c.login}`)).toEqual(["streak:x", "drop:y"]);
+  });
+});
+
+describe("adaptive timing", () => {
+  const MIN = 60_000;
+
+  it("backs off exponentially up to 15 minutes", () => {
+    expect([1, 2, 3, 4, 5, 9].map(backoffMs)).toEqual([MIN, 2 * MIN, 4 * MIN, 8 * MIN, 15 * MIN, 15 * MIN]);
+    expect(backoffMs(0)).toBe(MIN);
+  });
+
+  it("syncs when the next reward is due, never sooner than 3 minutes after the last sync", () => {
+    expect(syncDueAt(0, [])).toBe(15 * MIN);
+    expect(syncDueAt(0, [null, 6 * MIN])).toBe(7 * MIN);
+    expect(syncDueAt(0, [40 * MIN])).toBe(15 * MIN);
+    expect(syncDueAt(10 * MIN, [10 * MIN])).toBe(13 * MIN); // reward was due before this sync: no extra sync
+    expect(syncDueAt(10 * MIN, [11 * MIN - 30_000])).toBe(13 * MIN);
+  });
+
+  it("looks for a streamer more often while waiting for the broadcast", () => {
+    expect(planInterval(true)).toBeLessThan(planInterval(false));
+  });
+
+  it("rotates a stalled campaign to another channel once, then skips it", () => {
+    expect(stallAction(1, 2)).toBe("rotate");
+    expect(stallAction(1, 0)).toBe("skip");
+    expect(stallAction(MAX_CHANNEL_TRIES, 3)).toBe("skip");
+  });
+
+  it("forgets offline channels after their time", () => {
+    const offline = new Map([["a", 100], ["b", 500]]);
+    expect([...activeOffline(offline, 200)]).toEqual(["b"]);
+    expect(offline.has("a")).toBe(false);
   });
 });

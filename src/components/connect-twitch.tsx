@@ -57,7 +57,7 @@ export function ConnectTwitch({ disabled, onConnected }: { disabled?: boolean; o
     return (
       <Card className="flex flex-col gap-3">
         <p className="text-sm">
-          Откройте страницу активации Twitch, войдите в нужный аккаунт и введите код:
+          1. Откройте страницу активации Twitch и войдите в тот аккаунт, который хотите подключить. 2. Введите код:
         </p>
         <p className="select-all text-center font-mono text-3xl font-bold tracking-widest text-acc-t">{device.userCode}</p>
         <div className="flex flex-wrap gap-2">
@@ -65,7 +65,7 @@ export function ConnectTwitch({ disabled, onConnected }: { disabled?: boolean; o
             href={device.verificationUri}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex flex-1 items-center justify-center rounded-lg bg-acc px-3 py-2 text-sm font-medium text-white hover:bg-acc"
+            className="inline-flex flex-1 items-center justify-center rounded-lg border border-acc px-3 py-2 text-sm font-medium text-acc-t hover:bg-acc/12"
           >
             Открыть twitch.tv/activate
           </a>

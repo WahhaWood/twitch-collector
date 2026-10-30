@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { errorText, minutesText, percent, timeAgo, timeLeft } from "./format";
+import { errorText, hoursText, minutesText, percent, plural, timeAgo, timeLeft } from "./format";
 
 const now = Date.parse("2026-10-30T12:00:00Z");
 const ago = (ms: number) => new Date(now - ms);
@@ -43,5 +43,17 @@ describe("progress display", () => {
   it("maps error codes to text", () => {
     expect(errorText("account_limit")).toMatch(/5/);
     expect(errorText("nope", "fallback")).toBe("fallback");
+  });
+});
+
+describe("plural / hoursText", () => {
+  it("picks the Russian plural form", () => {
+    const f = (n: number) => plural(n, "награда", "награды", "наград");
+    expect([1, 2, 5, 11, 12, 21, 22, 25, 111].map(f)).toEqual(["награда", "награды", "наград", "наград", "наград", "награда", "награды", "наград", "наград"]);
+  });
+
+  it("shows long durations in hours", () => {
+    expect(hoursText(45)).toBe("45 мин");
+    expect(hoursText(18171)).toBe("303 ч");
   });
 });

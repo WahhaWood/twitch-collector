@@ -1,0 +1,1 @@
+ALTER TABLE "twitch_accounts" ADD COLUMN "worker_status" jsonb;

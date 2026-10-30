@@ -7,6 +7,8 @@ import {
   dailySeries,
   effectiveStatus,
   plan,
+  skipActive,
+  skipRetryAt,
   type StatItem,
   streak,
   summarizeCampaigns,
@@ -170,12 +172,25 @@ export async function buildStats(userId: number, days: number, tz: string, now =
 export type Stats = Awaited<ReturnType<typeof buildStats>>;
 
 const PLAN_PER_ACCOUNT = 6;
-const LINKS_PER_ACCOUNT = 50;
 
-// Claims and watch items are the plan; link reminders follow, capped separately so they never crowd it out.
+// Skips of the given accounts; `no_progress` ones past their cooldown are deleted, so the campaign is tried again.
+export async function loadSkipped(accountIds: number[], now = new Date()) {
+  if (!accountIds.length) return [];
+  const rows = await db()
+    .select()
+    .from(skippedCampaigns)
+    .where(inArray(skippedCampaigns.accountId, accountIds))
+    .orderBy(asc(skippedCampaigns.createdAt));
+  const expired = rows.filter((r) => !skipActive(r, now));
+  for (const r of expired) {
+    await db().delete(skippedCampaigns).where(and(eq(skippedCampaigns.accountId, r.accountId), eq(skippedCampaigns.campaignKey, r.campaignKey)));
+  }
+  return rows.filter((r) => skipActive(r, now));
+}
+
+// Claims and watch items are the plan; every link reminder follows (the overview groups them by game).
 function limitPlan(items: ReturnType<typeof plan>) {
-  const main = items.filter((i) => i.action !== "link").slice(0, PLAN_PER_ACCOUNT);
-  return [...main, ...items.filter((i) => i.action === "link").slice(0, LINKS_PER_ACCOUNT)];
+  return [...items.filter((i) => i.action !== "link").slice(0, PLAN_PER_ACCOUNT), ...items.filter((i) => i.action === "link")];
 }
 
 export async function buildPlan(userId: number, now = new Date()) {
@@ -186,18 +201,7 @@ export async function buildPlan(userId: number, now = new Date()) {
   );
   const campaignIds = [...new Set(items.map((i) => i.campaignExternalId).filter((v): v is string => !!v))];
   const live = await loadLive(campaignIds, now);
-  const skipped = accounts.length
-    ? await db()
-        .select({
-          accountId: skippedCampaigns.accountId,
-          key: skippedCampaigns.campaignKey,
-          campaignName: skippedCampaigns.campaignName,
-          reason: skippedCampaigns.reason,
-        })
-        .from(skippedCampaigns)
-        .where(inArray(skippedCampaigns.accountId, accounts.map((a) => a.id)))
-        .orderBy(asc(skippedCampaigns.createdAt))
-    : [];
+  const skipped = await loadSkipped(accounts.map((a) => a.id), now);
   return {
     accounts: accounts.map((a) => {
       const own = skipped.filter((s) => s.accountId === a.id);
@@ -209,10 +213,10 @@ export async function buildPlan(userId: number, now = new Date()) {
             items.filter((i) => i.accountId === a.id),
             live,
             now,
-            new Set(own.map((s) => s.key)),
+            new Set(own.map((s) => s.campaignKey)),
           ),
         ),
-        skipped: own.map(({ key, campaignName, reason }) => ({ key, campaignName, reason })),
+        skipped: own.map((s) => ({ key: s.campaignKey, campaignName: s.campaignName, reason: s.reason, retryAt: skipRetryAt(s) })),
       };
     }),
   };

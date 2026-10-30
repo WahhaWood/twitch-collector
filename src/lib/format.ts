@@ -112,3 +112,17 @@ export function percentText(ratio: number | null): string {
 
 const COMPACT = new Intl.NumberFormat("ru-RU", { notation: "compact", maximumFractionDigits: 1 });
 export const compactNumber = (n: number) => COMPACT.format(n);
+
+// Russian plural form: plural(1, "награда", "награды", "наград") → "награда".
+export function plural(n: number, one: string, few: string, many: string): string {
+  const m10 = n % 10;
+  const m100 = n % 100;
+  if (m10 === 1 && m100 !== 11) return one;
+  if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return few;
+  return many;
+}
+
+// Big minute counts as hours: 18171 → "303 ч".
+export function hoursText(minutes: number): string {
+  return minutes >= 120 ? `${Math.round(minutes / 60)} ч` : `${minutes} мин`;
+}

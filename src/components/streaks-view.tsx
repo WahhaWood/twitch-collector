@@ -2,10 +2,10 @@
 
 import { type FormEvent, useState } from "react";
 import useSWR from "swr";
-import { api, ApiError, fetcher, type StreakChannel, type StreaksResponse, WORKER_STALE_MS } from "@/lib/client";
+import { api, ApiError, fetcher, type StreakChannel, type StreaksResponse, workerUp } from "@/lib/client";
 import { errorText, timeAgo } from "@/lib/format";
 import { useNow } from "./progress-row";
-import { Button, Card, Empty, ErrorBox, Pill, Skeleton, Thumb } from "./ui";
+import { Button, Card, Empty, ErrorBox, Notice, PageHead, Pill, Skeleton, Thumb } from "./ui";
 
 const INPUT = "rounded-lg border border-line bg-sf px-3 py-2 text-sm";
 const STREAK_POLL_MS = 20_000;
@@ -14,17 +14,40 @@ export function StreaksView() {
   const { data, error, mutate } = useSWR<StreaksResponse>("/api/streaks", fetcher, { refreshInterval: STREAK_POLL_MS });
   const now = useNow();
 
-  if (error) return <ErrorBox>Не удалось загрузить стрики</ErrorBox>;
-  if (!data) return <Skeleton />;
-  if (!data.accounts.length) return <Empty>Сначала подключите Twitch-аккаунт на странице «Аккаунты».</Empty>;
+  const head = (
+    <PageHead title="Серии просмотра">
+      Список стримеров, чьи эфиры воркер будет смотреть сам, чтобы не терялась серия просмотра. Работает отдельно от дропсов.
+    </PageHead>
+  );
+  if (error) return <ErrorBox>Не удалось загрузить серии просмотра</ErrorBox>;
+  if (!data) return <><div>{head}</div><Skeleton /></>;
+  if (!data.accounts.length) {
+    return (
+      <>
+        {head}
+        <Empty>Сначала подключите Twitch-аккаунт на странице «Аккаунты».</Empty>
+      </>
+    );
+  }
 
   const goal = Math.round(data.goalSeconds / 60);
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-sm text-mut">
-        Когда выбранный стример в эфире, воркер смотрит его трансляцию {goal} минут, чтобы засчитался стрик. Twitch засчитывает его, если эфир
-        длится от 10 минут и с прошлого эфира прошло больше 30 минут. Подтверждения от Twitch нет: «засчитано» значит, что мы досмотрели нужное время.
-      </p>
+      {head}
+      <details className="rounded-lg border border-line px-4 py-3 text-sm">
+        <summary className="cursor-pointer font-medium">Что такое серия просмотра и как это работает</summary>
+        <div className="mt-2 flex flex-col gap-2 text-mut">
+          <p>
+            Twitch считает, сколько эфиров подряд вы смотрели у одного стримера. Чтобы серия шла, нужно побывать на его трансляции — достаточно
+            открыть её на несколько минут.
+          </p>
+          <p>
+            Добавьте стримера ниже. Когда он выйдет в эфир, воркер откроет трансляцию и посмотрит {goal} минут, а затем освободит место для дропсов.
+            Эфир должен идти от 10 минут, а с прошлого эфира должно пройти больше 30 минут.
+          </p>
+          <p>Twitch не сообщает, засчитал ли он серию. «Засчитано» здесь значит только одно: мы досмотрели нужное время.</p>
+        </div>
+      </details>
       {data.accounts.map((a) => (
         <AccountStreaks
           key={a.id}
@@ -49,7 +72,7 @@ function AccountStreaks({ account, channels, goalSeconds, now, onChange }: {
   const [login, setLogin] = useState("");
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
-  const workerUp = !!account.watchingAt && now - new Date(account.watchingAt).getTime() < WORKER_STALE_MS;
+  const up = workerUp(account, now);
 
   async function add(e: FormEvent) {
     e.preventDefault();
@@ -79,15 +102,19 @@ function AccountStreaks({ account, channels, goalSeconds, now, onChange }: {
     <Card className="flex flex-col gap-3">
       <div className="flex flex-wrap items-center gap-2">
         <h2 className="font-semibold">{account.displayName}</h2>
-        {channels.length > 0 && !workerUp && <span className="text-xs text-warn">воркер не запущен</span>}
       </div>
+      {channels.length > 0 && !up && (
+        <Notice tone="warn" title="Воркер не запущен">
+          Пока он выключен, серии не набираются: стримеры ниже будут ждать запуска.
+        </Notice>
+      )}
       <form onSubmit={add} className="flex flex-wrap gap-2">
         <input
           value={login}
           onChange={(e) => setLogin(e.target.value)}
-          placeholder="Логин стримера"
+          placeholder="Логин, напр. shroud"
           aria-label="Логин стримера"
-          className={`${INPUT} min-w-0 flex-1 sm:max-w-64`}
+          className={`${INPUT} min-w-0 flex-1 sm:max-w-80`}
         />
         <Button type="submit" variant="primary" disabled={busy || !login.trim()}>
           Добавить
@@ -95,7 +122,7 @@ function AccountStreaks({ account, channels, goalSeconds, now, onChange }: {
       </form>
       {err && <ErrorBox>{err}</ErrorBox>}
       {channels.length === 0 ? (
-        <p className="text-sm text-mut">Пока никого. Добавьте стримеров, чей стрик нужно поддерживать.</p>
+        <p className="text-sm text-mut">Пока никого. Вставьте логин стримера выше — например, того, чьи эфиры вы смотрите регулярно.</p>
       ) : (
         <ul className="flex flex-col divide-y divide-line">
           {channels.map((c) => (
@@ -126,12 +153,12 @@ function StreakState({ channel, goalSeconds }: { channel: StreakChannel; goalSec
   const minutes = Math.floor(channel.watchedSeconds / 60);
   const goal = Math.round(goalSeconds / 60);
   if (channel.watchedSeconds >= goalSeconds) {
-    return <Pill tone="bg-ok-bg text-ok">засчитано</Pill>;
+    return <Pill tone="bg-ok-bg text-ok">досмотрено</Pill>;
   }
   if (channel.live) {
     return (
       <Pill tone="bg-acc-bg text-acc-t">
-        {minutes}/{goal} мин
+        {minutes} из {goal} мин
       </Pill>
     );
   }

@@ -64,6 +64,13 @@
       "when": 1793324398673,
       "tag": "0008_clammy_blonde_phantom",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1793330284201,
+      "tag": "0009_common_magus",
+      "breakpoints": true
     }
   ]
 }

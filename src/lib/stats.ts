@@ -185,6 +185,16 @@ export function summarizeCampaigns(items: StatItem[], now: Date): CampaignSummar
   });
 }
 
+// A campaign the worker gave up on (`no_progress`) is hidden for a while only: Twitch may count views again later.
+// User skips never expire.
+export const NO_PROGRESS_COOLDOWN_MS = 3 * 60 * MIN;
+export function skipActive(s: { reason: "user" | "no_progress"; createdAt: Date }, now: Date): boolean {
+  return s.reason === "user" || now.getTime() - s.createdAt.getTime() < NO_PROGRESS_COOLDOWN_MS;
+}
+export function skipRetryAt(s: { reason: "user" | "no_progress"; createdAt: Date }): Date | null {
+  return s.reason === "no_progress" ? new Date(s.createdAt.getTime() + NO_PROGRESS_COOLDOWN_MS) : null;
+}
+
 // What to do now, per account: claim finished drops, watch the most urgent feasible campaign, then link game accounts
 // (a campaign without a linked account awards nothing, so it is not worth watching until linked).
 // `live` should hold recently seen channels only; stale ones may be offline. `skipped` holds campaign keys the user hid.

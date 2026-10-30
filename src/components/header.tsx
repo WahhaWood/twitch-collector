@@ -7,11 +7,12 @@ import useSWR from "swr";
 import { fetcher } from "@/lib/client";
 
 const LINKS = [
-  { href: "/", label: "Обзор" },
+  { href: "/", label: "Главная" },
   { href: "/accounts", label: "Аккаунты" },
+  { href: "/catalog", label: "Все награды" },
+  { href: "/streaks", label: "Серии просмотра" },
   { href: "/stats", label: "Статистика" },
-  { href: "/catalog", label: "Каталог" },
-  { href: "/streaks", label: "Стрики" },
+  { href: "/help", label: "Как это работает" },
 ] as const;
 
 export type Section = (typeof LINKS)[number]["href"] | "/admin";
@@ -25,7 +26,7 @@ export function Header({ section }: { section: Section }) {
   const [open, setOpen] = useState(false);
   const { data } = useSWR<{ user: { name: string; isAdmin: boolean } }>("/api/me", fetcher);
   const links = [...LINKS, ...(data?.user.isAdmin ? [{ href: "/admin" as const, label: "Админ" }] : [])];
-  const current = links.find((l) => l.href === section)?.label ?? "Обзор";
+  const current = links.find((l) => l.href === section)?.label ?? "Главная";
 
   const logout = async () => {
     await fetch("/api/auth/logout", { method: "POST" });
@@ -41,7 +42,7 @@ export function Header({ section }: { section: Section }) {
           <Mark />
           Дропсы
         </span>
-        <div className="flex gap-5 text-sm text-mut">
+        <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-mut">
           {links.map((l) => (
             <Link
               key={l.href}

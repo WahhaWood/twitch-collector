@@ -16,6 +16,7 @@ export async function GET() {
       autoWatch: twitchAccounts.autoWatch,
       watching: twitchAccounts.watching,
       watchingAt: twitchAccounts.watchingAt,
+      workerStatus: twitchAccounts.workerStatus,
     })
     .from(twitchAccounts)
     .where(eq(twitchAccounts.userId, user.id))

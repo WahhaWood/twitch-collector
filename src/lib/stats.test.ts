@@ -4,8 +4,11 @@ import {
   dailySeries,
   dayKey,
   effectiveStatus,
+  NO_PROGRESS_COOLDOWN_MS,
   plan,
   risk,
+  skipActive,
+  skipRetryAt,
   type StatItem,
   streak,
   summarizeCampaigns,
@@ -224,5 +227,18 @@ describe("aggregates", () => {
     expect(t).toMatchObject({ drops: 4, claimed: 1, inProgress: 2, ready: 1, unknown: 1, activeCampaigns: 3, remainingMinutes: 40 });
     expect(t.atRisk).toBe(0);
     expect(t.completion).toBeCloseTo(1 / 3);
+  });
+});
+
+describe("skip cooldown", () => {
+  const at = new Date("2026-10-30T10:00:00Z");
+
+  it("keeps user skips forever and no_progress skips for the cooldown", () => {
+    const later = new Date(at.getTime() + NO_PROGRESS_COOLDOWN_MS + 1);
+    expect(skipActive({ reason: "user", createdAt: at }, later)).toBe(true);
+    expect(skipActive({ reason: "no_progress", createdAt: at }, new Date(at.getTime() + 60_000))).toBe(true);
+    expect(skipActive({ reason: "no_progress", createdAt: at }, later)).toBe(false);
+    expect(skipRetryAt({ reason: "user", createdAt: at })).toBeNull();
+    expect(skipRetryAt({ reason: "no_progress", createdAt: at })?.getTime()).toBe(at.getTime() + NO_PROGRESS_COOLDOWN_MS);
   });
 });
