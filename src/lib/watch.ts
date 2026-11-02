@@ -11,6 +11,7 @@ export type Channel = {
   // null when offline
   broadcastId: string | null;
   liveSince: Date | null;
+  watchStreak: number; // Twitch watch streak of this account on the channel, 0 when none
   game: { id: string; name: string } | null;
 };
 
@@ -31,10 +32,10 @@ export async function claimDrop(accessToken: string, instanceId: string): Promis
 
 // null when there is no such user.
 export async function fetchChannel(accessToken: string, login: string): Promise<Channel | null> {
-  type User = { id: string; login: string; displayName?: string | null; profileImageURL?: string | null; stream?: { id?: string; createdAt?: string; game?: { id?: string; name?: string } | null } | null };
+  type User = { id: string; login: string; displayName?: string | null; profileImageURL?: string | null; stream?: { id?: string; createdAt?: string; game?: { id?: string; name?: string } | null } | null; channel?: { self?: { viewerMilestones?: { category?: string; value?: string }[] | null } | null } | null };
   const data = await gql<{ user: User | null }>(
     accessToken,
-    `query { user(login: ${JSON.stringify(login)}) { id login displayName profileImageURL(width: 70) stream { id createdAt game { id name } } } }`,
+    `query { user(login: ${JSON.stringify(login)}) { id login displayName profileImageURL(width: 70) stream { id createdAt game { id name } } channel { self { viewerMilestones { category value } } } } }`,
   );
   const u = data.user;
   if (!u?.id) return null;
@@ -46,6 +47,7 @@ export async function fetchChannel(accessToken: string, login: string): Promise<
     avatarUrl: u.profileImageURL ?? null,
     broadcastId: u.stream?.id ?? null,
     liveSince: since && !Number.isNaN(since.getTime()) ? since : null,
+    watchStreak: Number(u.channel?.self?.viewerMilestones?.find((m) => m.category === "WATCH_STREAK")?.value) || 0,
     game: u.stream?.game?.id && u.stream.game.name ? { id: u.stream.game.id, name: u.stream.game.name } : null,
   };
 }
