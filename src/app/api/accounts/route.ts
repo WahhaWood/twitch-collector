@@ -14,6 +14,8 @@ export async function GET() {
       status: twitchAccounts.status,
       lastSyncedAt: twitchAccounts.lastSyncedAt,
       autoWatch: twitchAccounts.autoWatch,
+      autoClaimDrops: twitchAccounts.autoClaimDrops,
+      autoClaimBadges: twitchAccounts.autoClaimBadges,
       watching: twitchAccounts.watching,
       watchingAt: twitchAccounts.watchingAt,
       workerStatus: twitchAccounts.workerStatus,

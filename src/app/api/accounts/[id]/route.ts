@@ -20,7 +20,10 @@ export async function DELETE(_req: Request, ctx: RouteContext<"/api/accounts/[id
   return new Response(null, { status: 204 });
 }
 
-const patch = z.object({ autoWatch: z.boolean() });
+const patch = z
+  .object({ autoWatch: z.boolean(), autoClaimDrops: z.boolean(), autoClaimBadges: z.boolean() })
+  .partial()
+  .refine((v) => Object.keys(v).length > 0);
 
 // Turns the watch worker on or off for this account.
 export async function PATCH(req: Request, ctx: RouteContext<"/api/accounts/[id]">) {
@@ -32,9 +35,9 @@ export async function PATCH(req: Request, ctx: RouteContext<"/api/accounts/[id]"
   if (!parsed.success) return apiError(400, "bad_request", "Invalid body");
   const updated = await db()
     .update(twitchAccounts)
-    .set({ autoWatch: parsed.data.autoWatch })
+    .set(parsed.data)
     .where(ownedAccount(user.id, id))
-    .returning({ id: twitchAccounts.id, autoWatch: twitchAccounts.autoWatch });
+    .returning({ id: twitchAccounts.id, autoWatch: twitchAccounts.autoWatch, autoClaimDrops: twitchAccounts.autoClaimDrops, autoClaimBadges: twitchAccounts.autoClaimBadges });
   if (!updated.length) return apiError(404, "not_found", "Account not found");
   return Response.json(updated[0]);
 }

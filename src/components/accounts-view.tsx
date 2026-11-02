@@ -74,13 +74,13 @@ function AccountCard({ account, now, counts, hasStreaks, onChange }: {
   const canSync = account.status === "active" || account.status === "error";
   const line = workerLine(account, now, hasStreaks);
 
-  async function setAutoWatch(autoWatch: boolean) {
+  async function setFlag(flag: Partial<Pick<Account, "autoWatch" | "autoClaimDrops" | "autoClaimBadges">>) {
     setToggling(true);
     try {
       await api(`/api/accounts/${account.id}`, {
         method: "PATCH",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ autoWatch }),
+        body: JSON.stringify(flag),
       });
     } finally {
       setToggling(false);
@@ -134,13 +134,27 @@ function AccountCard({ account, now, counts, hasStreaks, onChange }: {
       {canSync && (
         <div className="flex flex-col gap-3 rounded-lg bg-sf2 p-3">
           <div className="flex items-start gap-3">
-            <Switch checked={account.autoWatch} busy={toggling} onChange={setAutoWatch} label={`Автопросмотр для ${account.displayName}`} />
+            <Switch checked={account.autoWatch} busy={toggling} onChange={(autoWatch) => setFlag({ autoWatch })} label={`Автопросмотр для ${account.displayName}`} />
             <div className="min-w-0 flex-1">
               <div className="text-sm font-medium">Автопросмотр дропсов</div>
               <p className="text-xs text-mut">
                 Воркер сам открывает стримы самых срочных кампаний, набирает минуты и забирает готовые награды. Это неофициальный способ — Twitch может
                 ограничить аккаунт.
               </p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 border-t border-line pt-3">
+            <Switch checked={account.autoClaimDrops} busy={toggling} onChange={(autoClaimDrops) => setFlag({ autoClaimDrops })} label={`Автозабор дропсов для ${account.displayName}`} />
+            <div className="min-w-0 flex-1">
+              <div className="text-sm font-medium">Автозабор дропсов</div>
+              <p className="text-xs text-mut">Сервис сам забирает досмотренные дропсы при обновлении данных.</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3">
+            <Switch checked={account.autoClaimBadges} busy={toggling} onChange={(autoClaimBadges) => setFlag({ autoClaimBadges })} label={`Автозабор значков для ${account.displayName}`} />
+            <div className="min-w-0 flex-1">
+              <div className="text-sm font-medium">Автозабор значков</div>
+              <p className="text-xs text-mut">То же для значков: они приходят прямо на аккаунт Twitch.</p>
             </div>
           </div>
           <div className="flex items-start gap-2 border-t border-line pt-3 text-sm">

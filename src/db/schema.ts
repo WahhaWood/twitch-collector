@@ -33,6 +33,9 @@ export const twitchAccounts = pgTable("twitch_accounts", {
   lockedUntil: timestamp("locked_until", { withTimezone: true }),
   // Watch worker: farm drops on this account; `watching` is refreshed every tick, stale `watchingAt` = worker is down.
   autoWatch: boolean("auto_watch").notNull().default(false),
+  // Whether a sync claims finished drops / badges for this account; both on by default.
+  autoClaimDrops: boolean("auto_claim_drops").notNull().default(true),
+  autoClaimBadges: boolean("auto_claim_badges").notNull().default(true),
   watching: jsonb("watching").$type<WatchTarget[]>(),
   watchingAt: timestamp("watching_at", { withTimezone: true }),
   workerStatus: jsonb("worker_status").$type<WorkerStatus>(),

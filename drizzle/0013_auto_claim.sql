@@ -1,0 +1,2 @@
+ALTER TABLE "twitch_accounts" ADD COLUMN "auto_claim_drops" boolean DEFAULT true NOT NULL;--> statement-breakpoint
+ALTER TABLE "twitch_accounts" ADD COLUMN "auto_claim_badges" boolean DEFAULT true NOT NULL;

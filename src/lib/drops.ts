@@ -37,7 +37,7 @@ export type LiveChannelRow = {
   avatarUrl: string | null;
 };
 // A watched-out drop that is not claimed yet. `instanceId` is null when Twitch did not send one (see claimId).
-export type Claimable = { externalId: string; campaignExternalId: string; instanceId: string | null };
+export type Claimable = { externalId: string; campaignExternalId: string; instanceId: string | null; kind: CampaignKind };
 export type ParsedDrops = { drops: DropRow[]; progress: ProgressRow[]; rewards: RewardRow[]; claimable: Claimable[] };
 
 type GqlSelf = { currentMinutesWatched?: number | null; currentSubs?: number | null; isClaimed?: boolean | null; dropInstanceID?: string | null } | null;
@@ -296,7 +296,7 @@ export function parseDrops(inventoryData: InventoryData, discovered: GqlCampaign
       progress.push({ externalId: d.id, ...s, subsCurrent, accountConnected });
       // An unlinked game account gets nothing from a claim; leave it for the "link" reminder.
       if (accountConnected !== false && canClaim(s, subsCurrent, d, endsAt, now)) {
-        claimable.push({ externalId: d.id, campaignExternalId: c.id, instanceId: self?.dropInstanceID || null });
+        claimable.push({ externalId: d.id, campaignExternalId: c.id, instanceId: self?.dropInstanceID || null, kind });
       }
     }
   }

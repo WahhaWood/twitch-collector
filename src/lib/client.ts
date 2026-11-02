@@ -7,6 +7,8 @@ export type Account = {
   status: AccountStatus;
   lastSyncedAt: string | null;
   autoWatch: boolean;
+  autoClaimDrops: boolean;
+  autoClaimBadges: boolean;
   watching: WatchTarget[] | null;
   watchingAt: string | null;
   workerStatus: WorkerStatus | null;

@@ -93,7 +93,7 @@ export async function syncAccount(accountId: number): Promise<SyncResult> {
   try {
     const { parsed, claimed } = await withFreshToken(account, async (token) => {
       const parsed = await fetchDrops(token, now);
-      return { parsed, claimed: await claimReady(token, account.twitchUserId, parsed) };
+      return { parsed, claimed: await claimReady(token, account.twitchUserId, parsed, account) };
     });
     await store(accountId, parsed, now);
     await db()
@@ -122,10 +122,16 @@ export async function syncAccount(accountId: number): Promise<SyncResult> {
 }
 
 // Claims every watched-out drop; a confirmed claim turns its progress row into `claimed` before it is stored.
-// A failed claim leaves the row as is, so the next sync retries it.
-async function claimReady(token: string, twitchUserId: string, parsed: ReturnType<typeof parseDrops>): Promise<number> {
+// A failed claim leaves the row as is, so the next sync retries it. Kinds the account turned off are left unclaimed.
+async function claimReady(
+  token: string,
+  twitchUserId: string,
+  parsed: ReturnType<typeof parseDrops>,
+  allow: { autoClaimDrops: boolean; autoClaimBadges: boolean },
+): Promise<number> {
   let claimed = 0;
   for (const c of parsed.claimable) {
+    if (c.kind === "badge" ? !allow.autoClaimBadges : !allow.autoClaimDrops) continue;
     const ok = await claimDrop(token, claimId(c, twitchUserId)).catch((e) => {
       if (e instanceof TwitchError && e.code === "unauthorized") throw e;
       return false;
