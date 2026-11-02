@@ -37,6 +37,7 @@ export type StreakChannel = {
   live: boolean;
   liveSince: string | null;
   watchedSeconds: number;
+  streakCount: number;
   checkedAt: string | null;
 };
 export type StreaksResponse = {

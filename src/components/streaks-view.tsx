@@ -137,6 +137,9 @@ function AccountStreaks({ account, channels, goalSeconds, now, onChange }: {
                   {c.checkedAt && ` · проверено ${timeAgo(c.checkedAt, now)}`}
                 </span>
               </div>
+              <span className="text-sm tabular-nums text-mut" title="Подряд просмотренных эфиров до цели (счёт воркера, не данные Twitch)">
+                🔥 {c.streakCount}
+              </span>
               <StreakState channel={c} goalSeconds={goalSeconds} />
               <Button variant="danger" onClick={() => remove(c)} aria-label={`Убрать ${c.displayName}`}>
                 ✕

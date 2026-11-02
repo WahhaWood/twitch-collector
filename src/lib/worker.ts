@@ -254,8 +254,10 @@ async function runAccount(a: Account, streaks: Streak[], state: State, now: numb
     if (w.streakId) {
       const s = streaks.find((x) => x.id === w.streakId);
       const seconds = Math.round((s?.watchedSeconds ?? 0) + elapsed);
-      await db().update(streakChannels).set({ watchedSeconds: seconds }).where(eq(streakChannels.id, w.streakId));
-      if (s) s.watchedSeconds = seconds;
+      const reached = seconds >= STREAK_GOAL_SECONDS && (s?.watchedSeconds ?? 0) < STREAK_GOAL_SECONDS;
+      const streakCount = (s?.streakCount ?? 0) + (reached ? 1 : 0);
+      await db().update(streakChannels).set({ watchedSeconds: seconds, streakCount }).where(eq(streakChannels.id, w.streakId));
+      if (s) Object.assign(s, { watchedSeconds: seconds, streakCount });
       if (seconds >= STREAK_GOAL_SECONDS) {
         log(a, `streak goal reached on ${w.login}`);
         state.watches = state.watches.filter((x) => x !== w);
@@ -283,7 +285,15 @@ async function replan(a: Account, streaks: Streak[], state: State, now: number) 
         live: !!ch?.broadcastId,
         checkedAt: new Date(now),
         ...(ch ? { displayName: ch.displayName, avatarUrl: ch.avatarUrl } : {}),
-        ...(changed ? { broadcastId: ch!.broadcastId, liveSince: ch!.liveSince, watchedSeconds: 0 } : {}),
+        // A broadcast that changed before the goal was reached breaks the streak.
+        ...(changed
+          ? {
+              broadcastId: ch!.broadcastId,
+              liveSince: ch!.liveSince,
+              watchedSeconds: 0,
+              ...(s.broadcastId && s.watchedSeconds < STREAK_GOAL_SECONDS ? { streakCount: 0 } : {}),
+            }
+          : {}),
       };
       await db().update(streakChannels).set(update).where(eq(streakChannels.id, s.id));
       Object.assign(s, update);

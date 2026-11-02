@@ -1,0 +1,1 @@
+ALTER TABLE "streak_channels" ADD COLUMN "streak_count" integer DEFAULT 0 NOT NULL;

@@ -29,6 +29,7 @@ const streak = (id: number, login: string, over: Partial<Parameters<typeof strea
   liveSince: new Date(`2026-10-30T1${id}:00:00Z`),
   live: true,
   watchedSeconds: 0,
+  streakCount: 0,
   checkedAt: null,
   createdAt: new Date(),
   ...over,

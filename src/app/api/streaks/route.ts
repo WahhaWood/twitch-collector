@@ -30,6 +30,7 @@ export async function GET() {
           live: streakChannels.live,
           liveSince: streakChannels.liveSince,
           watchedSeconds: streakChannels.watchedSeconds,
+          streakCount: streakChannels.streakCount,
           checkedAt: streakChannels.checkedAt,
         })
         .from(streakChannels)

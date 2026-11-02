@@ -158,6 +158,8 @@ export const streakChannels = pgTable(
     liveSince: timestamp("live_since", { withTimezone: true }),
     live: boolean("live").notNull().default(false),
     watchedSeconds: integer("watched_seconds").notNull().default(0),
+    // Our own count of consecutive broadcasts watched to the goal (Twitch does not expose the real number).
+    streakCount: integer("streak_count").notNull().default(0),
     checkedAt: timestamp("checked_at", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
