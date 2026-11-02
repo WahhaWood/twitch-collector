@@ -1,7 +1,9 @@
 name: worker
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    # GitHub drops scheduled runs under load, so queue one often: concurrency keeps a single
+    # pending run, which starts the moment the current 6h slot ends.
+    - cron: "*/30 * * * *"
   workflow_dispatch:
 
 # One worker at a time: a new run waits for the previous one to finish.
