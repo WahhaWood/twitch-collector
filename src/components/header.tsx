@@ -36,12 +36,8 @@ export function Header({ section }: { section: Section }) {
 
   return (
     <header className="sticky top-0 z-10 bg-bg/90 backdrop-blur">
-      {/* Desktop: brand, text tabs with an accent underline, user on the right. */}
+      {/* Desktop: text tabs with an accent underline, user on the right. */}
       <nav className="mx-auto hidden max-w-7xl items-center gap-7 px-10 py-4 sm:flex">
-        <span className="flex items-center gap-2 text-base font-semibold">
-          <Mark />
-          Дропсы
-        </span>
         <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-mut">
           {links.map((l) => (
             <Link
