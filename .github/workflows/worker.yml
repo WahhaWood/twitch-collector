@@ -38,5 +38,17 @@ jobs:
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
           TOKEN_ENC_KEY: ${{ secrets.TOKEN_ENC_KEY }}
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           timeout --signal=SIGTERM 350m npx tsx scripts/worker.mts || test $? -eq 124
+      - name: Alert on crash
+        if: failure()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$TELEGRAM_CHAT_ID" ] || exit 0
+          curl -s -o /dev/null "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "text=twitch-collector: worker упал ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

@@ -13,6 +13,7 @@ import { db } from "@/db";
 import { skippedCampaigns, streakChannels, twitchAccounts, type WatchTarget, type WorkerStatus } from "@/db/schema";
 import { loadItems, loadLive, loadSkipped } from "./stats-data";
 import { campaignKey, plan, type StatItem } from "./stats";
+import { notify } from "./notify";
 import { syncAccount, withFreshToken } from "./sync";
 import { TwitchError } from "./twitch";
 import { type Channel, fetchChannel, fetchPlaylistUrl, headNewSegments, sendMinuteWatched } from "./watch";
@@ -70,6 +71,7 @@ type State = {
   // `config` = what the user asked for; a change replans right away instead of waiting for the plan interval.
   config: string;
   failures: number;
+  alerted: boolean;
   retryAt: number;
   idle: { reason: WorkerStatus["reason"]; detail: string | null };
 };
@@ -169,6 +171,7 @@ const newState = (): State => ({
   lastDrops: [],
   config: "",
   failures: 0,
+  alerted: false,
   retryAt: 0,
   idle: { reason: "ok", detail: null },
 });
@@ -177,6 +180,7 @@ function rest(state: State, login: string, now: number) {
   state.offline.set(login, now + offlineTtl(strikes));
   state.strikes.set(login, strikes + 1);
 }
+const ALERT_AFTER_FAILURES = 5;
 const log = (a: Account, msg: string) => console.log(`${new Date().toISOString()} [${a.login}] ${msg}`);
 
 export async function tick(now = Date.now()) {
@@ -209,6 +213,7 @@ async function tickAccount(a: Account, mine: Streak[], now: number) {
   try {
     await runAccount(a, mine, state, now);
     state.failures = 0;
+    state.alerted = false;
   } catch (e) {
     state.failures++;
     state.retryAt = now + backoffMs(state.failures);
@@ -218,6 +223,10 @@ async function tickAccount(a: Account, mine: Streak[], now: number) {
     state.watches = [];
     if (e instanceof TwitchError && e.code === "unauthorized") {
       await db().update(twitchAccounts).set({ status: "expired" }).where(eq(twitchAccounts.id, a.id));
+      await notify(`twitch-collector: токен ${a.login} протух, нужен повторный вход`);
+    } else if (state.failures >= ALERT_AFTER_FAILURES && !state.alerted) {
+      state.alerted = true;
+      await notify(`twitch-collector: ${a.login} — ${state.failures} ошибок подряд (${code})`);
     }
     await setWatching(a.id, [], { state: "error", reason: "error", retryAt: new Date(state.retryAt).toISOString(), detail: code }).catch(() => undefined);
   }
