@@ -11,11 +11,20 @@ concurrency:
   group: worker
   cancel-in-progress: false
 
+permissions:
+  actions: write
+
 jobs:
   worker:
     runs-on: ubuntu-latest
     timeout-minutes: 358
     steps:
+      # Self-chaining: queue the successor first thing, so it starts the moment this slot ends
+      # (concurrency keeps one pending run). Does not depend on GitHub's unreliable cron.
+      - name: Queue next run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run worker.yml --repo "${{ github.repository }}" --ref "${{ github.ref_name }}"
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
