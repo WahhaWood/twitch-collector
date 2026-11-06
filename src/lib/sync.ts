@@ -153,14 +153,13 @@ export async function withFreshToken<T>(account: Account, fn: (token: string) =>
   const refresh = async () => {
     if (!account.refreshTokenEnc) throw new TwitchError("unauthorized", "No refresh token");
     const tokens = await refreshTokens(decrypt(account.refreshTokenEnc, key));
-    await db()
-      .update(twitchAccounts)
-      .set({
-        accessTokenEnc: encrypt(tokens.accessToken, key),
-        refreshTokenEnc: tokens.refreshToken ? encrypt(tokens.refreshToken, key) : account.refreshTokenEnc,
-        tokenExpiresAt: tokens.expiresAt,
-      })
-      .where(eq(twitchAccounts.id, account.id));
+    const fresh = {
+      accessTokenEnc: encrypt(tokens.accessToken, key),
+      refreshTokenEnc: tokens.refreshToken ? encrypt(tokens.refreshToken, key) : account.refreshTokenEnc,
+      tokenExpiresAt: tokens.expiresAt,
+    };
+    await db().update(twitchAccounts).set(fresh).where(eq(twitchAccounts.id, account.id));
+    Object.assign(account, fresh); // the worker keeps accounts cached between ticks
     token = tokens.accessToken;
     refreshed = true;
   };
@@ -290,4 +289,6 @@ export async function pruneOldRows(now = new Date()) {
   await db().delete(syncRuns).where(lt(syncRuns.startedAt, monthAgo));
   await db().delete(loginAttempts).where(lt(loginAttempts.at, dayAgo));
   await db().delete(liveChannels).where(lt(liveChannels.seenAt, dayAgo));
+  // The stats page shows at most 90 days.
+  await db().delete(progressHistory).where(lt(progressHistory.at, new Date(now.getTime() - 100 * 24 * 60 * 60_000)));
 }

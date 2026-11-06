@@ -4,7 +4,7 @@
 Спека: `plan-mvp.md`, задачи: `Plan.md`.
 
 ## Как устроено
-- Next.js 16 (App Router, cacheComponents) + Drizzle + Neon Postgres, хостинг Vercel Hobby.
+- Next.js 16 (App Router, cacheComponents) + Drizzle + Supabase Postgres, хостинг Vercel Hobby.
 - Аккаунт подключается через device code flow Twitch (код вводится на twitch.tv/activate). Токен шифруется AES-256-GCM.
 - Прогресс и каталог берутся из неофициального GQL Twitch (`src/lib/drops.ts`). Дашборд дропсов Twitch закрыт проверкой клиента,
   поэтому кампании ищутся через live-стримы с включёнными дропсами (`channel.viewerDropCampaigns` отдаёт и личный прогресс),

@@ -19,6 +19,7 @@ import { TwitchError } from "./twitch";
 import { type Channel, fetchChannel, fetchPlaylistUrl, headNewSegments, sendMinuteWatched } from "./watch";
 
 export const TICK_MS = 20_000;
+const ACCOUNTS_REFRESH_MS = 60_000; // account list is re-read this often: the DB egress cap is the real limit
 export const MAX_WATCH = 2; // Twitch counts watch time on at most two channels at once
 export const STREAK_GOAL_SECONDS = 7 * 60;
 const PLAN_MS = 5 * 60_000;
@@ -183,7 +184,10 @@ function rest(state: State, login: string, now: number) {
 const ALERT_AFTER_FAILURES = 5;
 const log = (a: Account, msg: string) => console.log(`${new Date().toISOString()} [${a.login}] ${msg}`);
 
-export async function tick(now = Date.now()) {
+let cache: { at: number; accounts: Account[]; streaks: Streak[] } | undefined;
+
+async function loadAccounts(now: number) {
+  if (cache && now - cache.at < ACCOUNTS_REFRESH_MS) return cache;
   const accounts = await db()
     .select()
     .from(twitchAccounts)
@@ -191,6 +195,12 @@ export async function tick(now = Date.now()) {
   const streaks = accounts.length
     ? await db().select().from(streakChannels).where(inArray(streakChannels.accountId, accounts.map((a) => a.id)))
     : [];
+  cache = { at: now, accounts, streaks };
+  return cache;
+}
+
+export async function tick(now = Date.now()) {
+  const { accounts, streaks } = await loadAccounts(now);
 
   await Promise.allSettled(accounts.map((a) => tickAccount(a, streaks.filter((s) => s.accountId === a.id), now)));
   // Accounts that left the list (disconnected, expired) stop being watched.
