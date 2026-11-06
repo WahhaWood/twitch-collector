@@ -16,9 +16,9 @@
     "worker": "tsx --env-file=.env.local scripts/worker.mts"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.2.0",
     "drizzle-orm": "^0.45.4",
     "next": "16.4.3",
+    "postgres": "^4.1.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "swr": "^2.5.1",
