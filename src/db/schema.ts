@@ -1,7 +1,7 @@
 import { boolean, index, integer, jsonb, pgTable, primaryKey, serial, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core";
 
 // What the watch worker is on right now, for the UI.
-export type WatchTarget = { kind: "drop" | "streak"; login: string; displayName: string; campaignName?: string | null; reward?: string | null; avatarUrl?: string | null };
+export type WatchTarget = { kind: "drop" | "streak" | "points"; login: string; displayName: string; campaignName?: string | null; reward?: string | null; avatarUrl?: string | null };
 
 // Why the worker is (not) watching, in words for the UI. `retryAt` is set while an account backs off after errors.
 export type WorkerStatus = {
@@ -36,6 +36,8 @@ export const twitchAccounts = pgTable("twitch_accounts", {
   // Whether a sync claims finished drops / badges for this account; both on by default.
   autoClaimDrops: boolean("auto_claim_drops").notNull().default(true),
   autoClaimBadges: boolean("auto_claim_badges").notNull().default(true),
+  // Worker claims bonus chests (channel points) on every channel it has open.
+  autoClaimPoints: boolean("auto_claim_points").notNull().default(true),
   watching: jsonb("watching").$type<WatchTarget[]>(),
   watchingAt: timestamp("watching_at", { withTimezone: true }),
   workerStatus: jsonb("worker_status").$type<WorkerStatus>(),
@@ -163,6 +165,10 @@ export const streakChannels = pgTable(
     watchedSeconds: integer("watched_seconds").notNull().default(0),
     // Twitch's own watch streak for this account on the channel (self.viewerMilestones WATCH_STREAK), refreshed on every check.
     streakCount: integer("streak_count").notNull().default(0),
+    // Keep watching after the streak goal to earn channel points, in the slots drops and streaks leave free.
+    points: boolean("points").notNull().default(false),
+    // Channel points balance of this account, refreshed on every check; null when unknown or the channel has none.
+    pointsBalance: integer("points_balance"),
     checkedAt: timestamp("checked_at", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },

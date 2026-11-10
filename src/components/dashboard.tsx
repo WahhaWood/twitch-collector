@@ -339,7 +339,7 @@ function Avatar({ login, avatarUrl, size }: { login: string; avatarUrl?: string 
 }
 
 function NowWatching({ kind, login, displayName, avatarUrl, campaignName, account, progress, streaks }: {
-  kind: "drop" | "streak";
+  kind: "drop" | "streak" | "points";
   login: string;
   displayName: string;
   avatarUrl?: string | null;
@@ -349,19 +349,17 @@ function NowWatching({ kind, login, displayName, avatarUrl, campaignName, accoun
   streaks?: StreaksResponse;
 }) {
   let goal: { cur: number; max: number; label: string; eta: string } | null = null;
+  const channel = streaks?.channels.find((c) => c.accountId === account.id && c.login === login);
   if (kind === "drop") {
     const next = (progress?.[account.id] ?? [])
       .filter((i) => i.campaignName === campaignName && i.requiredMinutes && !isReady(i) && (i.status === "in_progress" || i.status === "not_started"))
       .map((i) => ({ i, left: i.requiredMinutes! - (i.minutesWatched ?? 0) }))
       .sort((a, b) => a.left - b.left)[0];
     if (next) goal = { cur: next.i.minutesWatched ?? 0, max: next.i.requiredMinutes!, label: next.i.name, eta: `до награды ещё ${durationText(next.left)}` };
-  } else if (streaks) {
-    const ch = streaks.channels.find((c) => c.accountId === account.id && c.login === login);
+  } else if (kind === "streak" && streaks && channel) {
     const max = Math.round(streaks.goalSeconds / 60);
-    if (ch) {
-      const cur = Math.min(max, Math.floor(ch.watchedSeconds / 60));
-      goal = { cur, max, label: "Серия просмотра за этот эфир", eta: cur >= max ? "досмотрено" : `ещё ${durationText(max - cur)}` };
-    }
+    const cur = Math.min(max, Math.floor(channel.watchedSeconds / 60));
+    goal = { cur, max, label: "Серия просмотра за этот эфир", eta: cur >= max ? "досмотрено" : `ещё ${durationText(max - cur)}` };
   }
 
   return (
@@ -375,7 +373,11 @@ function NowWatching({ kind, login, displayName, avatarUrl, campaignName, accoun
             </a>{" "}
             <span className="text-[13px] text-mut md:text-[15px]">· {account.displayName}</span>
           </div>
-          <div className="truncate text-xs text-mut md:text-[13px]">{kind === "streak" ? "Серия просмотра" : `Дропсы: ${campaignName ?? "кампания"}`}</div>
+          <div className="truncate text-xs text-mut md:text-[13px]">{kind === "streak"
+              ? "Серия просмотра"
+              : kind === "points"
+                ? `Баллы канала${channel?.pointsBalance != null ? ` · ${channel.pointsBalance.toLocaleString("ru")}` : ""}`
+                : `Дропсы: ${campaignName ?? "кампания"}`}</div>
         </div>
         {goal && (
           <div className="text-2xl leading-none font-medium tracking-[-.02em] md:text-[30px]">

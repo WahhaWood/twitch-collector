@@ -7,6 +7,10 @@ export type WorkerLine = {
   detail: string | null;
 };
 
+const KIND = { drop: "дропсы", streak: "серия просмотра", points: "баллы" } as const;
+// With drops off, the worker still watches channels from the «Серии» page: say so, or the switch looks broken.
+const DROPS_OFF = "Дропсы не смотрит: автопросмотр дропсов выключен. Эти каналы — со страницы «Серии».";
+
 const time = (iso: string) => new Date(iso).toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
 
 export function workerLine(a: Pick<Account, "autoWatch" | "watching" | "watchingAt" | "workerStatus">, now: number, hasStreaks = false): WorkerLine {
@@ -27,9 +31,11 @@ export function workerLine(a: Pick<Account, "autoWatch" | "watching" | "watching
       detail: `Воркер повторит попытку${s.retryAt ? ` в ${time(s.retryAt)}` : " позже"}${s.detail ? ` (${s.detail})` : ""}.`,
     };
   }
-  if (a.watching?.length) {
-    const parts = a.watching.map((w) => `${w.displayName} (${w.kind === "drop" ? "дропсы" : "серия просмотра"})`);
-    return { tone: "ok", title: `Смотрит: ${parts.join(", ")}`, detail: null };
+  // A drops channel can linger for a minute after the switch is turned off, until the worker re-reads the account.
+  const watching = (a.watching ?? []).filter((w) => a.autoWatch || w.kind !== "drop");
+  if (watching.length) {
+    const parts = watching.map((w) => `${w.displayName} (${KIND[w.kind]})`);
+    return { tone: "ok", title: `Смотрит: ${parts.join(", ")}`, detail: a.autoWatch ? null : DROPS_OFF };
   }
   switch (s?.reason) {
     case "no_campaigns":
@@ -37,7 +43,11 @@ export function workerLine(a: Pick<Account, "autoWatch" | "watching" | "watching
     case "no_live":
       return { tone: "idle", title: "Ждём живые стримы", detail: `Подходящие кампании есть, но канал для них не нашёлся или стример не в эфире. Воркер проверяет каждые несколько минут.${s.detail ? ` Ждут канал: ${s.detail}.` : ""}` };
     case "waiting_streamers":
-      return { tone: "idle", title: "Ждём эфир стримеров из серий", detail: s.detail ? `Не в эфире: ${s.detail}.` : null };
+      return {
+        tone: "idle",
+        title: a.autoWatch ? "Ждём эфир стримеров из серий" : "Дропсы выключены, ждём эфир стримеров из серий",
+        detail: s.detail ? `Не в эфире: ${s.detail}.` : null,
+      };
     default:
       return { tone: "idle", title: "Воркер работает", detail: "Определяет, что смотреть." };
   }

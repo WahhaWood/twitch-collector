@@ -5,7 +5,7 @@ import useSWR from "swr";
 import { api, ApiError, fetcher, type StreakChannel, type StreaksResponse, workerUp } from "@/lib/client";
 import { errorText, timeAgo } from "@/lib/format";
 import { useNow } from "./progress-row";
-import { Button, Card, Empty, ErrorBox, Notice, PageHead, Pill, Skeleton, Thumb } from "./ui";
+import { Button, Card, Empty, ErrorBox, Notice, PageHead, Pill, Skeleton, Switch, Thumb } from "./ui";
 
 const INPUT = "rounded-lg border border-line bg-sf px-3 py-2 text-sm";
 const STREAK_POLL_MS = 20_000;
@@ -16,7 +16,8 @@ export function StreaksView() {
 
   const head = (
     <PageHead title="Серии просмотра">
-      Список стримеров, чьи эфиры воркер будет смотреть сам, чтобы не терялась серия просмотра. Работает отдельно от дропсов.
+      Список стримеров, чьи эфиры воркер будет смотреть сам, чтобы не терялась серия просмотра, а при желании — копились баллы канала. Работает
+      отдельно от автопросмотра дропсов.
     </PageHead>
   );
   if (error) return <ErrorBox>Не удалось загрузить серии просмотра</ErrorBox>;
@@ -46,6 +47,11 @@ export function StreaksView() {
             Эфир должен идти от 10 минут, а с прошлого эфира должно пройти больше 30 минут.
           </p>
           <p>Twitch не сообщает, засчитал ли он серию. «Засчитано» здесь значит только одно: мы досмотрели нужное время.</p>
+          <p>
+            Переключатель «баллы» оставляет стрим открытым и после серии, чтобы копились баллы канала. Twitch засчитывает просмотр не больше чем на
+            двух каналах сразу, поэтому места идут по очереди: дропсы, серии, затем баллы. Сундучки с баллами воркер забирает сам, если это
+            включено на странице «Аккаунты».
+          </p>
         </div>
       </details>
       {data.accounts.map((a) => (
@@ -93,6 +99,11 @@ function AccountStreaks({ account, channels, goalSeconds, now, onChange }: {
     }
   }
 
+  async function setPoints(c: StreakChannel, points: boolean) {
+    await api(`/api/streaks/${c.id}`, { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify({ points }) }).catch(() => null);
+    await onChange();
+  }
+
   async function remove(c: StreakChannel) {
     await api(`/api/streaks/${c.id}`, { method: "DELETE" }).catch(() => null);
     await onChange();
@@ -134,12 +145,17 @@ function AccountStreaks({ account, channels, goalSeconds, now, onChange }: {
                 </a>
                 <span className="text-xs text-mut">
                   {c.live && c.liveSince ? `в эфире с ${new Date(c.liveSince).toLocaleTimeString("ru", { hour: "2-digit", minute: "2-digit" })}` : "не в эфире"}
+                  {c.pointsBalance != null && ` · ${c.pointsBalance.toLocaleString("ru")} баллов`}
                   {c.checkedAt && ` · проверено ${timeAgo(c.checkedAt, now)}`}
                 </span>
               </div>
               <span className="text-sm tabular-nums text-mut" title="Стрик просмотров на Twitch: эфиров подряд">
                 🔥 {c.streakCount}
               </span>
+              <label className="flex items-center gap-1.5 text-xs text-mut" title="Смотреть и после серии, чтобы копились баллы канала">
+                <Switch checked={c.points} onChange={(v) => setPoints(c, v)} label={`Баллы канала ${c.displayName}`} />
+                <span className="hidden sm:inline">баллы</span>
+              </label>
               <StreakState channel={c} goalSeconds={goalSeconds} />
               <Button variant="danger" onClick={() => remove(c)} aria-label={`Убрать ${c.displayName}`}>
                 ✕

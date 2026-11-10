@@ -22,6 +22,15 @@ describe("workerLine", () => {
     expect(l).toMatchObject({ tone: "ok", title: "Смотрит: A (дропсы), B (серия просмотра)" });
   });
 
+  it("hides a lingering drops channel and says drops are off when only streak channels are watched", () => {
+    const watching = [{ kind: "drop" as const, login: "a", displayName: "A" }, { kind: "points" as const, login: "b", displayName: "B" }];
+    const l = workerLine({ ...base, autoWatch: false, watching }, now, true);
+    expect(l.title).toBe("Смотрит: B (баллы)");
+    expect(l.detail).toContain("Дропсы не смотрит");
+    const idle = workerLine({ ...base, autoWatch: false, workerStatus: { state: "idle", reason: "waiting_streamers", detail: null } }, now, true);
+    expect(idle.title).toContain("Дропсы выключены");
+  });
+
   it("explains why it is idle", () => {
     const idle = (reason: "no_campaigns" | "no_live" | "waiting_streamers", detail: string | null = null) =>
       workerLine({ ...base, workerStatus: { state: "idle", reason, detail } }, now);

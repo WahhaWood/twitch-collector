@@ -11,6 +11,7 @@ import {
   minuteDue,
   offlineTtl,
   planInterval,
+  pointsCandidates,
   STREAK_GOAL_SECONDS,
   stalled,
   stallAction,
@@ -30,6 +31,8 @@ const streak = (id: number, login: string, over: Partial<Parameters<typeof strea
   live: true,
   watchedSeconds: 0,
   streakCount: 0,
+  points: false,
+  pointsBalance: null,
   checkedAt: null,
   createdAt: new Date(),
   ...over,
@@ -49,6 +52,22 @@ describe("streakCandidates", () => {
     ]);
     expect(out.map((c) => c.login)).toEqual(["early", "late"]);
     expect(out[0]).toMatchObject({ kind: "streak", streakId: 1 });
+  });
+});
+
+describe("pointsCandidates", () => {
+  it("keeps live channels picked for points, oldest first, skipping resting ones", () => {
+    const out = pointsCandidates(
+      [
+        streak(3, "c", { points: true }),
+        streak(1, "a", { points: true }),
+        streak(2, "off", { points: true, live: false }),
+        streak(4, "nopoints"),
+        streak(5, "resting", { points: true }),
+      ],
+      new Set(["resting"]),
+    );
+    expect(out.map((c) => `${c.kind}:${c.login}`)).toEqual(["points:a", "points:c"]);
   });
 });
 
@@ -97,14 +116,20 @@ describe("chooseTargets", () => {
   const s = (login: string) => ({ kind: "streak" as const, login, displayName: login });
   const d = (login: string) => ({ kind: "drop" as const, login, displayName: login });
 
-  it("puts streaks first and fills the rest with one drops channel", () => {
-    expect(chooseTargets([s("x")], [d("y"), d("z")]).map((c) => c.login)).toEqual(["x", "y"]);
-    expect(chooseTargets([s("x"), s("w"), s("v")], [d("y")]).map((c) => c.login)).toEqual(["x", "w"]);
+  const p = (login: string) => ({ kind: "points" as const, login, displayName: login });
+
+  it("puts one drops channel first, then streaks, then points channels", () => {
+    expect(chooseTargets([s("x")], [d("y"), d("z")]).map((c) => c.login)).toEqual(["y", "x"]);
+    expect(chooseTargets([s("x"), s("w"), s("v")], [d("y")]).map((c) => c.login)).toEqual(["y", "x"]);
+    expect(chooseTargets([s("x"), s("w")], []).map((c) => c.login)).toEqual(["x", "w"]);
     expect(chooseTargets([], [d("y"), d("z")]).map((c) => c.login)).toEqual(["y"]);
+    expect(chooseTargets([], [d("y")], [p("a"), p("b")]).map((c) => `${c.kind}:${c.login}`)).toEqual(["drop:y", "points:a"]);
+    expect(chooseTargets([s("x")], [], [p("a"), p("b")]).map((c) => `${c.kind}:${c.login}`)).toEqual(["streak:x", "points:a"]);
   });
 
   it("never opens one channel twice", () => {
-    expect(chooseTargets([s("x")], [d("x"), d("y")]).map((c) => `${c.kind}:${c.login}`)).toEqual(["streak:x", "drop:y"]);
+    expect(chooseTargets([s("x")], [d("x"), d("y")]).map((c) => `${c.kind}:${c.login}`)).toEqual(["drop:x"]);
+    expect(chooseTargets([s("x")], [], [p("x"), p("y")]).map((c) => `${c.kind}:${c.login}`)).toEqual(["streak:x", "points:y"]);
   });
 });
 

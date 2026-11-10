@@ -13,6 +13,8 @@ export type Channel = {
   liveSince: Date | null;
   watchStreak: number; // Twitch watch streak of this account on the channel, 0 when none
   game: { id: string; name: string } | null;
+  // Channel points of this account; null when the channel has none. `claimId`: a bonus chest waiting to be claimed.
+  points: { balance: number; claimId: string | null } | null;
 };
 
 const BROWSER_UA = "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0";
@@ -32,10 +34,10 @@ export async function claimDrop(accessToken: string, instanceId: string): Promis
 
 // null when there is no such user.
 export async function fetchChannel(accessToken: string, login: string): Promise<Channel | null> {
-  type User = { id: string; login: string; displayName?: string | null; profileImageURL?: string | null; stream?: { id?: string; createdAt?: string; game?: { id?: string; name?: string } | null } | null; channel?: { self?: { viewerMilestones?: { category?: string; value?: string }[] | null } | null } | null };
+  type User = { id: string; login: string; displayName?: string | null; profileImageURL?: string | null; stream?: { id?: string; createdAt?: string; game?: { id?: string; name?: string } | null } | null; channel?: { self?: { viewerMilestones?: { category?: string; value?: string }[] | null; communityPoints?: { balance?: number | null; availableClaim?: { id?: string | null } | null } | null } | null } | null };
   const data = await gql<{ user: User | null }>(
     accessToken,
-    `query { user(login: ${JSON.stringify(login)}) { id login displayName profileImageURL(width: 70) stream { id createdAt game { id name } } channel { self { viewerMilestones { category value } } } } }`,
+    `query { user(login: ${JSON.stringify(login)}) { id login displayName profileImageURL(width: 70) stream { id createdAt game { id name } } channel { self { viewerMilestones { category value } communityPoints { balance availableClaim { id } } } } } }`,
   );
   const u = data.user;
   if (!u?.id) return null;
@@ -49,7 +51,23 @@ export async function fetchChannel(accessToken: string, login: string): Promise<
     liveSince: since && !Number.isNaN(since.getTime()) ? since : null,
     watchStreak: Number(u.channel?.self?.viewerMilestones?.find((m) => m.category === "WATCH_STREAK")?.value) || 0,
     game: u.stream?.game?.id && u.stream.game.name ? { id: u.stream.game.id, name: u.stream.game.name } : null,
+    points: toPoints(u.channel?.self?.communityPoints),
   };
+}
+
+export function toPoints(cp: { balance?: number | null; availableClaim?: { id?: string | null } | null } | null | undefined): Channel["points"] {
+  if (typeof cp?.balance !== "number") return null;
+  return { balance: cp.balance, claimId: cp.availableClaim?.id || null };
+}
+
+// Claims a bonus chest; the new balance, or null when Twitch refused (already claimed, expired).
+export async function claimPoints(accessToken: string, channelId: string, claimId: string): Promise<number | null> {
+  const data = await gql<{ claimCommunityPoints: { currentPoints?: number | null; error?: { code?: string } | null } | null }>(
+    accessToken,
+    `mutation { claimCommunityPoints(input: { channelID: ${JSON.stringify(channelId)}, claimID: ${JSON.stringify(claimId)} }) { currentPoints error { code } } }`,
+  );
+  const r = data.claimCommunityPoints;
+  return r && !r.error && typeof r.currentPoints === "number" ? r.currentPoints : null;
 }
 
 // Lowest-quality variant playlist of a live channel; null when it is offline.

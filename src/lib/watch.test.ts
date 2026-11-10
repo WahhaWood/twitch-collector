@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { lastUrl, LOGIN_RE, minuteWatchedBody, segmentUrls } from "./watch";
+import { lastUrl, LOGIN_RE, minuteWatchedBody, segmentUrls, toPoints } from "./watch";
 
 describe("lastUrl", () => {
   it("takes the lowest quality from a master playlist", () => {
@@ -53,5 +53,14 @@ describe("segmentUrls", () => {
     const m3u8 = "#EXTM3U\n#EXTINF:2.000,live\nhttps://c.example/1.ts\n#EXTINF:2.000,live\nhttps://c.example/2.ts\n";
     expect(segmentUrls(m3u8)).toEqual(["https://c.example/1.ts", "https://c.example/2.ts"]);
     expect(segmentUrls("#EXTM3U\n")).toEqual([]);
+  });
+});
+
+describe("toPoints", () => {
+  it("reads balance and a waiting bonus chest, null when the channel has no points", () => {
+    expect(toPoints({ balance: 870, availableClaim: null })).toEqual({ balance: 870, claimId: null });
+    expect(toPoints({ balance: 0, availableClaim: { id: "c1" } })).toEqual({ balance: 0, claimId: "c1" });
+    expect(toPoints(null)).toBeNull();
+    expect(toPoints({ balance: null })).toBeNull();
   });
 });

@@ -21,11 +21,11 @@ export async function DELETE(_req: Request, ctx: RouteContext<"/api/accounts/[id
 }
 
 const patch = z
-  .object({ autoWatch: z.boolean(), autoClaimDrops: z.boolean(), autoClaimBadges: z.boolean() })
+  .object({ autoWatch: z.boolean(), autoClaimDrops: z.boolean(), autoClaimBadges: z.boolean(), autoClaimPoints: z.boolean() })
   .partial()
   .refine((v) => Object.keys(v).length > 0);
 
-// Turns the watch worker on or off for this account.
+// Account switches: the watch worker and what gets claimed automatically.
 export async function PATCH(req: Request, ctx: RouteContext<"/api/accounts/[id]">) {
   const user = await getCurrentUser();
   if (!user) return apiError(401, "unauthorized", "Login required");
@@ -37,7 +37,7 @@ export async function PATCH(req: Request, ctx: RouteContext<"/api/accounts/[id]"
     .update(twitchAccounts)
     .set(parsed.data)
     .where(ownedAccount(user.id, id))
-    .returning({ id: twitchAccounts.id, autoWatch: twitchAccounts.autoWatch, autoClaimDrops: twitchAccounts.autoClaimDrops, autoClaimBadges: twitchAccounts.autoClaimBadges });
+    .returning({ id: twitchAccounts.id, autoWatch: twitchAccounts.autoWatch, autoClaimDrops: twitchAccounts.autoClaimDrops, autoClaimBadges: twitchAccounts.autoClaimBadges, autoClaimPoints: twitchAccounts.autoClaimPoints });
   if (!updated.length) return apiError(404, "not_found", "Account not found");
   return Response.json(updated[0]);
 }

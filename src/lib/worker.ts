@@ -1,5 +1,6 @@
 // Watch worker: a long-running process (scripts/worker.mts) that keeps up to MAX_WATCH live channels "open"
-// per account: streak channels until the goal is reached on the current broadcast, then the most urgent drops campaign.
+// per account: the most urgent drops campaign, streak channels until the goal is reached on the current broadcast,
+// then channels picked for channel points in the slots left. Bonus chests are claimed on every open channel.
 // Every account touch goes through the DB, so the web app sees what the worker does via twitch_accounts.watching / worker_status.
 //
 // Adaptive behaviour (each piece is a small pure function below, covered by tests):
@@ -16,7 +17,7 @@ import { campaignKey, plan, type StatItem } from "./stats";
 import { notify } from "./notify";
 import { syncAccount, withFreshToken } from "./sync";
 import { TwitchError } from "./twitch";
-import { type Channel, fetchChannel, fetchPlaylistUrl, headNewSegments, sendMinuteWatched } from "./watch";
+import { type Channel, claimPoints, fetchChannel, fetchPlaylistUrl, headNewSegments, sendMinuteWatched } from "./watch";
 
 export const TICK_MS = 20_000;
 const ACCOUNTS_REFRESH_MS = 60_000; // account list is re-read this often: the DB egress cap is the real limit
@@ -35,6 +36,7 @@ export const MAX_CHANNEL_TRIES = 2;
 export const MAX_MISSES = 3;
 export const MINUTE_MS = 60_000; // Twitch counts one minute-watched per channel per minute; the tick is faster
 const OFFLINE_TTL_MS = 10 * 60_000;
+const CHEST_CHECK_MS = 2 * 60_000; // a bonus chest appears every ~15 minutes of watching
 const MAX_OFFLINE_TTL_MS = 2 * 60 * 60_000;
 
 type Account = typeof twitchAccounts.$inferSelect;
@@ -62,6 +64,7 @@ type State = {
   watches: Watch[];
   plannedAt: number;
   syncedAt: number;
+  chestsAt: number;
   // login -> until when it is considered offline
   offline: Map<string, number>;
   // login -> how many times in a row it failed (reset when watching it moves a campaign)
@@ -83,6 +86,14 @@ export function streakCandidates(streaks: Streak[]): Candidate[] {
     .filter((s) => s.live && s.broadcastId && s.watchedSeconds < STREAK_GOAL_SECONDS)
     .sort((a, b) => (a.liveSince?.getTime() ?? 0) - (b.liveSince?.getTime() ?? 0))
     .map((s) => ({ kind: "streak", login: s.login, displayName: s.displayName, avatarUrl: s.avatarUrl, streakId: s.id }));
+}
+
+// Live channels picked for channel points, oldest first; `offline` holds logins that failed recently.
+export function pointsCandidates(streaks: Streak[], offline: ReadonlySet<string>): Candidate[] {
+  return streaks
+    .filter((s) => s.points && s.live && s.broadcastId && !offline.has(s.login))
+    .sort((a, b) => a.id - b.id)
+    .map((s) => ({ kind: "points", login: s.login, displayName: s.displayName, avatarUrl: s.avatarUrl }));
 }
 
 // Channels of the most urgent watchable campaigns, in plan order; `offline` holds logins that failed recently,
@@ -126,12 +137,11 @@ export function stallAction(tried: number, alternatives: number): "rotate" | "sk
   return tried < MAX_CHANNEL_TRIES && alternatives > 0 ? "rotate" : "skip";
 }
 
-// Streaks first (a few minutes each, tied to the broadcast); drops take what is left. One channel serves one purpose.
-export function chooseTargets(streaks: Candidate[], drops: Candidate[], max = MAX_WATCH): Candidate[] {
-  const out: Candidate[] = [];
-  for (const c of streaks) if (out.length < max && !out.some((o) => o.login === c.login)) out.push(c);
-  const drop = drops.find((d) => !out.some((o) => o.login === d.login));
-  if (drop && out.length < max) out.push(drop);
+// One drops channel first, then streaks (a few minutes each, tied to the broadcast), then points channels take what is left.
+// One channel serves one purpose; a streak still counts while its channel is open for drops.
+export function chooseTargets(streaks: Candidate[], drops: Candidate[], points: Candidate[] = [], max = MAX_WATCH): Candidate[] {
+  const out: Candidate[] = drops.slice(0, Math.min(1, max));
+  for (const c of [...streaks, ...points]) if (out.length < max && !out.some((o) => o.login === c.login)) out.push(c);
   return out;
 }
 
@@ -166,6 +176,7 @@ const newState = (): State => ({
   watches: [],
   plannedAt: 0,
   syncedAt: 0,
+  chestsAt: 0,
   offline: new Map(),
   strikes: new Map(),
   tried: new Map(),
@@ -250,7 +261,7 @@ async function runAccount(a: Account, streaks: Streak[], state: State, now: numb
     if (r.status !== "skipped") log(a, `sync ${r.status}${r.code ? ` ${r.code}` : ""}${r.claimed ? `, claimed ${r.claimed}` : ""}`);
     state.plannedAt = 0; // fresh progress and live channels
   }
-  const config = `${a.autoWatch}|${streaks.map((s) => s.id).join(",")}`;
+  const config = `${a.autoWatch}|${streaks.map((s) => `${s.id}${s.points ? "p" : ""}`).join(",")}`;
   const waiting = streaks.some((s) => !s.live);
   if (config !== state.config || now - state.plannedAt > planInterval(waiting)) {
     state.config = config;
@@ -270,17 +281,22 @@ async function runAccount(a: Account, streaks: Streak[], state: State, now: numb
       continue;
     }
     w.misses = 0;
-    if (w.streakId) {
-      const s = streaks.find((x) => x.id === w.streakId);
-      const seconds = Math.round((s?.watchedSeconds ?? 0) + elapsed);
-      await db().update(streakChannels).set({ watchedSeconds: seconds }).where(eq(streakChannels.id, w.streakId));
-      if (s) s.watchedSeconds = seconds;
+    const s = streaks.find((x) => x.login === w.login);
+    if (s && s.watchedSeconds < STREAK_GOAL_SECONDS) {
+      const seconds = Math.round(s.watchedSeconds + elapsed);
+      await db().update(streakChannels).set({ watchedSeconds: seconds }).where(eq(streakChannels.id, s.id));
+      s.watchedSeconds = seconds;
       if (seconds >= STREAK_GOAL_SECONDS) {
         log(a, `streak goal reached on ${w.login}`);
-        state.watches = state.watches.filter((x) => x !== w);
         state.plannedAt = 0;
+        if (w.kind === "streak" && s.points) w.kind = "points"; // stays open for channel points, no reconnect
+        else if (w.kind === "streak") state.watches = state.watches.filter((x) => x !== w);
       }
     }
+  }
+  if (a.autoClaimPoints && state.watches.length && now - state.chestsAt >= CHEST_CHECK_MS) {
+    state.chestsAt = now;
+    await claimChests(a, streaks, state.watches);
   }
   await checkProgress(a, state, now);
   const targets = state.watches.map(({ kind, login, displayName, campaignName, reward, avatarUrl }) => ({ kind, login, displayName, campaignName, reward, avatarUrl }));
@@ -302,7 +318,7 @@ async function replan(a: Account, streaks: Streak[], state: State, now: number) 
         live: !!ch?.broadcastId,
         checkedAt: new Date(now),
         ...(ch ? { displayName: ch.displayName, avatarUrl: ch.avatarUrl } : {}),
-        ...(ch ? { streakCount: ch.watchStreak } : {}),
+        ...(ch ? { streakCount: ch.watchStreak, pointsBalance: ch.points?.balance ?? null } : {}),
         ...(changed ? { broadcastId: ch!.broadcastId, liveSince: ch!.liveSince, watchedSeconds: 0 } : {}),
       };
       await db().update(streakChannels).set(update).where(eq(streakChannels.id, s.id));
@@ -325,7 +341,7 @@ async function replan(a: Account, streaks: Streak[], state: State, now: number) 
     }
     state.lastDrops = drops;
 
-    const wanted = chooseTargets(streakCandidates(streaks), drops);
+    const wanted = chooseTargets(streakCandidates(streaks), drops, pointsCandidates(streaks, activeOffline(state.offline, now)));
     const kept = state.watches.filter((w) => wanted.some((c) => c.login === w.login && c.kind === w.kind && c.campaignKey === w.campaignKey));
     for (const w of kept) {
       const c = wanted.find((x) => x.login === w.login && x.kind === w.kind && x.campaignKey === w.campaignKey)!;
@@ -339,7 +355,7 @@ async function replan(a: Account, streaks: Streak[], state: State, now: number) 
       const ch = await fetchChannel(token, c.login);
       const url = ch?.broadcastId ? await fetchPlaylistUrl(token, c.login) : null;
       if (!ch?.broadcastId || !url) {
-        if (c.kind === "drop") rest(state, c.login, now);
+        if (c.kind !== "streak") rest(state, c.login, now);
         continue;
       }
       const baseline = c.campaignKey ? campaignMinutes(items, c.campaignKey) : null;
@@ -358,13 +374,42 @@ async function replan(a: Account, streaks: Streak[], state: State, now: number) 
         minuteAt: 0,
         seen: new Set(),
       });
-      log(a, `watching ${c.login} (${c.kind === "drop" ? `drops: ${c.reward ?? "?"}, campaign ${c.campaignName ?? "?"}` : "streak"})`);
+      log(a, `watching ${c.login} (${c.kind === "drop" ? `drops: ${c.reward ?? "?"}, campaign ${c.campaignName ?? "?"}` : c.kind})`);
     }
     state.watches = next;
     state.idle = {
       reason: !a.autoWatch ? "waiting_streamers" : watchable === 0 ? "no_campaigns" : "no_live",
       detail: (watchable > 0 ? [...new Set(starving)].slice(0, 4).join(", ") : streaks.filter((s) => !s.live).map((s) => s.displayName).join(", ")) || null,
     };
+  });
+}
+
+// Claims bonus chests on the open channels and keeps the balance of streak channels fresh.
+// A Twitch hiccup here only skips this round: it must not stop the watching itself.
+async function claimChests(a: Account, streaks: Streak[], watches: Watch[]) {
+  await withFreshToken(a, async (token) => {
+    for (const w of watches) {
+      try {
+        const ch = await fetchChannel(token, w.login);
+        if (!ch?.points) continue;
+        let balance = ch.points.balance;
+        if (ch.points.claimId) {
+          const after = await claimPoints(token, ch.channelId, ch.points.claimId);
+          if (after !== null) {
+            balance = after;
+            log(a, `bonus chest on ${w.login}, balance ${after}`);
+          }
+        }
+        const s = streaks.find((x) => x.login === w.login);
+        if (s && s.pointsBalance !== balance) {
+          await db().update(streakChannels).set({ pointsBalance: balance }).where(eq(streakChannels.id, s.id));
+          s.pointsBalance = balance;
+        }
+      } catch (e) {
+        if (e instanceof TwitchError && e.code === "unauthorized") throw e;
+        log(a, `chest check on ${w.login} failed: ${e instanceof TwitchError ? e.code : "unknown"}`);
+      }
+    }
   });
 }
 

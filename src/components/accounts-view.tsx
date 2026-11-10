@@ -74,7 +74,7 @@ function AccountCard({ account, now, counts, hasStreaks, onChange }: {
   const canSync = account.status === "active" || account.status === "error";
   const line = workerLine(account, now, hasStreaks);
 
-  async function setFlag(flag: Partial<Pick<Account, "autoWatch" | "autoClaimDrops" | "autoClaimBadges">>) {
+  async function setFlag(flag: Partial<Pick<Account, "autoWatch" | "autoClaimDrops" | "autoClaimBadges" | "autoClaimPoints">>) {
     setToggling(true);
     try {
       await api(`/api/accounts/${account.id}`, {
@@ -139,7 +139,7 @@ function AccountCard({ account, now, counts, hasStreaks, onChange }: {
               <div className="text-sm font-medium">Автопросмотр дропсов</div>
               <p className="text-xs text-mut">
                 Воркер сам открывает стримы самых срочных кампаний, набирает минуты и забирает готовые награды. Это неофициальный способ — Twitch может
-                ограничить аккаунт.
+                ограничить аккаунт. Каналы со страницы «Серии просмотра» смотрятся независимо от этого переключателя.
               </p>
             </div>
           </div>
@@ -155,6 +155,13 @@ function AccountCard({ account, now, counts, hasStreaks, onChange }: {
             <div className="min-w-0 flex-1">
               <div className="text-sm font-medium">Автозабор значков</div>
               <p className="text-xs text-mut">То же для значков: они приходят прямо на аккаунт Twitch.</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3">
+            <Switch checked={account.autoClaimPoints} busy={toggling} onChange={(autoClaimPoints) => setFlag({ autoClaimPoints })} label={`Сундучки с баллами для ${account.displayName}`} />
+            <div className="min-w-0 flex-1">
+              <div className="text-sm font-medium">Сундучки с баллами</div>
+              <p className="text-xs text-mut">Воркер забирает бонусный сундучок (+50 баллов канала) на всех стримах, которые он смотрит.</p>
             </div>
           </div>
           <div className="flex items-start gap-2 border-t border-line pt-3 text-sm">

@@ -9,12 +9,13 @@ export type Account = {
   autoWatch: boolean;
   autoClaimDrops: boolean;
   autoClaimBadges: boolean;
+  autoClaimPoints: boolean;
   watching: WatchTarget[] | null;
   watchingAt: string | null;
   workerStatus: WorkerStatus | null;
 };
 
-export type WatchTarget = { kind: "drop" | "streak"; login: string; displayName: string; campaignName?: string | null; reward?: string | null };
+export type WatchTarget = { kind: "drop" | "streak" | "points"; login: string; displayName: string; campaignName?: string | null; reward?: string | null };
 export type WorkerStatus = {
   state: "watching" | "idle" | "error";
   reason: "no_campaigns" | "no_live" | "waiting_streamers" | "error" | "ok";
@@ -40,6 +41,8 @@ export type StreakChannel = {
   liveSince: string | null;
   watchedSeconds: number;
   streakCount: number;
+  points: boolean;
+  pointsBalance: number | null;
   checkedAt: string | null;
 };
 export type StreaksResponse = {
