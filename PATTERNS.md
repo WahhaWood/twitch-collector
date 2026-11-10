@@ -16,3 +16,4 @@
 - Адаптивные решения воркера — маленькие чистые функции в `src/lib/worker.ts` (`backoffMs`, `syncDueAt`, `stallAction`, `planInterval`) с тестами; `runAccount` только вызывает их.
 - Скриншоты в Playwright: куку `session` подписать `SESSION_SECRET` (формат `userId.expMs.hmac`, `src/lib/session.ts`) — без входа по токену. Chromium скачивать вручную в scratchpad (автораспаковка Playwright на этой машине пустая).
 - Кампания без своих каналов в `viewerDropCampaigns`: живые каналы берём из `allow` (isEnabled=false → стримы игры) — `allowedLive` в src/lib/drops.ts.
+- Баллы канала через raw GQL с TV-токеном: `user.channel.self.communityPoints { balance availableClaim { id } }`, забор `claimCommunityPoints(input:{channelID,claimID})` → `currentPoints` (`src/lib/watch.ts` claimPoints). Баллы начисляются за наш `minute-watched`.
