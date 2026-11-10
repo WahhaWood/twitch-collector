@@ -318,7 +318,7 @@ async function replan(a: Account, streaks: Streak[], state: State, now: number) 
         live: !!ch?.broadcastId,
         checkedAt: new Date(now),
         ...(ch ? { displayName: ch.displayName, avatarUrl: ch.avatarUrl } : {}),
-        ...(ch ? { streakCount: ch.watchStreak, pointsBalance: ch.points?.balance ?? null } : {}),
+        ...(ch ? { streakCount: ch.watchStreak, pointsBalance: ch.points?.balance ?? null, pointsIconUrl: ch.pointsLook.iconUrl, pointsName: ch.pointsLook.name } : {}),
         ...(changed ? { broadcastId: ch!.broadcastId, liveSince: ch!.liveSince, watchedSeconds: 0 } : {}),
       };
       await db().update(streakChannels).set(update).where(eq(streakChannels.id, s.id));

@@ -33,6 +33,8 @@ export async function GET() {
           streakCount: streakChannels.streakCount,
           points: streakChannels.points,
           pointsBalance: streakChannels.pointsBalance,
+          pointsIconUrl: streakChannels.pointsIconUrl,
+          pointsName: streakChannels.pointsName,
           checkedAt: streakChannels.checkedAt,
         })
         .from(streakChannels)
@@ -77,6 +79,8 @@ export async function POST(req: Request) {
       liveSince: channel.liveSince,
       live: !!channel.broadcastId,
       pointsBalance: channel.points?.balance ?? null,
+      pointsIconUrl: channel.pointsLook.iconUrl,
+      pointsName: channel.pointsLook.name,
       checkedAt: new Date(),
     })
     .onConflictDoNothing()

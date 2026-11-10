@@ -15,6 +15,8 @@ export type Channel = {
   game: { id: string; name: string } | null;
   // Channel points of this account; null when the channel has none. `claimId`: a bonus chest waiting to be claimed.
   points: { balance: number; claimId: string | null } | null;
+  // The channel's own points icon (Twitch's default orb when it has none) and name, e.g. "черепа"; null name = default.
+  pointsLook: { iconUrl: string | null; name: string | null };
 };
 
 const BROWSER_UA = "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0";
@@ -34,10 +36,10 @@ export async function claimDrop(accessToken: string, instanceId: string): Promis
 
 // null when there is no such user.
 export async function fetchChannel(accessToken: string, login: string): Promise<Channel | null> {
-  type User = { id: string; login: string; displayName?: string | null; profileImageURL?: string | null; stream?: { id?: string; createdAt?: string; game?: { id?: string; name?: string } | null } | null; channel?: { self?: { viewerMilestones?: { category?: string; value?: string }[] | null; communityPoints?: { balance?: number | null; availableClaim?: { id?: string | null } | null } | null } | null } | null };
+  type User = { id: string; login: string; displayName?: string | null; profileImageURL?: string | null; stream?: { id?: string; createdAt?: string; game?: { id?: string; name?: string } | null } | null; channel?: { communityPointsSettings?: { name?: string | null; image?: { url2x?: string | null } | null; defaultImage?: { url2x?: string | null } | null } | null; self?: { viewerMilestones?: { category?: string; value?: string }[] | null; communityPoints?: { balance?: number | null; availableClaim?: { id?: string | null } | null } | null } | null } | null };
   const data = await gql<{ user: User | null }>(
     accessToken,
-    `query { user(login: ${JSON.stringify(login)}) { id login displayName profileImageURL(width: 70) stream { id createdAt game { id name } } channel { self { viewerMilestones { category value } communityPoints { balance availableClaim { id } } } } } }`,
+    `query { user(login: ${JSON.stringify(login)}) { id login displayName profileImageURL(width: 70) stream { id createdAt game { id name } } channel { communityPointsSettings { name image { url2x } defaultImage { url2x } } self { viewerMilestones { category value } communityPoints { balance availableClaim { id } } } } } }`,
   );
   const u = data.user;
   if (!u?.id) return null;
@@ -52,12 +54,19 @@ export async function fetchChannel(accessToken: string, login: string): Promise<
     watchStreak: Number(u.channel?.self?.viewerMilestones?.find((m) => m.category === "WATCH_STREAK")?.value) || 0,
     game: u.stream?.game?.id && u.stream.game.name ? { id: u.stream.game.id, name: u.stream.game.name } : null,
     points: toPoints(u.channel?.self?.communityPoints),
+    pointsLook: toPointsLook(u.channel?.communityPointsSettings),
   };
 }
 
 export function toPoints(cp: { balance?: number | null; availableClaim?: { id?: string | null } | null } | null | undefined): Channel["points"] {
   if (typeof cp?.balance !== "number") return null;
   return { balance: cp.balance, claimId: cp.availableClaim?.id || null };
+}
+
+export function toPointsLook(
+  s: { name?: string | null; image?: { url2x?: string | null } | null; defaultImage?: { url2x?: string | null } | null } | null | undefined,
+): Channel["pointsLook"] {
+  return { iconUrl: s?.image?.url2x || s?.defaultImage?.url2x || null, name: s?.name?.trim() || null };
 }
 
 // Claims a bonus chest; the new balance, or null when Twitch refused (already claimed, expired).

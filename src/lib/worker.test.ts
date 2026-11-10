@@ -33,6 +33,8 @@ const streak = (id: number, login: string, over: Partial<Parameters<typeof strea
   streakCount: 0,
   points: false,
   pointsBalance: null,
+  pointsIconUrl: null,
+  pointsName: null,
   checkedAt: null,
   createdAt: new Date(),
   ...over,

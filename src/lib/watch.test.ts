@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { lastUrl, LOGIN_RE, minuteWatchedBody, segmentUrls, toPoints } from "./watch";
+import { lastUrl, LOGIN_RE, minuteWatchedBody, segmentUrls, toPoints, toPointsLook } from "./watch";
 
 describe("lastUrl", () => {
   it("takes the lowest quality from a master playlist", () => {
@@ -62,5 +62,13 @@ describe("toPoints", () => {
     expect(toPoints({ balance: 0, availableClaim: { id: "c1" } })).toEqual({ balance: 0, claimId: "c1" });
     expect(toPoints(null)).toBeNull();
     expect(toPoints({ balance: null })).toBeNull();
+  });
+});
+
+describe("toPointsLook", () => {
+  it("prefers the channel's own icon and name, falls back to Twitch's default orb", () => {
+    expect(toPointsLook({ name: "черепа", image: { url2x: "own.png" }, defaultImage: { url2x: "orb.png" } })).toEqual({ iconUrl: "own.png", name: "черепа" });
+    expect(toPointsLook({ name: null, image: null, defaultImage: { url2x: "orb.png" } })).toEqual({ iconUrl: "orb.png", name: null });
+    expect(toPointsLook(null)).toEqual({ iconUrl: null, name: null });
   });
 });

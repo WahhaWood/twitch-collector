@@ -152,7 +152,16 @@ function AccountStreaks({ account, channels, goalSeconds, now, onChange }: {
               <div className="flex shrink-0 flex-col items-end text-sm leading-tight tabular-nums text-mut">
                 <span title="Стрик просмотров на Twitch: эфиров подряд">🔥 {c.streakCount}</span>
                 {c.pointsBalance != null && (
-                  <span title={`Баллы канала: ${c.pointsBalance.toLocaleString("ru")}`}>💎 {POINTS.format(c.pointsBalance)}</span>
+                  <span className="flex items-center gap-1" title={`${c.pointsName ?? "Баллы канала"}: ${c.pointsBalance.toLocaleString("ru")}`}>
+                    {c.pointsIconUrl ? (
+                      // Twitch CDN icon, 36 px source for 18 px on retina; next/image would need a remote pattern.
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={c.pointsIconUrl} alt="" className="size-[1.1em] object-contain" loading="lazy" />
+                    ) : (
+                      "💎"
+                    )}
+                    {POINTS.format(c.pointsBalance)}
+                  </span>
                 )}
               </div>
               <label className="flex items-center gap-1.5 text-xs text-mut" title="Смотреть и после серии, чтобы копились баллы канала">

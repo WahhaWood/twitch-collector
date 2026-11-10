@@ -169,6 +169,9 @@ export const streakChannels = pgTable(
     points: boolean("points").notNull().default(false),
     // Channel points balance of this account, refreshed on every check; null when unknown or the channel has none.
     pointsBalance: integer("points_balance"),
+    // The channel's points icon and name as Twitch shows them; refreshed with the balance.
+    pointsIconUrl: text("points_icon_url"),
+    pointsName: text("points_name"),
     checkedAt: timestamp("checked_at", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },

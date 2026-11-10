@@ -43,6 +43,8 @@ export type StreakChannel = {
   streakCount: number;
   points: boolean;
   pointsBalance: number | null;
+  pointsIconUrl: string | null;
+  pointsName: string | null;
   checkedAt: string | null;
 };
 export type StreaksResponse = {
