@@ -9,6 +9,7 @@ import { Button, Card, Empty, ErrorBox, Notice, PageHead, Pill, Skeleton, Switch
 
 const INPUT = "rounded-lg border border-line bg-sf px-3 py-2 text-sm";
 const STREAK_POLL_MS = 20_000;
+const POINTS = new Intl.NumberFormat("ru", { notation: "compact", maximumFractionDigits: 1 });
 
 export function StreaksView() {
   const { data, error, mutate } = useSWR<StreaksResponse>("/api/streaks", fetcher, { refreshInterval: STREAK_POLL_MS });
@@ -145,13 +146,15 @@ function AccountStreaks({ account, channels, goalSeconds, now, onChange }: {
                 </a>
                 <span className="text-xs text-mut">
                   {c.live && c.liveSince ? `в эфире с ${new Date(c.liveSince).toLocaleTimeString("ru", { hour: "2-digit", minute: "2-digit" })}` : "не в эфире"}
-                  {c.pointsBalance != null && ` · ${c.pointsBalance.toLocaleString("ru")} баллов`}
                   {c.checkedAt && ` · проверено ${timeAgo(c.checkedAt, now)}`}
                 </span>
               </div>
-              <span className="text-sm tabular-nums text-mut" title="Стрик просмотров на Twitch: эфиров подряд">
-                🔥 {c.streakCount}
-              </span>
+              <div className="flex shrink-0 flex-col items-end text-sm leading-tight tabular-nums text-mut">
+                <span title="Стрик просмотров на Twitch: эфиров подряд">🔥 {c.streakCount}</span>
+                {c.pointsBalance != null && (
+                  <span title={`Баллы канала: ${c.pointsBalance.toLocaleString("ru")}`}>💎 {POINTS.format(c.pointsBalance)}</span>
+                )}
+              </div>
               <label className="flex items-center gap-1.5 text-xs text-mut" title="Смотреть и после серии, чтобы копились баллы канала">
                 <Switch checked={c.points} onChange={(v) => setPoints(c, v)} label={`Баллы канала ${c.displayName}`} />
                 <span className="hidden sm:inline">баллы</span>
